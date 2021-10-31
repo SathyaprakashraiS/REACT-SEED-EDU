@@ -25,11 +25,12 @@ class GLogin extends Component
             console.log("worked");
             this.props.history.push({
                 pathname: '/newhome',
-                  state: googleresponseData // your data array of objects
+                // pathname:'/book',
+                state: googleresponseData // your data array of objects
               })
           }
             
-         
+        
         return (
           <div className="App">
             <h1>LOGIN WITH GOOGLE</h1>

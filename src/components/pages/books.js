@@ -3,6 +3,7 @@ import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
 import './books.css';
+import GLogin from './log';
 
 function Disp()
 {
@@ -10,6 +11,25 @@ function Disp()
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
   var apiavail=false;
+
+  const { state } = ([])
+  var authenticated=false;
+  try{
+    state = this.props.location
+    authenticated=true
+  }
+  catch{
+
+  }
+  if(state)
+  {
+    console.log("Authenticated",state)
+    authenticated=true;
+  }
+  else
+  {
+    console.log("Not Authenticated")
+  }
 
   async function fetchData() {
     var apiavail=false;
@@ -56,6 +76,20 @@ if(api)
 
   return(
     <>
+    <div>
+      {authenticated ? (
+        <>
+        <p>Logout</p>
+        <p>{state.Name}</p>
+        <p>{state.email}</p>
+        <p>{state.ProviderId}</p>
+        <p>{state.auth}</p>
+        <img src={state.Image} alt="not found"/>
+        </>
+      ) : (
+        <p>Login panra dei</p>
+      )}
+    </div>
     <div className="centertext">
     <h1>BOOKS</h1>
     </div>
