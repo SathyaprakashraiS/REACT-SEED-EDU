@@ -6,6 +6,7 @@ import Home from './components/pages/home';
 import Book from './components/pages/books';
 import GLogin from './components/pages/log';
 import NewHome from './components/pages/newhome';
+import News from './components/pages/news';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/book' exact component={Book} />
         <Route path='/login' exact component={GLogin} />
         <Route path='/newhome' exact component={NewHome} />
+        <Route path='/news' exact component={News} />
       </Switch>
     </Router>
   );

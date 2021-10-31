@@ -14,6 +14,9 @@ return(
                     <Link to="/book" className="navbar-links">
                         BOOK
                     </Link>
+                    <Link to="/news" className="navbar-links">
+                        NEWS
+                    </Link>
                     <Link to="/login" className="navbar-links">
                         LOGIN
                     </Link>

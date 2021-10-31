@@ -1,19 +1,18 @@
 import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
-// import Dispcards from './display';
-import './books.css';
+import './news.css';
 
-function Disp()
+function News()
 {
-  const [book,setbook] = useState([]);
-  const [api,setapi] = useState([false]);
+    const [news,setnews] = useState([]);
+    const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
   var apiavail=false;
 
   async function fetchData() {
     var apiavail=false;
-    const request = await fetch(`http://127.0.0.1:8000/books-list/`)
+    const request = await fetch(`http://127.0.0.1:8000/news-list/`)
       .then(response => {
         if(response.ok)
       {
@@ -28,7 +27,7 @@ function Disp()
       }
     })
       .then(data => {
-        setbook(data)
+        setnews(data)
         setloading(false)
         setapi(true)
       })
@@ -57,14 +56,14 @@ if(api)
   return(
     <>
     <div className="centertext">
-    <h1>BOOKS</h1>
+    <h1>NEWS</h1>
     </div>
     {apiavail ? (
         <><p>{api}</p>
         <div className="cardcontainer">
       {
   
-      book.map(item => (
+      news.map(item => (
       <a key={item.id}>
         <div className="card">
               <div className="imgs">
@@ -96,4 +95,4 @@ if(api)
   );
 }
 
-export default Disp;
+export default News;
