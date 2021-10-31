@@ -26,7 +26,7 @@ class NewHome extends Component
         <p>Logout</p>
         <p>{state.Name}</p>
         <p>{state.email}</p>
-        <p>asdasd{state.ProviderId}</p>
+        <p>{state.ProviderId}</p>
         <p>{state.auth}</p>
         <img src={state.Image} alt="not found"/>
         </>
