@@ -1,95 +1,132 @@
 import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
+// import Dispcards from './display';
 import './books.css';
-import { Document, Page, pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import GLogin from './log';
 
-
-function Disp() 
+export default function Book()
 {
-  const [profile,setprofile] = useState([]);
+  const [book,setbook] = useState([]);
+  const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
+  const locdata = JSON.parse(localStorage.getItem('user'));
+  var apiavail=false;
 
-  // fetch(`http://127.0.0.1:8000/books-list/`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     setprofile(data)
-  //     setloading(false)
-  //   });
-  //   setTimeout(function() {
-  //     setloading(true);
-  //   }, 1000);
+  const { state } = ([])
+  var authenticated=false;
+  try{
+    state = this.props.location
+    authenticated=true
+  }
+  catch{
 
-  // try
-  // {
-  //   const request = 
-  //   fetch(`http://127.0.0.1:8000/books-list/`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     setprofile(data)
-  //     setloading(false)
-  //   }); 
-    
-  // }
-  // catch(e)
-  // {
-  //   console.log(e) 
-  // }
+  }
+  if(locdata!=null)
+  {
+    console.log("Authenticated",state)
+    authenticated=true;
+  }
+  else
+  {
+    console.log("Not Authenticated")
+  }
 
-  
+  async function fetchData() {
+    var apiavail=false;
+    const request = await fetch(`http://127.0.0.1:8000/books-list/`)
+      .then(response => {
+        if(response.ok)
+      {
+        console.log("here")
+        console.log(apiavail)
+        apiavail=true;
+        return response.json(); 
+      }
+      else{
+        console.log("im not here")
+        console.log(apiavail)
+      }
+    })
+      .then(data => {
+        setbook(data)
+        setloading(false)
+        setapi(true)
+      })
+      .catch((error) => {
+        console.log("the error ",error)
+        setapi(false)
+      });
+    }
 
-    
-    
-      async function fetchData() {
-        const request = await fetch(`http://127.0.0.1:8000/books-list/`)
-          .then(response => response.json())
-          .then(data => {
-            setprofile(data)
-            setloading(false)
-          }); 
-        }
-      
-    
-    useEffect(() => {
-    
-      fetchData();
-    
-    }, []);
+useEffect(() => {
+  fetchData();
+}, []);
+if(api)
+  {
+    console.log("fetched from api")
+    apiavail=true;
+    console.log(apiavail)
+  }
+  else
+  {
+    console.log("treid fetching api not available")
+    apiavail=false;
+    console.log(apiavail)
+  }
 
   return(
-  <>
-  <div className="centertext">
-  <h1>BOOKS</h1>
-  </div>
-  <div className="cardcontainer">
-    {
-
-    profile.map(item => (
-    <a key={item.id}>
-      <div className="card">
-            <div className="imgs">
-                <img src={item.image} alt="not found"/>
-            </div>
-            <div className="details">
-                <h1>{item.name}</h1>
-                <p>Subject: {item.subject}</p>
-                <p>Details: {item.details}</p>
-                <p>Review: {item.review}</p>
-                <p>Rating: {item.rating}</p>
-                <a href={item.file}><p>View</p></a>
-                <p>bgrade: {item.bgrade}</p> 
-            </div>
-        </div>
-      
-      
-    </a>
-    ))
-
-    }
-  </div>
-  </>
+    <>
+    <div>
+      {authenticated ? (
+        <>
+        <p>Logout</p>
+        <p>{locdata.Name}</p>
+        <p>{locdata.email}</p>
+        <p>{locdata.ProviderId}</p>
+        <p>{locdata.auth}</p>
+        <img src={locdata.Image} alt="not found"/>
+        </>
+      ) : (
+        <p>Login panra dei</p>
+      )}
+    </div>
+    <div className="centertext">
+    <h1>BOOKS</h1>
+    </div>
+    {apiavail ? (
+        <><p>{api}</p>
+        <div className="cardcontainer">
+      {
+  
+      book.map(item => (
+      <a key={item.id}>
+        <div className="card">
+              <div className="imgs">
+                  <img src={item.image} alt="not found"/>
+              </div>
+              <div className="details">
+                  <h1>{item.name}</h1>
+                  <p>Subject: {item.subject}</p>
+                  <p>Details: {item.details}</p>
+                  <p>Review: {item.review}</p>
+                  <p>Rating: {item.rating}</p>
+                  <a href={item.file}><p>View</p></a>
+                  <p>bgrade: {item.bgrade}</p> 
+              </div>
+          </div>
+        
+        
+      </a>
+      ))
+  
+      }
+    </div>
+        </>
+      ) : (
+        <p>no api to fetch from :(</p>
+      )}
+    </>
+    
   );
 }
-
-export default Disp;

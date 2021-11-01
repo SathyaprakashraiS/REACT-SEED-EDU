@@ -10,21 +10,29 @@ function Disp()
   const [book,setbook] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
+  
+  const locdata = JSON.parse(localStorage.getItem('user'));
+  const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
+  const userdata = JSON.parse(localStorage.getItem('theuser'));
   var apiavail=false;
 
   const { state } = ([])
   var authenticated=false;
-  try{
-    state = this.props.location
-    authenticated=true
-  }
-  catch{
 
-  }
-  if(state)
+  // try{
+  //   state = this.props.location
+  //   authenticated=true
+  // }
+  // catch{
+
+  // }
+
+  if(locdata!=null)
   {
-    console.log("Authenticated",state)
+    console.log("Authenticated")
     authenticated=true;
+    console.log("api fetched userdata",apilocdata)
+    console.log("the signed in userdata is ",userdata)
   }
   else
   {
@@ -80,11 +88,11 @@ if(api)
       {authenticated ? (
         <>
         <p>Logout</p>
-        <p>{state.Name}</p>
-        <p>{state.email}</p>
-        <p>{state.ProviderId}</p>
-        <p>{state.auth}</p>
-        <img src={state.Image} alt="not found"/>
+        <p>{locdata.Name}</p>
+        <p>{locdata.email}</p>
+        <p>{locdata.ProviderId}</p>
+        <p>{locdata.auth}</p>
+        <img src={locdata.Image} alt="not found"/>
         </>
       ) : (
         <p>Login panra dei</p>
