@@ -2,6 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 import './news.css';
+import Navbar from './navbar';
 
 function News()
 {
@@ -55,6 +56,7 @@ if(api)
 
   return(
     <>
+    <Navbar />
     <div className="centertext">
     <h1>NEWS</h1>
     </div>

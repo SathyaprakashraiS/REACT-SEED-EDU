@@ -5,6 +5,7 @@ import {GoogleLogin , GoogleLogout} from 'react-google-login';
 import googleLogin from "../../services/googleLogin"
 import { Redirect } from "react-router-dom";
 import Book from './books';
+import Navbar from './navbar';
 
 class GLogin extends Component
 {
@@ -115,6 +116,8 @@ class GLogin extends Component
             
         
         return (
+          <>
+          <Navbar />
           <div className="App">
             <h1>LOGIN WITH GOOGLE</h1>
             <GoogleLogin
@@ -124,6 +127,7 @@ class GLogin extends Component
               onFailure={console.log("login failed")}
             />
           </div>
+          </>
         );
       }
  

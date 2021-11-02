@@ -4,6 +4,7 @@ import axios from 'axios';
 // import Dispcards from './display';
 import './books.css';
 import GLogin from './log';
+import Navbar from './navbar';
 
 function Disp()
 {
@@ -85,15 +86,19 @@ if(api)
 
   return(
     <>
+    <Navbar />
     <div>
       {authenticated ? (
         <>
-        <p>Logout</p>
-        <p>{locdata.Name}</p>
+        <p>username is {userdata.username}</p>
+        <p>username is {userdata.standard}</p>
+
+        <img src={userdata.img} alt="not found"/>
+        {/* <p>{locdata.Name}</p>
         <p>{locdata.email}</p>
         <p>{locdata.ProviderId}</p>
         <p>{locdata.auth}</p>
-        <img src={locdata.Image} alt="not found"/>
+        <img src={locdata.Image} alt="not found"/> */}
         </>
       ) : (
         <p>Login panra dei</p>

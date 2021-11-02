@@ -7,9 +7,12 @@ import Book from './components/pages/books';
 import GLogin from './components/pages/log';
 import NewHome from './components/pages/newhome';
 import News from './components/pages/news';
+import Teacher from './components/pages/teacher/home';
+import Student from './components/pages/student/home';
 
 function App() {
   return (
+    <>
     <Router>
       <Navbar />
       <Switch>
@@ -18,8 +21,11 @@ function App() {
         <Route path='/login' exact component={GLogin} />
         <Route path='/newhome' exact component={NewHome} />
         <Route path='/news' exact component={News} />
+        <Route path='/student' exact component={Student} />
+        <Route path='/teacher' exact component={Teacher} />
       </Switch>
     </Router>
+  </>
   );
 }
 
