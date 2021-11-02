@@ -42,25 +42,41 @@ class GLogin extends Component
               }
             })
               .then(data => {
-                localStorage.setItem('apiuser',JSON.stringify(data));localStorage.setItem('apiuser',JSON.stringify(data));
-              })
-              .catch((error) => {
-                console.log("the error ",error)
-              });
-
-            const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
-            const locdata = JSON.parse(localStorage.getItem('user'));
-            for(var i=0;i< apilocdata.length;i++)
+                localStorage.setItem('apiuser',JSON.stringify(data));
+                console.log("api setitem done")
+                const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
+                const locdata = JSON.parse(localStorage.getItem('user'));
+                for(var i=0;i< apilocdata.length;i++)
                 {
                   //console.log("data name: ",i,apilocdata[i].email)
                   var checkemail=apilocdata[i].email
                   var logedemail=locdata.email
                   if(checkemail==logedemail)
-                  {
-                    localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));
-                    console.log("user from api: ",apilocdata[i].username)
-                  }
+                    {
+                      localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));
+                      console.log("user from api: ",apilocdata[i].username)
+                      console.log("auto reload")
+                      window.location.reload(false);
+                    }
                 }
+              })
+              .catch((error) => {
+                console.log("the error ",error)
+              });
+
+            // const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
+            // const locdata = JSON.parse(localStorage.getItem('user'));
+            // for(var i=0;i< apilocdata.length;i++)
+            //     {
+            //       //console.log("data name: ",i,apilocdata[i].email)
+            //       var checkemail=apilocdata[i].email
+            //       var logedemail=locdata.email
+            //       if(checkemail==logedemail)
+            //       {
+            //         localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));
+            //         console.log("user from api: ",apilocdata[i].username)
+            //       }
+            //     }
           }
             
           

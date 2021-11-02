@@ -32,7 +32,8 @@ function Disp()
     console.log("Authenticated")
     authenticated=true;
     console.log("api fetched userdata",apilocdata)
-    console.log("the signed in userdata is ",userdata)
+    //console.log("the signed in userdata is ",userdata)
+    console.log("the signed in user is ",userdata.username)
   }
   else
   {

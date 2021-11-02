@@ -8,7 +8,22 @@ function Navbar(){
         localStorage.clear(); //for localStorage
         sessionStorage.clear(); //for sessionStorage
       }
-
+      const userdata = JSON.parse(localStorage.getItem('theuser'));
+      var teacher=false
+      var student=false
+      if(userdata)
+      {
+          console.log("userdata.is_staff is ",userdata.is_staff)
+        if(userdata.is_staff == true)
+      {
+          teacher=true
+          console.log("teacher here")
+      }
+      if(userdata.is_staff == false){
+          student=true
+          console.log("student here")
+      }
+      }
 return(
     <nav className="navbar">
             <ul>
@@ -25,6 +40,26 @@ return(
                     <Link to="/login" className="navbar-links">
                         LOGIN
                     </Link>
+                    {teacher && userdata ? (
+                        <>
+                        <Link to="/book" className="navbar-links">
+                        TBOOK
+                    </Link>
+                    </>
+                    ):(
+                        <>
+                    </>
+                    )}
+                    {student && userdata ? (
+                        <>
+                        <Link to="/book" className="navbar-links">
+                        SBOOK
+                    </Link>
+                    </>
+                    ):(
+                        <>
+                    </>
+                    )}
                     <Link to="/logout" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
                     className="logout"
