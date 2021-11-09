@@ -2,7 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 import './news.css';
-import Navbar from './navbar';
+import Navbar from '../navbar';
 
 function News()
 {
@@ -31,6 +31,7 @@ function News()
         setnews(data)
         setloading(false)
         setapi(true)
+        console.log("printing data",data)
       })
       .catch((error) => {
         console.log("the error ",error)
@@ -40,7 +41,9 @@ function News()
 
 useEffect(() => {
   fetchData();
+  console.log("this api",news)
 }, []);
+
 if(api)
   {
     console.log("fetched from api")
@@ -69,20 +72,14 @@ if(api)
       <a key={item.id}>
         <div className="card">
               <div className="imgs">
-                  <img src={item.image} alt="not found"/>
+              <a href={item.url}><img src={item.img} alt="not found"/></a>
               </div>
               <div className="details">
-                  <h1>{item.name}</h1>
-                  <p>Subject: {item.subject}</p>
-                  <p>Details: {item.details}</p>
-                  <p>Review: {item.review}</p>
-                  <p>Rating: {item.rating}</p>
-                  <a href={item.file}><p>View</p></a>
-                  <p>bgrade: {item.bgrade}</p> 
+              <a href={item.url}><h1>{item.name}</h1></a>
+              <p>{item.liner}</p>
               </div>
           </div>
-        
-        
+
       </a>
       ))
   

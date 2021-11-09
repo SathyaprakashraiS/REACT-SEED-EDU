@@ -7,16 +7,17 @@ import Book from './components/pages/books';
 import GLogin from './components/pages/log';
 import NewHome from './components/pages/newhome';
 import News from './components/pages/news';
-import Teacher from './components/pages/teacher/home';
-import Student from './components/pages/student/home';
-
+import Student from './components/pages/shome';
+import Teacher from './components/pages/thome';
+import College from './components/pages/college';
 function App() {
   return (
     <>
     <Router>
-      <Navbar />
       <Switch>
         <Route path='/' exact component={Home} />
+        <Route path='/home/' exact component={Home} />
+        <Route path='/colleges/' exact component={College} />
         <Route path='/book' exact component={Book} />
         <Route path='/login' exact component={GLogin} />
         <Route path='/newhome' exact component={NewHome} />

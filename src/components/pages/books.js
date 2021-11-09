@@ -4,7 +4,7 @@ import axios from 'axios';
 // import Dispcards from './display';
 import './books.css';
 import GLogin from './log';
-import Navbar from './navbar';
+import Navbar from '../navbar';
 
 function Disp()
 {
@@ -90,15 +90,9 @@ if(api)
     <div>
       {authenticated ? (
         <>
-        <p>username is {userdata.username}</p>
+        {/* <p>username is {userdata.username}</p>
         <p>username is {userdata.standard}</p>
-
-        <img src={userdata.img} alt="not found"/>
-        {/* <p>{locdata.Name}</p>
-        <p>{locdata.email}</p>
-        <p>{locdata.ProviderId}</p>
-        <p>{locdata.auth}</p>
-        <img src={locdata.Image} alt="not found"/> */}
+        <img src={userdata.img} alt="not found"/> */}
         </>
       ) : (
         <p>Login panra dei</p>
@@ -109,32 +103,19 @@ if(api)
     </div>
     {apiavail ? (
         <><p>{api}</p>
-        <div className="cardcontainer">
+        
       {
-  
       book.map(item => (
       <a key={item.id}>
-        <div className="card">
-              <div className="imgs">
-                  <img src={item.image} alt="not found"/>
-              </div>
-              <div className="details">
-                  <h1>{item.name}</h1>
-                  <p>Subject: {item.subject}</p>
-                  <p>Details: {item.details}</p>
-                  <p>Review: {item.review}</p>
-                  <p>Rating: {item.rating}</p>
-                  <a href={item.file}><p>View</p></a>
-                  <p>bgrade: {item.bgrade}</p> 
-              </div>
-          </div>
-        
-        
+        <img src={item.image}/>
+        <b>{item.name}</b>
+        <b>{item.author}</b>
+        <b>{item.bgrade}</b><br></br>
       </a>
       ))
   
       }
-    </div>
+    
         </>
       ) : (
         <p>no api to fetch from :(</p>

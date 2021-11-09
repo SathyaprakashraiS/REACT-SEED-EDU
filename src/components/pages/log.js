@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import {GoogleLogin , GoogleLogout} from 'react-google-login';
 import googleLogin from "../../services/googleLogin"
 import { Redirect } from "react-router-dom";
-import Book from './books';
-import Navbar from './navbar';
+import Navbar from '../navbar';
 
 class GLogin extends Component
 {

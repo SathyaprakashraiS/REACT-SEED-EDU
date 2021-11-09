@@ -8,7 +8,7 @@ function Navbar(){
     const logout = ()=>{
         localStorage.clear(); //for localStorage
         sessionStorage.clear(); //for sessionStorage
-        window.location.reload(false);
+        // window.location.reload(false);
         return(
             <Redirect to="/"/>
         )
@@ -33,14 +33,29 @@ return(
     <nav className="navbar">
             <ul>
                 <li className='nav-item'>
-                    <Link to="/" className="navbar-links">
-                        HOME
+                <Link to="/" className="navbar-links">
+                        SEED
+                    </Link>
+                    <Link to="/colleges" className="navbar-links">
+                        COLLEGES
                     </Link>
                     <Link to="/book" className="navbar-links">
-                        BOOK
+                        LIBRARY
                     </Link>
                     <Link to="/news" className="navbar-links">
                         NEWS
+                    </Link>
+                    <Link to="/" className="navbar-links">
+                        COURSES
+                    </Link>
+                    <Link to="/" className="navbar-links">
+                        DATES
+                    </Link>
+                    <Link to="/" className="navbar-links">
+                        QUESTION BANK
+                    </Link>
+                    <Link to="/" className="navbar-links">
+                        OTHER
                     </Link>
                     {userdata ? (
                         <></>
@@ -54,7 +69,7 @@ return(
                         <Link to="/teacher" className="navbar-links">
                             TEACHER PORTAL
                         </Link>
-                        <Link to="/logout" className="navbar-links" onClick={logout}>LOGOUT
+                        <Link to="/" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
                     className="logout"
                     theme="dark"
@@ -74,7 +89,7 @@ return(
                         <Link to="/student" className="navbar-links">
                             STUDENT PORTAL
                         </Link>
-                        <Link to="/logout" className="navbar-links" onClick={logout}>LOGOUT
+                        <Link to="/" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
                     className="logout"
                     theme="dark"
