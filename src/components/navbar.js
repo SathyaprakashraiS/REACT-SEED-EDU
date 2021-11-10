@@ -45,7 +45,7 @@ return(
                     <Link to="/news" className="navbar-links">
                         NEWS
                     </Link>
-                    <Link to="/" className="navbar-links">
+                    <Link to="/courses" className="navbar-links">
                         COURSES
                     </Link>
                     <Link to="/" className="navbar-links">
