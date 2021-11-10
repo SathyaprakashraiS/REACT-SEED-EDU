@@ -48,7 +48,7 @@ return(
                     <Link to="/courses" className="navbar-links">
                         COURSES
                     </Link>
-                    <Link to="/" className="navbar-links">
+                    <Link to="/dates" className="navbar-links">
                         DATES
                     </Link>
                     <Link to="/" className="navbar-links">

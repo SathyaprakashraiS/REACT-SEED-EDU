@@ -22,6 +22,7 @@ import Science from './components/pages/science';
 import Engineering from './components/pages/engineering';
 import Commerce from './components/pages/commerce';
 import Procourse from './components/pages/procourse';
+import Date from './components/pages/dates';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path='/login' exact component={GLogin} />
         <Route path='/newhome' exact component={NewHome} />
         <Route path='/news' exact component={News} />
+        <Route path='/dates' exact component={Date} />
         <Route path='/student' exact component={Student} />
         <Route path='/teacher' exact component={Teacher} />
       </Switch>
