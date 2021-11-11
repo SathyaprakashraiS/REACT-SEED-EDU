@@ -23,6 +23,12 @@ import Engineering from './components/pages/engineering';
 import Commerce from './components/pages/commerce';
 import Procourse from './components/pages/procourse';
 import Date from './components/pages/dates';
+import Quesbank from './components/pages/quesbank';
+import Quesbankdisp from './components/pages/quesbankdisp';
+import FAQ from './components/pages/FAQ';
+import Rnotes from './components/pages/rnotes';
+import Rnotesdisp from './components/pages/rnotesdisp';
+import Tips from './components/pages/tips';
 
 function App() {
   return (
@@ -51,6 +57,12 @@ function App() {
         <Route path='/dates' exact component={Date} />
         <Route path='/student' exact component={Student} />
         <Route path='/teacher' exact component={Teacher} />
+        <Route path='/questionbank' exact component={Quesbank} />
+        <Route path='/questionbank/quespapers' exact component={Quesbankdisp} />
+        <Route path='/FAQ' exact component={FAQ} />
+        <Route path='/revnotes' exact component={Rnotes} />
+        <Route path='/revnotes/rnotesdisp' exact component={Rnotesdisp} />
+        <Route path='/tips' exact component={Tips} />
       </Switch>
     </Router>
   </>

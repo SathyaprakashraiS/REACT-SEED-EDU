@@ -2,13 +2,15 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './arts.css';
+import './rnotes.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import { Link, Redirect,useHistory } from 'react-router-dom';
 
-function Science()
+function Rnotes()
 {
-  const [course,setcourse] = useState([]);
+    let history = useHistory();
+  const [notes,setnotes] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
   
@@ -19,6 +21,14 @@ function Science()
 
   const { state } = ([])
   var authenticated=false;
+
+  // try{
+  //   state = this.props.location
+  //   authenticated=true
+  // }
+  // catch{
+
+  // }
 
   if(locdata!=null)
   {
@@ -33,9 +43,22 @@ function Science()
     console.log("Not Authenticated")
   }
 
+  function redirectto(id) {
+    alert(`hello, ${id}`);
+    localStorage.setItem('notesid',JSON.stringify(id));
+  //   return(
+  //     <Redirect to="/"/>
+  // )
+    history.push("/revnotes/rnotesdisp/");
+    // history.push({
+    //   pathname: '/rnotes/rnotesdisp/',
+    //   state: papersfetched // your data array of objects
+    // })
+  }
+
   async function fetchData() {
     var apiavail=false;
-    const request = await fetch(`http://127.0.0.1:8000/sciencecourse-list/`)
+    const request = await fetch(`http://127.0.0.1:8000/rnotes-list/`)
       .then(response => {
         if(response.ok)
       {
@@ -50,7 +73,7 @@ function Science()
       }
     })
       .then(data => {
-        setcourse(data)
+        setnotes(data)
         setloading(false)
         setapi(true)
       })
@@ -79,30 +102,25 @@ if(api)
   return(
     <>
     <Navbar />
-    <div>
-      {authenticated ? (
-        <>
-
-        </>
-      ) : (
-        <p>Login panra dei</p>
-      )}
-    </div>
-    <div className="centertext">
-    <a href="/courses/">Go back</a>
-    <h1>SCIENCE COURSE</h1>
-    </div>
+    <h1>REVISION NOTES</h1>
     {apiavail ? (
         <><p>{api}</p>
+        
       {
-      course.map(item => (
+      notes.map(item => (
       <a key={item.id}>
-      {item.name}
-      {item.duration}
-      {item.desc}
+        <img src={item.thumbnail}/>
+        <b>{item.title}</b>
+        <b>{item.sub}</b>
+        <b>{item.grade}</b>
+        {/* {item.file} */}
+        <button onClick={() => redirectto(item.id)}>button</button><br></br><br></br>
+        <br></br>
       </a>
       ))
-    }
+  
+      }
+    
         </>
       ) : (
         <p>no api to fetch from :(</p>
@@ -112,4 +130,4 @@ if(api)
   );
 }
 
-export default Science;
+export default Rnotes;

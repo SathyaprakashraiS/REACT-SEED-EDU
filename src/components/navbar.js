@@ -5,6 +5,10 @@ import { Redirect } from 'react-router';
 
 function Navbar(){
 
+    const clear = ()=>{
+        localStorage.removeItem("paperid")
+        localStorage.removeItem("notesid")
+    }
     const logout = ()=>{
         localStorage.clear(); //for localStorage
         sessionStorage.clear(); //for sessionStorage
@@ -33,40 +37,40 @@ return(
     <nav className="navbar">
             <ul>
                 <li className='nav-item'>
-                <Link to="/" className="navbar-links">
+                <Link to="/" onClick={clear} className="navbar-links">
                         SEED
                     </Link>
-                    <Link to="/colleges" className="navbar-links">
+                    <Link to="/colleges" onClick={clear} className="navbar-links">
                         COLLEGES
                     </Link>
-                    <Link to="/book" className="navbar-links">
+                    <Link to="/book" onClick={clear} className="navbar-links">
                         LIBRARY
                     </Link>
-                    <Link to="/news" className="navbar-links">
+                    <Link to="/news" onClick={clear} className="navbar-links">
                         NEWS
                     </Link>
-                    <Link to="/courses" className="navbar-links">
+                    <Link to="/courses" onClick={clear} className="navbar-links">
                         COURSES
                     </Link>
-                    <Link to="/dates" className="navbar-links">
+                    <Link to="/dates" onClick={clear} className="navbar-links">
                         DATES
                     </Link>
-                    <Link to="/" className="navbar-links">
+                    <Link to="/questionbank" className="navbar-links">
                         QUESTION BANK
                     </Link>
-                    <Link to="/" className="navbar-links">
+                    <Link to="/" onClick={clear} className="navbar-links">
                         OTHER
                     </Link>
                     {userdata ? (
                         <></>
                     ):(
-                        <Link to="/login" className="navbar-links">
+                        <Link to="/login" onClick={clear} className="navbar-links">
                             LOGIN
                         </Link>
                     )}
                     {teacher && userdata ? (
                         <>
-                        <Link to="/teacher" className="navbar-links">
+                        <Link to="/teacher" onClick={clear} className="navbar-links">
                             TEACHER PORTAL
                         </Link>
                         <Link to="/" className="navbar-links" onClick={logout}>LOGOUT

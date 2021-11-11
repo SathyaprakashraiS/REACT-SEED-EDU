@@ -2,13 +2,13 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './arts.css';
+import './tips.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 
-function Science()
+function Tips()
 {
-  const [course,setcourse] = useState([]);
+  const [tips,settips] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
   
@@ -19,6 +19,14 @@ function Science()
 
   const { state } = ([])
   var authenticated=false;
+
+  // try{
+  //   state = this.props.location
+  //   authenticated=true
+  // }
+  // catch{
+
+  // }
 
   if(locdata!=null)
   {
@@ -35,7 +43,7 @@ function Science()
 
   async function fetchData() {
     var apiavail=false;
-    const request = await fetch(`http://127.0.0.1:8000/sciencecourse-list/`)
+    const request = await fetch(`http://127.0.0.1:8000/tips-list/`)
       .then(response => {
         if(response.ok)
       {
@@ -50,7 +58,7 @@ function Science()
       }
     })
       .then(data => {
-        setcourse(data)
+        settips(data)
         setloading(false)
         setapi(true)
       })
@@ -76,33 +84,51 @@ if(api)
     console.log(apiavail)
   }
 
+  function viewtip(desc) {
+    alert('actually use this function to disp tip using overlay');
+    // alert('${desc}');
+    alert(`${desc}`);
+  }
+
   return(
     <>
     <Navbar />
     <div>
       {authenticated ? (
         <>
-
+        {/* <p>username is {userdata.username}</p>
+        <p>username is {userdata.standard}</p>
+        <img src={userdata.img} alt="not found"/> */}
         </>
       ) : (
         <p>Login panra dei</p>
       )}
     </div>
     <div className="centertext">
-    <a href="/courses/">Go back</a>
-    <h1>SCIENCE COURSE</h1>
+    <h1>TIPS n TRICKS</h1>
     </div>
     {apiavail ? (
         <><p>{api}</p>
+        
       {
-      course.map(item => (
+      tips.map(item => (
       <a key={item.id}>
-      {item.name}
-      {item.duration}
-      {item.desc}
+        <img src={item.thumbnail}/>
+        <b>{item.name}</b>
+        <b>{item.grade}</b>
+        <b>{item.link}</b>
+        <b>{item.isvideo}</b>
+        {/* <b>{item.description}</b> */}
+        <b>{item.istext}</b>
+        <b>{item.tipfile}</b>
+        <b>{item.isfile}</b>
+        <button onClick={()=>viewtip(item.description)}>view tip</button>
+        <br></br>
       </a>
       ))
-    }
+  
+      }
+    
         </>
       ) : (
         <p>no api to fetch from :(</p>
@@ -112,4 +138,4 @@ if(api)
   );
 }
 
-export default Science;
+export default Tips;

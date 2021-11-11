@@ -1,14 +1,17 @@
 import '../../App.css';
-import React,{useState,useEffect, Component } from 'react';
+import React,{useState,useEffect, Component, useCallback } from 'react';
+import { Button } from 'react-native'
 import axios from 'axios';
 // import Dispcards from './display';
-import './arts.css';
+import './rnotesdisp.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import { Link, Redirect,useHistory } from 'react-router-dom';
 
-function Science()
+function Rnotesdisp()
 {
-  const [course,setcourse] = useState([]);
+  let history = useHistory();
+  const [note,setnote] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
   
@@ -17,8 +20,18 @@ function Science()
   const userdata = JSON.parse(localStorage.getItem('theuser'));
   var apiavail=false;
 
-  const { state } = ([])
+//   const { state } = this.props.location
   var authenticated=false;
+  var papersfetched=false;
+  const notesid=JSON.parse(localStorage.getItem('notesid'));
+  
+  // try{
+  //   state = this.props.location
+  //   authenticated=true
+  // }
+  // catch{
+
+  // }
 
   if(locdata!=null)
   {
@@ -35,7 +48,8 @@ function Science()
 
   async function fetchData() {
     var apiavail=false;
-    const request = await fetch(`http://127.0.0.1:8000/sciencecourse-list/`)
+    var thestring='http://127.0.0.1:8000/rnotes-list/'+notesid+'/'
+    const request = await fetch(thestring)
       .then(response => {
         if(response.ok)
       {
@@ -50,7 +64,7 @@ function Science()
       }
     })
       .then(data => {
-        setcourse(data)
+        setnote(data)
         setloading(false)
         setapi(true)
       })
@@ -75,41 +89,45 @@ if(api)
     apiavail=false;
     console.log(apiavail)
   }
-
+  
   return(
     <>
     <Navbar />
     <div>
       {authenticated ? (
         <>
-
         </>
       ) : (
         <p>Login panra dei</p>
       )}
     </div>
     <div className="centertext">
-    <a href="/courses/">Go back</a>
-    <h1>SCIENCE COURSE</h1>
+    <h1>QUESTION PAPERS</h1>
     </div>
-    {apiavail ? (
-        <><p>{api}</p>
-      {
-      course.map(item => (
-      <a key={item.id}>
-      {item.name}
-      {item.duration}
-      {item.desc}
+    {apiavail && notesid ? (
+        <>
+        {
+      note.map(item => (
+        <a key={item.id}>
+        <b>HERE THE PDF MUST BE DISPLAYED FOR NOW DETAILS ALONE IS DISPLAYED</b><br></br>
+        <b>{item.title}</b><br></br>
+        <b>{item.sub}</b><br></br>
+        <b>{item.grade}</b>
+        {/* {item.file} */}
+        <br></br>
       </a>
       ))
-    }
+  
+      }
         </>
       ) : (
-        <p>no api to fetch from :(</p>
+        <>
+        {history.push("/revnotes")}
+        </>
       )}
     </>
     
   );
 }
 
-export default Science;
+export default Rnotesdisp;

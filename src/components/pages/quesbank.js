@@ -1,14 +1,17 @@
 import '../../App.css';
-import React,{useState,useEffect, Component } from 'react';
+import React,{useState,useEffect, Component, useCallback } from 'react';
+import { Button } from 'react-native'
 import axios from 'axios';
 // import Dispcards from './display';
-import './arts.css';
+import './quesbank.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import { Link, Redirect,useHistory } from 'react-router-dom';
 
-function Science()
+function Quesbank()
 {
-  const [course,setcourse] = useState([]);
+  let history = useHistory();
+  const [qtype,setqtype] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
   
@@ -17,8 +20,17 @@ function Science()
   const userdata = JSON.parse(localStorage.getItem('theuser'));
   var apiavail=false;
 
-  const { state } = ([])
+  // const { state } = this.props.location
   var authenticated=false;
+  var papersfetched=false;
+
+  // try{
+  //   state = this.props.location
+  //   authenticated=true
+  // }
+  // catch{
+
+  // }
 
   if(locdata!=null)
   {
@@ -35,7 +47,7 @@ function Science()
 
   async function fetchData() {
     var apiavail=false;
-    const request = await fetch(`http://127.0.0.1:8000/sciencecourse-list/`)
+    const request = await fetch(`http://127.0.0.1:8000/qptypes-list/`)
       .then(response => {
         if(response.ok)
       {
@@ -50,7 +62,7 @@ function Science()
       }
     })
       .then(data => {
-        setcourse(data)
+        setqtype(data)
         setloading(false)
         setapi(true)
       })
@@ -76,40 +88,56 @@ if(api)
     console.log(apiavail)
   }
 
+  function redirectto(id) {
+    alert(`hello, ${id}`);
+    papersfetched=true
+    localStorage.setItem('paperid',JSON.stringify(id));
+  //   return(
+  //     <Redirect to="/"/>
+  // )
+    history.push("/questionbank/quespapers/");
+    // history.push({
+    //   pathname: '/questionbank/quespapers/',
+    //   state: papersfetched // your data array of objects
+    // })
+  }
+  
   return(
     <>
     <Navbar />
     <div>
       {authenticated ? (
         <>
-
         </>
       ) : (
         <p>Login panra dei</p>
       )}
     </div>
     <div className="centertext">
-    <a href="/courses/">Go back</a>
-    <h1>SCIENCE COURSE</h1>
+    <h1>QUESTION PAPERS</h1>
     </div>
     {apiavail ? (
-        <><p>{api}</p>
+        <>
       {
-      course.map(item => (
+      qtype.map(item => (
       <a key={item.id}>
-      {item.name}
-      {item.duration}
-      {item.desc}
+        <b>{item.id}</b><br></br>
+        <b>{item.parentpaperfile}</b><br></br>
+        <b>{item.description}</b><br></br>
+        <button onClick={() => redirectto(item.id)}>button</button><br></br><br></br>
       </a>
       ))
-    }
+  
+      }
+    
         </>
       ) : (
-        <p>no api to fetch from :(</p>
+        <><p>{api}</p>
+        <p>no api to fetch from :(</p> </>
       )}
     </>
     
   );
 }
 
-export default Science;
+export default Quesbank;

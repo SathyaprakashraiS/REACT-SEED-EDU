@@ -35,7 +35,7 @@ function Acollege()
 
   async function fetchData() {
     var apiavail=false;
-    const request = await fetch(`http://127.0.0.1:8000/sciencecourse-list/`)
+    const request = await fetch(`http://127.0.0.1:8000/artscourse-list/`)
       .then(response => {
         if(response.ok)
       {
