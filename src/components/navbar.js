@@ -8,6 +8,7 @@ function Navbar(){
     const clear = ()=>{
         localStorage.removeItem("paperid")
         localStorage.removeItem("notesid")
+        localStorage.removeItem("quizid")
     }
     const logout = ()=>{
         localStorage.clear(); //for localStorage

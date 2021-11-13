@@ -5,6 +5,9 @@ import { Redirect } from 'react-router';
 
 function Navbar(){
 
+    const clear = ()=>{
+        localStorage.removeItem("quizid")
+    }
     const logout = ()=>{
         localStorage.clear(); //for localStorage
         sessionStorage.clear(); //for sessionStorage
@@ -30,7 +33,7 @@ function Navbar(){
       }
       }
 return(
-    // <nav className="navbar">
+    //<nav className="navbar">
     //         <ul>
     //             <li className='nav-item'>
     //                 <Link to="/" className="navbar-links">
@@ -44,8 +47,7 @@ return(
     //                 </Link>
     //             </li>
     //         </ul>
-        
-    // </nav>
+    //</nav>
     <ulsn>
         <lisn>
             <img class="profile" src={userdata.img}/>
@@ -54,28 +56,29 @@ return(
             <h1>{userdata.username}</h1>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/"><b>HOME</b></a>
+            <Link to="/student" onClick={clear} className="navbar-links"><b>HOME</b></Link>
+            {/* <Link to="/" onClick={clear} className="navbar-links">SEED</Link> */}
         </lisn>
         <lisn >
-            <a class="nav-link"  href="#"><b>COLLEGES</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>COLLEGES</b></Link>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="#"><b>BOOKS</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>BOOKS</b></Link>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="#"><b>EXAMS</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>EXAMS</b></Link>
         </lisn>
         <lisn>
-            <a class="nav-link"  href="#"><b>NEWS</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>NEWS</b></Link>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="#"><b>COURSES</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>COURSES</b></Link>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="#"><b>QUESTION BANK</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>QUESTION BANK</b></Link>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="#"><b>STUD PORTAL</b></a>
+        <Link to="/student" onClick={clear} className="navbar-links"><b>STUDENT PORTAL</b></Link>
         </lisn>
     </ulsn>
     );

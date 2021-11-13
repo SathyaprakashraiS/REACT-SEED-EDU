@@ -1,11 +1,21 @@
 import React,{useState,useEffect, Component } from 'react';
 import './shome.css';
 import { GoogleLogout } from 'react-google-login';
-import { Redirect, Link } from 'react-router';
 import SNavbar from './snavbar';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 function Student(){
 
+  let history = useHistory();
+  function viewans(theid)
+  {
+    localStorage.setItem('quizid',JSON.stringify(theid));
+    history.push("/student/quizans/");
+  }
+  function attemptquiz(theid)
+  {
+    alert(`hello, ${theid}`);
+  }
     const logout = ()=>{
         localStorage.clear(); //for localStorage
         sessionStorage.clear(); //for sessionStorage
@@ -114,6 +124,7 @@ function Student(){
       
         let content = {
             marginLeft: '220px',
+            paddingBottom:'100px',
             // width: '250px',
             // height: '250px',
             backgroundColor: 'yellow',
@@ -176,7 +187,7 @@ return(
         <b>{item.cname}</b><br/>
         <b>{item.author}</b><br/>
         <b>{item.cgrade}</b><br/>
-        <button>attempt quiz</button>
+        <button onClick={() => attemptquiz(item.id)}>attempt quiz</button>
         </div>
       </a>
       ))
@@ -213,13 +224,12 @@ return(
           <div style={quizcard}>
           <b>{item.stest}</b><br/>
           <b>{item.spoint}</b><br/>
-          <button>view answer</button>
+          <button onClick={() => viewans(item.stest)}>view answer</button>
           </div>
         </a>
         ))
       }
       </div>
-    
   
     </div>
     {/* </div> */}

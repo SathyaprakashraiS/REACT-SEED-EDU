@@ -31,6 +31,7 @@ import Rnotesdisp from './components/pages/rnotesdisp';
 import Tips from './components/pages/tips';
 import Ocourses from './components/pages/onlinecourse';
 import Video from './components/pages/video';
+import Qans from './components/pages/quizans';
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
         <Route path='/tips' exact component={Tips} />
         <Route path='/ocourses' exact component={Ocourses} />
         <Route path='/video' exact component={Video} />
+        <Route path='/student/quizans' exact component={Qans} />
       </Switch>
     </Router>
   </>
