@@ -5,6 +5,8 @@ import axios from 'axios';
 import './arts.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import ArtStructure from '../structures/ArtStructure';
+import ReactTable from "react-table";  
 
 function Acollege()
 {
@@ -16,9 +18,12 @@ function Acollege()
   const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
   const userdata = JSON.parse(localStorage.getItem('theuser'));
   var apiavail=false;
+  
+
 
   const { state } = ([])
   var authenticated=false;
+  
 
   if(locdata!=null)
   {
@@ -51,6 +56,7 @@ function Acollege()
     })
       .then(data => {
         setcourse(data)
+        console.log(data)
         setloading(false)
         setapi(true)
       })
@@ -94,15 +100,7 @@ if(api)
     </div>
     {apiavail ? (
         <><p>{api}</p>
-      {
-      course.map(item => (
-      <a key={item.id}>
-      {item.name}
-      {item.duration}
-      {item.desc}
-      </a>
-      ))
-    }
+    <ArtStructure data={course}/>
         </>
       ) : (
         <p>no api to fetch from :(</p>

@@ -88,6 +88,8 @@ if(api)
         <p>Login panra dei</p>
       )}
     </div>
+
+    
     <div className="centertext">
     <a href="/courses/">Go back</a>
     <h1>COMMERCE COURSE</h1>

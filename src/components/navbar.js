@@ -58,9 +58,21 @@ return(
                     <Link to="/questionbank" className="navbar-links">
                         QUESTION BANK
                     </Link>
-                    <Link to="/" onClick={clear} className="navbar-links">
+                    <Link  className="other">
                         OTHER
+                        <div className="dropdown">
+                    <Link to="/revnotes" onClick={clear} className="navbar-links">
+                        REVISION NOTES
                     </Link>
+                    <Link to="/video" onClick={clear} className="navbar-links">
+                        VIDEO
+                    </Link>
+                    <Link to="/ocourses" onClick={clear} className="navbar-links">
+                        ONLINE COURSES
+                    </Link>
+                    </div>
+                    </Link>
+                    
                     {userdata ? (
                         <></>
                     ):(

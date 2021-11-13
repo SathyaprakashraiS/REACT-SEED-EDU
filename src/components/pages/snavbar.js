@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './navbar.css';
+import './snavbar.css';
 import { GoogleLogout } from 'react-google-login';
 import { Redirect } from 'react-router';
 
@@ -30,22 +30,54 @@ function Navbar(){
       }
       }
 return(
-    <nav className="navbar">
-            <ul>
-                <li className='nav-item'>
-                    <Link to="/" className="navbar-links">
-                        HOME
-                    </Link>
-                    <Link to="/book" className="navbar-links">
-                        BOOK
-                    </Link>
-                    <Link to="/news" className="navbar-links">
-                        NEWS
-                    </Link>
-                </li>
-            </ul>
+    // <nav className="navbar">
+    //         <ul>
+    //             <li className='nav-item'>
+    //                 <Link to="/" className="navbar-links">
+    //                     HOME
+    //                 </Link>
+    //                 <Link to="/book" className="navbar-links">
+    //                     BOOK
+    //                 </Link>
+    //                 <Link to="/news" className="navbar-links">
+    //                     NEWS
+    //                 </Link>
+    //             </li>
+    //         </ul>
         
-    </nav>
+    // </nav>
+    <ulsn>
+        <lisn>
+            <img class="profile" src={userdata.img}/>
+        </lisn>
+        <lisn>
+            <h1>{userdata.username}</h1>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="/"><b>HOME</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="#"><b>COLLEGES</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="#"><b>BOOKS</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="#"><b>EXAMS</b></a>
+        </lisn>
+        <lisn>
+            <a class="nav-link"  href="#"><b>NEWS</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="#"><b>COURSES</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="#"><b>QUESTION BANK</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="#"><b>STUD PORTAL</b></a>
+        </lisn>
+    </ulsn>
     );
 }
 

@@ -20,13 +20,7 @@ function Ocourses()
   const { state } = ([])
   var authenticated=false;
 
-  // try{
-  //   state = this.props.location
-  //   authenticated=true
-  // }
-  // catch{
 
-  // }
 
   if(locdata!=null)
   {

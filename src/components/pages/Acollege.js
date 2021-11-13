@@ -1,16 +1,24 @@
 import '../../App.css';
-import React,{useState,useEffect, Component } from 'react';
+import React,{useState,useEffect, Component, } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
 import './Acollege.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import AllCollege from '../structures/AllCollege';
+import ReactDOM from 'react-dom';
+import { Input } from 'reactstrap';
 
 function Acollege()
 {
   const [college,setcollege] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
+  const [city,setCity] = useState([])
+  const [cname,setcname] = useState('')
+  const cools = []
+
+
   
   const locdata = JSON.parse(localStorage.getItem('user'));
   const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
@@ -40,6 +48,26 @@ function Acollege()
   {
     console.log("Not Authenticated")
   }
+  
+
+  const SortCity = (vcity) =>{
+    console.log("hello")
+    // console.log(cname)
+   
+    for(var i in college){
+      // console.log(college[i].city)
+        if(college[i].city === vcity){
+            console.log(college[i].name)
+            cools.push(college[i].name)
+            console.log(typeof(city))
+            
+        }
+        
+    }
+    setCity(cools)
+    console.log(cools)
+}
+
 
   async function fetchData() {
     var apiavail=false;
@@ -70,6 +98,7 @@ function Acollege()
 
 useEffect(() => {
   fetchData();
+
 }, []);
 if(api)
   {
@@ -102,13 +131,39 @@ if(api)
     </div>
     {apiavail ? (
         <><p>{api}</p>
+            
+            <div>
+                <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
+                {/* <button onClick={SortCity}>Search</button> */}
+                <div>
+                  
+                {
+                  city.map(item=>(
+                    <a>
+                      <p>{item}</p>
+                    </a>
+                  ))
+                }
+                  
+                  
+                </div>
+                
+            </div>
+        <div className="header">
+       <p>Name</p>
+       <p>City</p>
+       <p>State</p>
+       <p>Rating</p>
+       </div>
       {
       college.map(item => (
       <a key={item.id}>
-      {item.name}
+          
+          <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
+      {/* {item.name}
       {item.city}
       {item.state}
-      {item.rating}
+      {item.rating}  */}
       </a>
       ))
 }

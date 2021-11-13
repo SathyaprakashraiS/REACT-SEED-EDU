@@ -5,6 +5,7 @@ import axios from 'axios';
 import './Acollege.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import AllCollege from '../structures/AllCollege';
 
 function Scollege()
 {
@@ -102,13 +103,17 @@ if(api)
     </div>
     {apiavail ? (
         <><p>{api}</p>
+          <div className="header">
+       <p>Name</p>
+       <p>City</p>
+       <p>State</p>
+       <p>Rating</p>
+       </div>
       {
       college.map(item => (
       <a key={item.id}>
-      {item.name}
-      {item.city}
-      {item.state}
-      {item.rating}
+       
+      <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
       </a>
       ))
 }

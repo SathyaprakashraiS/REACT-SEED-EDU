@@ -1,20 +1,16 @@
-import React, { Component } from 'react';
-import '../../App.css';
-import { Link } from 'react-router-dom';
+import React from 'react'
 import Navbar from '../navbar';
-class Home extends Component
-{
-  render()
-  {
-    return (
-      <>
-      <Navbar />
-    <div className="App">
-      <p></p>
-      </div>
-      </>
-      );
-  }
+import './css/home.css'
+
+function home() {
+  return (
+    <div className="outer"> 
+      <Navbar/>
+     <div className="main">
+      <p>hello</p>
+    </div>
+    </div>
+  )
 }
 
-export default Home;
+export default home

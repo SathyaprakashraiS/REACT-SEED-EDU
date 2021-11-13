@@ -1,6 +1,6 @@
 import '../../App.css';
 import React,{useState,useEffect, Component, useCallback } from 'react';
-import { Button } from 'react-native'
+
 import axios from 'axios';
 // import Dispcards from './display';
 import './quesbank.css';

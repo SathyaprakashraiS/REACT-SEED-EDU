@@ -95,17 +95,20 @@ if(api)
     </div>
     {apiavail ? (
         <><p>{api}</p>
-        <section id="timeline">
+        <section className="timeline">
       {
       date.map(item => (
       <a key={item.id}>
         <article>
-    <div class="inner">
-      <span class="date">
-        <span class="day">{item.Date}</span>
-      </span>
-      <h2 class="ename">{item.event_name}</h2>
-      <p>{item.desc}</p>
+    <div className="inner">
+    <h2 className="ename">{item.event_name}</h2>
+      <div className="date">
+        
+         <div className="od"><p>{item.Date}</p></div>
+     
+      </div>
+      
+      <p className="desc">{item.desc}</p>
     </div>
   </article>
       </a>
