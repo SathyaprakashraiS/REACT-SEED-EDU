@@ -2,6 +2,7 @@ import React,{useState,useEffect, Component } from 'react';
 import './shome.css';
 import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
+import axios from 'axios';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 function Quiz(){
@@ -131,6 +132,7 @@ function Quiz(){
     }, []);
 
     function submit(){
+      let form_data= new FormData();
         var q=0
         var points=0
         for(var i=0;i<(quiz.length);i++)
@@ -153,7 +155,23 @@ function Quiz(){
                 }
             }
         }
-        addresult(points)
+        // addresult(points)
+        form_data.append('sname',userdata.username);
+        form_data.append('semail',userdata.email);
+        form_data.append('sgrade',userdata.standard);
+        form_data.append('stest',quizid);
+        form_data.append('spoint',points);
+        let resurl=`http://127.0.0.1:8000/quizrresult-list/`;
+        axios.post(resurl, form_data, {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        })
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(err => console.log(err))
+      
         alert(`YOU SCORED ${points}/${quiz.length}`);
         alert("QUIZ SUBMITTED")
         history.push("/student");
