@@ -14,7 +14,8 @@ function Student(){
   }
   function attemptquiz(theid)
   {
-    alert(`hello, ${theid}`);
+    localStorage.setItem('quizid',JSON.stringify(theid));
+    history.push("/student/attquiz/");
   }
     const logout = ()=>{
         localStorage.clear(); //for localStorage
@@ -187,7 +188,7 @@ return(
         <b>{item.cname}</b><br/>
         <b>{item.author}</b><br/>
         <b>{item.cgrade}</b><br/>
-        <button onClick={() => attemptquiz(item.id)}>attempt quiz</button>
+        <button onClick={() => attemptquiz(item.cname)}>attempt quiz</button>
         </div>
       </a>
       ))
