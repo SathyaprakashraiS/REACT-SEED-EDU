@@ -1,6 +1,6 @@
 import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
-import './FAQ.css';
+import './css/FAQ.css';
 
 import Navbar from '../navbar';
 

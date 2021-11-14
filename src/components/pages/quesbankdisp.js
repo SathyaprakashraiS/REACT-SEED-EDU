@@ -3,7 +3,7 @@ import React,{useState,useEffect, Component, useCallback } from 'react';
 
 import axios from 'axios';
 // import Dispcards from './display';
-import './quesbankdisp.css';
+import './css/quesbankdisp.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import { Link, Redirect,useHistory } from 'react-router-dom';

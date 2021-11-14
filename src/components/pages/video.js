@@ -2,9 +2,10 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './video.css';
+import './css/video.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import YoutubeEmbed from '../structures/YoutubeEmbed';
 
 function Video()
 {
@@ -91,30 +92,43 @@ if(api)
   }
 
   return(
-    <>
+    <div className="vidmain">
     <Navbar />
     <h1>VIDEOS</h1>
     {apiavail ? (
         <>
         <p>{api}</p>
+        <div className="outervid">
       {
       video.map(item => (
       <a key={item.id}>
-        <img src={item.thumbnail}/>
-        <b>{item.name}</b>
-        <b>{item.link}</b>
-        <b>{item.grade}</b>
-        <b>{item.description}</b>
-        <button onClick={()=>viewvideo(item.link)}>view video</button>
-        <br></br>
+         <div className="innervid">
+            <div className="cont fron">
+             <div className="imge">
+             <img src={item.thumbnail}/>
+                </div>
+             <div className="infos">
+              <b>{item.name}</b>
+              <b>{item.grade}</b>
+              <b>{item.description}</b>
+                 
+             </div>
+             
+            </div>
+            <div className="cont bac">
+              <YoutubeEmbed link={item.link}/>
+            </div>
+        </div>
+        
       </a>
       ))
       }
+      </div>
         </>
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+    </div>
     
   );
 }

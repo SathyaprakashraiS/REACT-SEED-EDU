@@ -2,9 +2,10 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './arts.css';
+import './css/arts.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import ArtStructure from '../structures/ArtStructure';
 
 function Acollege()
 {
@@ -77,7 +78,7 @@ if(api)
   }
 
   return(
-    <>
+    <div className="cpmain">
     <Navbar />
     <div>
       {authenticated ? (
@@ -92,14 +93,17 @@ if(api)
     <a href="/courses/">Go back</a>
     <h1>ENGINEERING COURSE</h1>
     </div>
+    <div className="cheader">
+    <h2>course</h2>
+    <h2>duration</h2>
+    <h2>About</h2>
+    </div>
     {apiavail ? (
         <><p>{api}</p>
       {
       course.map(item => (
       <a key={item.id}>
-      {item.name}
-      {item.duration}
-      {item.desc}
+      <ArtStructure name={item.name} duration={item.duration} desc={item.desc}/> 
       </a>
       ))
     }
@@ -107,7 +111,7 @@ if(api)
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+    </div>
     
   );
 }

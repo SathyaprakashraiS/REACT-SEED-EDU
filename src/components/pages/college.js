@@ -2,7 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './college.css';
+import './css/college.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 
@@ -32,7 +32,7 @@ function College()
   }
 
   return(
-    <>
+    <div className="chome">
     <Navbar />
     <div>
       {authenticated ? (
@@ -72,7 +72,7 @@ function College()
       <span><a href="/colleges/degreecolleges/" >DEGREE BASED COLLEGES</a></span>
     </div>
   </div>
-
+ 
   <div class="card-box">
     <div class="card-img">
       <a href="/colleges/statecolleges/"><img src="https://elements-video-cover-images-0.imgix.net/files/208091192/India+Map+Preview+590x332.jpg?auto=compress&crop=edges&fit=crop&fm=jpeg&h=800&w=1200&s=620bc62ed3e6a929dbe0ebe33836db03" alt=""/></a>
@@ -101,7 +101,7 @@ function College()
   </div>
 </div>
     
-    </>
+    </div>
     
   );
 }

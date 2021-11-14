@@ -3,7 +3,7 @@ import React,{useState,useEffect, Component, useCallback } from 'react';
 
 import axios from 'axios';
 // import Dispcards from './display';
-import './quesbank.css';
+import './css/quesbank.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import { Link, Redirect,useHistory } from 'react-router-dom';
@@ -103,7 +103,7 @@ if(api)
   }
   
   return(
-    <>
+    <div className="qbhome">
     <Navbar />
     <div>
       {authenticated ? (
@@ -116,15 +116,18 @@ if(api)
     <div className="centertext">
     <h1>QUESTION PAPERS</h1>
     </div>
+    <div className="qbouter">
     {apiavail ? (
         <>
       {
       qtype.map(item => (
       <a key={item.id}>
-        <b>{item.id}</b><br></br>
-        <b>{item.parentpaperfile}</b><br></br>
-        <b>{item.description}</b><br></br>
-        <button onClick={() => redirectto(item.id)}>button</button><br></br><br></br>
+        <div className="qbcard">
+        <b>{item.id}</b>
+        <b>{item.parentpaperfile}</b>
+        <b>{item.description}</b>
+        <button onClick={() => redirectto(item.id)}>VIEW</button><br></br><br></br>
+        </div>
       </a>
       ))
   
@@ -135,7 +138,8 @@ if(api)
         <><p>{api}</p>
         <p>no api to fetch from :(</p> </>
       )}
-    </>
+      </div>
+    </div>
     
   );
 }

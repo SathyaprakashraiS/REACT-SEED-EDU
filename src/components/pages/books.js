@@ -1,10 +1,11 @@
-import '../../App.css';
+
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './books.css';
+import './css/books.css';
 import GLogin from './log';
 import Navbar from '../navbar';
+import BookStruct from '../structures/BookStruct';
 
 function Disp()
 {
@@ -85,7 +86,7 @@ if(api)
   }
 
   return(
-    <>
+    <div className="bhome">
     <Navbar />
     <div>
       {authenticated ? (
@@ -104,23 +105,27 @@ if(api)
     {apiavail ? (
         <><p>{api}</p>
         
+      <div className="libmain">
       {
       book.map(item => (
       <a key={item.id}>
-        <img src={item.image}/>
+        {/* <libStruct img={item.img} name={item.name} /> */}
+        <BookStruct img={item.image} subject = {item.bgrade}name={item.name} author={item.author} file={item.file}/>
+        {/* <img src={item.image}/>
         <b>{item.name}</b>
         <b>{item.author}</b>
-        <b>{item.bgrade}</b><br></br>
+        <b>{item.bgrade}</b><br></br> */}
       </a>
       ))
   
       }
+      </div>
     
         </>
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+    </div>
     
   );
 }

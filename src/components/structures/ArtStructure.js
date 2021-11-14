@@ -1,44 +1,20 @@
 import React from 'react'
+import './CSS/Artstruct.css'
 
-import ReactTable from 'react-table-6';
 
-import 'react-table-6/react-table.css';
-function ArtStructure({data}) {
-    const fill = [{
-        name:'kavin',
-        duration:4,
-        desc:"hello"
-    },
-    {
-        name:'kavin',
-        duration:4,
-        desc:"hello"
-    }
-]
-
-    
-    const columns = [{  
-        Header: 'Name',  
-        accessor: 'name'  
-       },{  
-       Header: 'Duration',  
-       accessor: 'duration'  
-       },{
-         Header:'Description',
-         accessor:'desc'
-       }]  
+function ArtStructure(props) {
+   
      
     return (
         <div>
-           <ReactTable
-
-           data={data}
-           columns={columns}
-           />
-         
-            {/* <p>{props.name}</p>
-            <p>{props.duration}</p>
-            <p>{props.desc}</p> */}
+           
+            <div className="CTable">
+                
+            <p className="cname">{props.name}</p>
+            <p className="cname">{props.duration}</p>
+            <p className="cname">{props.desc}</p>
+            
+            </div>
         </div>
     )
 }

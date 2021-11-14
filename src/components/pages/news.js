@@ -1,7 +1,7 @@
 import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
-import './news.css';
+import './css/news.css';
 import Navbar from '../navbar';
 
 function News()
@@ -58,11 +58,12 @@ if(api)
   }
 
   return(
-    <>
+    <div className="newsmain">
     <Navbar />
     <div className="centertext">
     <h1>NEWS</h1>
     </div>
+    <div className="newsouter">
     {apiavail ? (
         <><p>{api}</p>
         <div className="cardcontainer">
@@ -70,14 +71,15 @@ if(api)
   
       news.map(item => (
       <a key={item.id}>
-        <div className="card">
-              <div className="imgs">
+        <div className="ncard">
+              <div className="nimgs">
               <a href={item.url}><img src={item.img} alt="not found"/></a>
-              </div>
-              <div className="details">
+              <div className="ndetails">
               <a href={item.url}><h1>{item.name}</h1></a>
               <p>{item.liner}</p>
               </div>
+              </div>
+              
           </div>
 
       </a>
@@ -89,7 +91,8 @@ if(api)
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+      </div>
+    </div>
     
   );
 }

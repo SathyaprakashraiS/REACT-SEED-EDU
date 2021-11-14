@@ -1,10 +1,23 @@
 import React,{useState,useEffect, Component } from 'react';
 import './shome.css';
 import { GoogleLogout } from 'react-google-login';
-import { Redirect, Link } from 'react-router';
+
 import SNavbar from './snavbar';
+import BookStruct from '../structures/BookStruct';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 function Student(){
+  let history = useHistory();
+  function viewans(theid)
+  {
+    localStorage.setItem('quizid',JSON.stringify(theid));
+    history.push("/student/quizans/");
+  }
+  function attemptquiz(theid)
+  {
+    localStorage.setItem('quizid',JSON.stringify(theid));
+    history.push("/student/attquiz/");
+  }
 
     const logout = ()=>{
         localStorage.clear(); //for localStorage
@@ -33,6 +46,8 @@ function Student(){
       const [book,setbook] = useState([]);
       const [quiz,setquiz] = useState([]);
       const [attquiz,setattquiz] = useState([]);
+      
+
 
       var attquizavail=false;
       async function fetchBook(stand) {
@@ -50,7 +65,7 @@ function Student(){
             console.log("im not here")
           }
         })
-          .then(data => {
+          .then(data => { 
             setbook(data)
             console.log(setbook)
           })
@@ -112,71 +127,73 @@ function Student(){
 
       console.log(userdata)
       
-        let content = {
-            marginLeft: '220px',
-            // width: '250px',
-            // height: '250px',
-            backgroundColor: 'yellow',
-          };
-          let page = {
-            // marginLeft: '220px',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'red',
-          };
+        // let content = {
+        //     marginLeft: '220px',
+          
+        //     backgroundColor: 'yellow',
+        //   };
+        //   let page = {
+           
+        //     width: '100%',
+        //     height: '100%',
+        //     backgroundColor: 'red',
+        //   };
           let center={
               marginLeft:'45%',
           };
-          let allcard={
-              width:'20%',
-              display: "flex",
-              flexDirection: "row",
-          };
-          let bookcard={
+//           let allcard={
+//               width:'20%',
+//               display: "flex",
+//               flexDirection: "row",
+//           };
+//           let bookcard={
             
-            width:'500px',
-          };
-          let bookimg={
-            height:'250px',
-            width:'250px',
-          };
-          let quizcard={
-            width:'200px',
-          };
+//             width:'500px',
+//           };
+//           let bookimg={
+//             height:'250px',
+//             width:'250px',
+//           };
+//           let quizcard={
+//             width:'200px',
+//           };
 return(
     
-    <>
+    <div className="main">
     <SNavbar/>
     {/* <div style={page}> */}
     {/* {userdata.standard} */}
-    <div style={content}>
+    <div className="inmain">
     <h1 style={center}><b>|_o_|</b></h1>
     <h1><b>BOOKS</b></h1>
-    <div style={allcard}>
+    <div className="sbook">
     {
     book.map(item => (
       <a key={item.id}>
-          <div style={bookcard}>
+        <div >
+        <BookStruct name={item.name} img={item.image} author={item.author} subject={item.subject} file={item.file}/>
+        </div>
+          {/* <div style={bookcard}>
         <img style={bookimg} src={item.image}/><br/>
         <b>{item.name}</b><br/>
         <b>{item.author}</b><br/>
         <b>{item.subject}</b>
-        </div>
+        </div> */}
       </a>
       ))
     }
     </div>
     <br/><br/><br/>
     <h1><b>QUIZ</b></h1>
-    <div style={allcard}>
+    <div className="qmain">
     {
     quiz.map(item => (
       <a key={item.id}>
-          <div style={quizcard}>
+          <div className="qcard">
         <b>{item.cname}</b><br/>
         <b>{item.author}</b><br/>
         <b>{item.cgrade}</b><br/>
-        <button>attempt quiz</button>
+        <button onClick={() => attemptquiz(item.cname)}>attempt quiz</button>
         </div>
       </a>
       ))
@@ -206,14 +223,14 @@ return(
       </>
     )} */}
     <h1><b>ATTEMPTED QUIZ</b></h1>
-      <div style={allcard}>
+      <div className="qmain">
       {
       attquiz.map(item => (
         <a key={item.id}>
-          <div style={quizcard}>
+          <div className="qcard">
           <b>{item.stest}</b><br/>
           <b>{item.spoint}</b><br/>
-          <button>view answer</button>
+          <button onClick={() => viewans(item.stest)}>view answer</button>
           </div>
         </a>
         ))
@@ -283,7 +300,7 @@ return(
                 </li>
             </ul>
     </nav> */}
-    </>
+    </div>
     );
 }
 

@@ -1,6 +1,6 @@
 //THIS NAVBAR IS USELESS
 import { Link } from 'react-router-dom';
-import './navbar.css';
+import './css/navbar.css';
 import { GoogleLogout } from 'react-google-login';
 import { Redirect } from 'react-router';
 

@@ -2,9 +2,9 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './dates.css';
-import GLogin from './log';
+import './css/dates.css';
 import Navbar from '../navbar';
+
 
 function Date()
 {
@@ -19,6 +19,8 @@ function Date()
 
   const { state } = ([])
   var authenticated=false;
+
+
 
 
   if(locdata!=null)
@@ -64,6 +66,7 @@ function Date()
 
 useEffect(() => {
   fetchData();
+ 
 }, []);
 if(api)
   {
@@ -79,7 +82,7 @@ if(api)
   }
 
   return(
-    <>
+    <div className="dtmain">
     
     <Navbar />
     <div>
@@ -96,30 +99,49 @@ if(api)
     {apiavail ? (
         <><p>{api}</p>
         <section className="timeline">
+      
       {
       date.map(item => (
-      <a key={item.id}>
-        <article>
-    <div className="inner">
-    <h2 className="ename">{item.event_name}</h2>
-      <div className="date">
-        
-         <div className="od"><p>{item.Date}</p></div>
-     
-      </div>
-      
-      <p className="desc">{item.desc}</p>
-    </div>
-  </article>
+      <a key={item.id}>  
+      <article>
+        {
+          item.id%2==0 ? (
+            <>
+              <div className="date">
+                <div className="od"><p>{item.Date}</p></div>
+               </div>
+               <div   className="Info">
+                     
+                     <h2 className="ename">{item.event_name}</h2>
+                     <p className="desc">{item.desc}</p>
+               </div>
+               </>
+          ) :(
+            <>
+            <div className="date">
+                <div className="od"><p>{item.Date}</p></div>
+               </div>
+               <div   className="left">
+                     
+                     <h2 className="ename">{item.event_name}</h2>
+                     <p className="desc">{item.desc}</p>
+               </div>
+               </>
+          )
+        }
+
+            
+      </article>
       </a>
       ))
       }
-    </section>
+       
+      </section>
         </>
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+    </div>
     
   );
 }

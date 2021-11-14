@@ -2,7 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './arts.css';
+import './css/arts.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 
@@ -30,7 +30,7 @@ function Course()
   }
 
   return(
-    <>
+    <div className="cpmain">
     <Navbar />
     <div>
       {authenticated ? (
@@ -89,7 +89,7 @@ function Course()
   </div>
 
   </div>
-    </>
+    </div>
     
   );
 }
