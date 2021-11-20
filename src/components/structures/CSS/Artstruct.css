@@ -1,0 +1,14 @@
+.CTable{
+    display:grid;
+    text-align: center;
+    grid-template-columns: 30vw 30vw 40vw;
+    grid-column-gap: 10px;
+    border:2px solid rgb(3, 175, 255);
+    color:white;
+}
+
+.CTable *{
+    border-right: 2px solid black;
+    height:100%;
+    margin-top:-2px;
+}

@@ -1,33 +1,42 @@
+.profile{
+  margin-top:7%;
+  width:75%;
+}
+
 ulsn
 {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 220px;
-  background-color: white;
+  width: 20%;
+  background-color: rgb(0, 0, 0);
+  color:wheat;
   position: fixed;
   height: 100%;
   overflow: auto;
+  text-align: center;
+  text-transform: uppercase;
+  scrollbar-width:thin;;
 }
 
 lisn a {
   display: block;
-  color: #000;
+  color: rgb(255, 255, 255);
   padding: 8px 16px;
   text-decoration: none;
 }
 
 lisn a.active {
-  background-color: #E7E7E7;
+  background-color: #0a7abb;
   color: black;
 }
 
 lisn a:hover:not(.active)
 {
-  background-color: #E7E7E7;
+  background-color: #0f94e0;
   color: white;
 }
-
 ulsn img{
   height:auto;
 }
+

@@ -2,7 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './onlinecourse.css';
+import './css/onlinecourse.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 
@@ -85,31 +85,37 @@ if(api)
   }
 
   return(
-    <>
+    <div className="onmain">
     <Navbar />
     <h1>ONLINE COURSES</h1>
     {apiavail ? (
         <>
         <p>{api}</p>
+        <div className="onl_outer">
       {
+        
       ocourses.map(item => (
       <a key={item.id}>
-        <img src={item.image}/>
+        <div className="onl_inner">
+          <img src={item.image}/>
+         <div className="onl_info">
         <b>{item.name}</b>
-        {/* <b>{item.description}</b> */}
         <b>{item.rating}</b>
         <b>{item.price}</b>
-        <b>{item.link}</b>
+        <a href={item.link}> View course</a>
         <button onClick={()=>viewcoursedes(item.description)}>view course desc</button>
-        <br></br>
+        </div>
+        </div>
       </a>
       ))
+      
       }
+      </div>
         </>
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+    </div>
     
   );
 }

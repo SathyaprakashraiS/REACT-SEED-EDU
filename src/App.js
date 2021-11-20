@@ -33,6 +33,8 @@ import Ocourses from './components/pages/onlinecourse';
 import Video from './components/pages/video';
 import Qans from './components/pages/quizans';
 import Quiz from './components/pages/attquiz';
+import Mockans from './components/pages/mockans';
+import Mock from './components/pages/mock';
 
 function App() {
   return (
@@ -71,6 +73,8 @@ function App() {
         <Route path='/video' exact component={Video} />
         <Route path='/student/quizans' exact component={Qans} />
         <Route path='/student/attquiz' exact component={Quiz} />
+        <Route path='/student/mockans' exact component={Mockans} />
+        <Route path='/student/attmock' exact component={Mock} />
       </Switch>
     </Router>
   </>

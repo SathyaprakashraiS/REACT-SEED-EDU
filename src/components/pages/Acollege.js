@@ -1,19 +1,21 @@
-import '../../App.css';
+
 import React,{useState,useEffect, Component, } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './Acollege.css';
+import './css/Acollege.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import AllCollege from '../structures/AllCollege';
 import ReactDOM from 'react-dom';
 import { Input } from 'reactstrap';
+import loadimage from './images/ROCKET.gif'
+
 
 function Acollege()
 {
   const [college,setcollege] = useState([]);
   const [api,setapi] = useState([false]);
-  const [loading,setloading] = useState(false);
+  const [loading,setloading] = useState(true);
   const [city,setCity] = useState([])
   const [cname,setcname] = useState('')
   const cools = []
@@ -51,6 +53,8 @@ function Acollege()
   
 
   const SortCity = (vcity) =>{
+    setcname(vcity)
+    console.log(city)
     console.log("hello")
     // console.log(cname)
    
@@ -61,6 +65,12 @@ function Acollege()
             cools.push(college[i].name)
             console.log(typeof(city))
             
+        }
+        else if(college[i].state === vcity){
+          cools.push(college[i].name)
+        }
+        else if(college[i].name === vcity){
+          cools.push(college[i].name)
         }
         
     }
@@ -87,14 +97,17 @@ function Acollege()
     })
       .then(data => {
         setcollege(data)
-        setloading(false)
+        setTimeout(function() {
+          setloading(false);
+       }, 1000); 
+        
         setapi(true)
       })
       .catch((error) => {
         console.log("the error ",error)
         setapi(false)
       });
-    }
+    } 
 
 useEffect(() => {
   fetchData();
@@ -115,64 +128,76 @@ if(api)
 
   return(
     <>
-    <Navbar />
-    <div>
-      {authenticated ? (
+    {
+      loading ?(
+        // <img src="https://i.pinimg.com/originals/92/96/f7/9296f70fce1ae3f298e0d085c17f6a3f.gif" alt="Not found" />
+        <img className="loadImage" src={loadimage} alt="Not found" />
+      ) :(
         <>
-
-        </>
-      ) : (
-        <p>Login panra dei</p>
-      )}
-    </div>
-    <div className="centertext">
-    <a href="/colleges/" >Go back</a>
-    <h1>ALL COLLEGES IN INDIA</h1>
-    </div>
-    {apiavail ? (
-        <><p>{api}</p>
-            
-            <div>
-                <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
-                {/* <button onClick={SortCity}>Search</button> */}
-                <div>
-                  
-                {
-                  city.map(item=>(
-                    <a>
-                      <p>{item}</p>
-                    </a>
-                  ))
-                }
-                  
-                  
-                </div>
+        <Navbar />
+        <div>
+          {authenticated ? (
+            <>
+    
+            </>
+          ) : (
+            <p>Login panra dei</p>
+          )}
+        </div>
+        <div className="centertext">
+        <a href="/colleges/" >Go back</a>
+        <h1>ALL COLLEGES IN INDIA</h1>
+        </div>
+        {apiavail ? (
+            <><p>{api}</p>
                 
-            </div>
-        <div className="header">
-       <p>Name</p>
-       <p>City</p>
-       <p>State</p>
-       <p>Rating</p>
-       </div>
-      {
-      college.map(item => (
-      <a key={item.id}>
-          
-          <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
-      {/* {item.name}
-      {item.city}
-      {item.state}
-      {item.rating}  */}
-      </a>
-      ))
-}
-
+                <div>
+                  <h4>SEARCH COLLEGE BY ENTERING CITY OR STATE:</h4>
+                    <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
+                    <h3>Colleges in {cname}</h3>
+                    {/* <button onClick={SortCity}>Search</button> */}
+                    <div>
+                      
+                    {
+                      city.map(item=>(
+                        <a>
+                          <p>{item}</p>
+                        </a>
+                      ))
+                    }
+                      
+                      
+                    </div>
+                    
+                </div>
+            <div className="header">
+           <p>Name</p>
+           <p>City</p>
+           <p>State</p>
+           <p>Rating</p>
+           </div>
+          {
+          college.map(item => (
+          <a key={item.id}>
+              
+              <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
+          {/* {item.name}
+          {item.city}
+          {item.state}
+          {item.rating}  */}
+          </a>
+          ))
+    }
+    
+            </>
+          ) : (
+            <p>no api to fetch from :(</p>
+          )}
         </>
-      ) : (
-        <p>no api to fetch from :(</p>
-      )}
+      )
+    }
     </>
+   
     
   );
 }

@@ -5,10 +5,12 @@
     z-index:-1;
 } */
 
-.main{
+
+
+.hmain{
     position: absolute;
     width: 100%;
-    background-color: rgb(3, 127, 199);
+    background:#150A41;
     height:100vh;
     z-index: -1;
     color:white;

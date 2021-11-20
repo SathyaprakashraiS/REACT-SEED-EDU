@@ -2,7 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './rnotes.css';
+import './css/rnotes.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import { Link, Redirect,useHistory } from 'react-router-dom';
@@ -13,11 +13,45 @@ function Rnotes()
   const [notes,setnotes] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
+  const [sub,setSub] = useState([])
+  const [sname,setsname] = useState('')
+
+  
   
   const locdata = JSON.parse(localStorage.getItem('user'));
   const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
   const userdata = JSON.parse(localStorage.getItem('theuser'));
   var apiavail=false;
+
+
+  const SortCity = (subn) =>{
+    const subs = []
+    var csubn = subn.toLowerCase()
+    setsname(subn)
+    console.log(sub)
+    console.log("hello")
+    // console.log(cname)
+   
+    for(var i in notes){
+      // console.log(college[i].city)
+        if(notes[i].sub === subn){
+            console.log(notes[i].sub)
+            subs.push(notes[i])
+            console.log(typeof(sub))
+            
+        }
+        else if(notes[i].sub === csubn){
+          subs.push(notes[i])
+        }
+       
+        
+    }
+   
+    setSub(subs)
+   
+    
+
+}
 
   const { state } = ([])
   var authenticated=false;
@@ -100,32 +134,63 @@ if(api)
   }
 
   return(
-    <>
+    <div className="revmain">
     <Navbar />
     <h1>REVISION NOTES</h1>
+
+   
     {apiavail ? (
         <><p>{api}</p>
-        
+             <div className="srev">
+                  <h4>SEARCH NOTES BY SUBJECT:</h4>
+                    <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
+                    <h3>Books for {sname}</h3>
+                    {/* <button onClick={SortCity}>Search</button> */}
+                
+                    <div className="revcard">
       {
-      notes.map(item => (
+      
+      sub.map(item => (
       <a key={item.id}>
+        <div className="inrev">
         <img src={item.thumbnail}/>
         <b>{item.title}</b>
         <b>{item.sub}</b>
         <b>{item.grade}</b>
         {/* {item.file} */}
-        <button onClick={() => redirectto(item.id)}>button</button><br></br><br></br>
-        <br></br>
+        <button onClick={() => redirectto(item.id)}>READ</button><br></br><br></br>
+        </div>
+      </a>
+      ))
+     
+  
+      }
+      </div> 
+                    
+                </div>
+       <div className="revcard">
+      {
+      notes.map(item => (
+      <a key={item.id}>
+        <div className="inrev">
+        <img src={item.thumbnail}/>
+        <b>{item.title}</b>
+        <b>{item.sub}</b>
+        <b>{item.grade}</b>
+        {/* {item.file} */}
+        <button onClick={() => redirectto(item.id)}>READ</button><br></br><br></br>
+        </div>
       </a>
       ))
   
       }
+      </div> 
     
         </>
       ) : (
         <p>no api to fetch from :(</p>
       )}
-    </>
+    </div>
     
   );
 }

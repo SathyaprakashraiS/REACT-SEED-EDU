@@ -1,0 +1,14 @@
+.aqmain{
+  
+    color:black;
+    background: red;
+}
+
+.qus{
+    padding-left: 50%;
+    color:black;
+}
+
+.subbut > button{
+    color:white
+}

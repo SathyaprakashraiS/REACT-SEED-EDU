@@ -1,145 +1,112 @@
-import '../../App.css';
-import React,{useState,useEffect, Component, useCallback } from 'react';
-
-import axios from 'axios';
-// import Dispcards from './display';
+import React,{useState,useEffect, Component } from 'react';
 import './quizans.css';
-import GLogin from './log';
+import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
-function Qans()
-{
-    let history = useHistory();
-  const [quizans,setquizans] = useState([]);
-  const [api,setapi] = useState([false]);
-  const [loading,setloading] = useState(false);
-  
-  const locdata = JSON.parse(localStorage.getItem('user'));
-  const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
-  const userdata = JSON.parse(localStorage.getItem('theuser'));
-  const quizid = JSON.parse(localStorage.getItem('quizid'));
-  var apiavail=false;
+function Qans(){
+  let history = useHistory();
 
-//   const { state } = this.props.location
-  var authenticated=false;
-  var papersfetched=false;
-  const papid=JSON.parse(localStorage.getItem('paperid'));
-  
-  // try{
-  //   state = this.props.location
-  //   authenticated=true
-  // }
-  // catch{
-
-  // }
-
-  if(locdata!=null)
-  {
-    console.log("Authenticated")
-    authenticated=true;
-    console.log("api fetched userdata",apilocdata)
-    //console.log("the signed in userdata is ",userdata)
-    console.log("the signed in user is ",userdata.username)
-  }
-  else
-  {
-    console.log("Not Authenticated")
-  }
-
-  async function fetchData() {
-    var apiavail=false;
-    var thestring='http://127.0.0.1:8000/quizans-list/'+quizid+'/'
-    console.log("THE STRING IS ",thestring)
-    const request = await fetch(thestring)
-      .then(response => {
-        if(response.ok)
+    const logout = ()=>{
+        localStorage.clear(); //for localStorage
+        sessionStorage.clear(); //for sessionStorage
+        // window.location.reload(false);
+        return(
+            <Redirect to="/"/>
+        )
+      }
+      const userdata = JSON.parse(localStorage.getItem('theuser'));
+      const quizid = JSON.parse(localStorage.getItem('quizid'));
+      var teacher=false
+      var student=false
+      if(userdata)
       {
-        console.log("here")
-        console.log(apiavail)
-        apiavail=true;
-        return response.json(); 
+          console.log("userdata.is_staff is ",userdata.is_staff)
+        if(userdata.is_staff == true)
+      {
+          teacher=true
+          console.log("teacher here")
       }
-      else{
-        console.log("im not here")
-        console.log(apiavail)
+      if(userdata.is_staff == false){
+          student=true
+          console.log("student here")
       }
-    })
-      .then(data => {
-        setquizans(data)
-        setloading(false)
-        setapi(true)
-      })
-      .catch((error) => {
-        console.log("the error ",error)
-        setapi(false)
-      });
-    }
+      }
+      const [ans,setans] = useState([]);
+      
 
-useEffect(() => {
-  fetchData();
-}, []);
-if(api)
-  {
-    console.log("fetched from api")
-    apiavail=true;
-    console.log(apiavail)
-  }
-  else
-  {
-    console.log("treid fetching api not available")
-    apiavail=false;
-    console.log(apiavail)
-  }
 
-  let content = {
-    marginLeft: '220px',
-    paddingBottom:'100px',
-    // width: '250px',
-    // height: '250px',
-    backgroundColor: 'yellow',
-  };
-  
-  return(
-    <>
-    <SNavbar />
-    <div>
-      {authenticated ? (
-        <>
-        </>
-      ) : (
-        <p>Login panra dei</p>
-      )}
-    </div>
-    <div style={content}>
-    <h1>{quizid} QUIZ ANSWERS</h1>
-    {apiavail && papid ? (
-        <>
-        {
-      quizans.map(item => (
+      var attquizavail=false;
+      async function fetchQuizans(stand) {
+        var apiavail=false;
+        var booklink=`http://127.0.0.1:8000/quizans-list/`+quizid+'/';
+        const request = await fetch(booklink)
+          .then(response => {
+            if(response.ok)
+          {
+            console.log("here")
+            apiavail=true;
+            return response.json(); 
+          }
+          else{
+            console.log("im not here")
+          }
+        })
+          .then(data => { 
+            setans(data)
+            console.log(setans)
+          })
+          .catch((error) => {
+            console.log("the error ",error)
+          });
+        }
+        
+            
+
+              
+
+                
+    
+    useEffect(() => {
+      fetchQuizans();
+    }, []);
+
+      console.log(userdata)
+
+          let center={
+              marginLeft:'45%',
+          };
+
+return(
+    
+    <div className="main">
+    <SNavbar/>
+    <div className="inmain">
+    <h1 style={center}><b>|_o_|</b></h1>
+    <h1><b>{quizid} ANSWERS</b></h1>
+    <div className="squiz">
+    {
+    ans.map(item => (
       <a key={item.id}>
-        <b>QUESTION: </b><p>{item.cquestion}</p>
-        <p>{item.coption1}</p>
-        <p>{item.coption2}</p>
-        <p>{item.coption3}</p>
-        <p>{item.coption4}</p>
-        <b>CORRECT OPTION: </b><p>{item.canswer}</p>
-        {/* {item.paper} */}
-        <br></br><br></br>
+        
+        <p><b>QUESTION: </b>{item.cquestion}</p>
+        <p><b>A. </b>{item.coption1}</p>
+        <p><b>B. </b>{item.coption2}</p>
+        <p><b>C. </b>{item.coption3}</p>
+        <p><b>D. </b>{item.coption4}</p>
+        <p><b>CORRECT OPTION: </b>{item.canswer}</p>
+        
       </a>
       ))
-  
-      }
-        </>
-      ) : (
-        <>
-        { history.push("/student") }
-        </>
-      )}
-      </div>
-    </>
+    }
+    </div>
+    <br/><br/><br/>
     
-  );
+
+    </div>
+   
+    </div>
+    );
 }
 
 export default Qans;

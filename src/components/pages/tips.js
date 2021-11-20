@@ -2,7 +2,7 @@ import '../../App.css';
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
-import './tips.css';
+import './css/tips.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 

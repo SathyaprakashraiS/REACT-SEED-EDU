@@ -1,0 +1,27 @@
+
+
+.cpmain{
+    background:#150A41;
+    height:100%;
+    padding-bottom: 20%;
+    overflow-x: hidden;
+}
+
+
+
+.cheader{
+    display:grid;
+    text-align: center;
+    grid-template-columns: 30vw 30vw 40vw;
+    grid-column-gap: 10px;
+    border:2px solid rgb(37, 1, 236);
+    text-transform: uppercase;
+    color:white;
+}
+
+.cheader *{
+    border-right: 3px solid black;
+    height:100%;
+   
+
+}

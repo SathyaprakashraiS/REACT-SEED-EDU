@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './thome.css';
+import './css/thome.css';
 import { GoogleLogout } from 'react-google-login';
 
 function Teacher(){

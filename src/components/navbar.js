@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import './navbar.css';
 import { GoogleLogout } from 'react-google-login';
 import { Redirect } from 'react-router';
+import { FaPlay,FaSchool,FaUniversity,FaBook, FaNewspaper, FaList, FaClock, FaQuestion, FaListAlt, FaDotCircle, FaDropbox, FaArrowDown, FaNotesMedical, FaWeebly, FaInternetExplorer, FaGlobe, FaGrav, FaUserAlt } from "react-icons/fa";
 
 function Navbar(){
 
     const clear = ()=>{
         localStorage.removeItem("paperid")
         localStorage.removeItem("notesid")
-        localStorage.removeItem("quizid")
     }
     const logout = ()=>{
         localStorage.clear(); //for localStorage
@@ -42,34 +42,34 @@ return(
                         SEED
                     </Link>
                     <Link to="/colleges" onClick={clear} className="navbar-links">
-                        COLLEGES
+                    <FaUniversity/> COLLEGES
                     </Link>
                     <Link to="/book" onClick={clear} className="navbar-links">
-                        LIBRARY
+                       <FaBook/> LIBRARY
                     </Link>
                     <Link to="/news" onClick={clear} className="navbar-links">
-                        NEWS
+                        <FaNewspaper/> NEWS
                     </Link>
                     <Link to="/courses" onClick={clear} className="navbar-links">
-                        COURSES
+                        <FaList/> COURSES
                     </Link>
                     <Link to="/dates" onClick={clear} className="navbar-links">
-                        DATES
+                        <FaClock/> DATES
                     </Link>
                     <Link to="/questionbank" className="navbar-links">
-                        QUESTION BANK
+                        <FaQuestion/> QUESTION BANK
                     </Link>
                     <Link  className="other">
-                        OTHER
+                        <FaArrowDown/> OTHER
                         <div className="dropdown">
                     <Link to="/revnotes" onClick={clear} className="navbar-links">
-                        REVISION NOTES
+                        <FaBook/>REVISION NOTES
                     </Link>
                     <Link to="/video" onClick={clear} className="navbar-links">
-                        VIDEO
+                    <FaPlay/> VIDEO
                     </Link>
                     <Link to="/ocourses" onClick={clear} className="navbar-links">
-                        ONLINE COURSES
+                        <FaGlobe/> ONLINE COURSES
                     </Link>
                     </div>
                     </Link>
@@ -104,7 +104,7 @@ return(
                     {student && userdata ? (
                         <>
                         <Link to="/student" className="navbar-links">
-                            STUDENT PORTAL
+                            <FaUserAlt/> STUDENT PORTAL
                         </Link>
                         <Link to="/" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
