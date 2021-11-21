@@ -24,10 +24,11 @@ function Student(){
     localStorage.setItem('quizid',JSON.stringify(theid));
     history.push("/student/attquiz/");
   }
-  function attemptmock(theid)
+  function attemptmock(theid,thename)
   {
     // localStorage.removeItem(quizid);
     localStorage.setItem('mockid',JSON.stringify(theid));
+    localStorage.setItem('mockname',JSON.stringify(thename));
     history.push("/student/attmock/");
   }
 
@@ -311,7 +312,7 @@ return(
           <b>{item.mockpapername}</b><br/>
           <b>{item.paperdescription}</b><br/>
           <b>{item.totalmarks}</b><br/>
-          <button onClick={() => attemptmock(item.id)}>ATTEMPT EXAM</button>
+          <button onClick={() => attemptmock(item.id,item.mockpapername)}>ATTEMPT EXAM</button>
           </div>
         </a>
         ))

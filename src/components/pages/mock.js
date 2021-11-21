@@ -20,6 +20,7 @@ function Mock(){
       }
       const userdata = JSON.parse(localStorage.getItem('theuser'));
       const mockid = JSON.parse(localStorage.getItem('mockid'));
+      const mockname = JSON.parse(localStorage.getItem('mockname'));
       //var isSelected=false;
       
         const [selectedFile, setSelectedFile] = useState();
@@ -82,6 +83,46 @@ function Mock(){
      
       const [qp,setqp] = useState([]);
 
+      async function savetempo(stand) {
+        var attlink=`http://127.0.0.1:8000/mocktempo-list/`+mockname+'/'+userdata.email+'/';
+          const request = await fetch(attlink)
+            .then(response => {
+              if(response.ok)
+            {
+              return response.json(); 
+            }
+            else{
+              console.log("im not here")
+            }
+          })
+            .then(data => {
+              // setatt(data)
+              if(data.length!=0)
+              {
+                alert("U CHEAT RELOAD PANRIYA DA BODYSODA");
+                history.push("/student");
+              }
+              else
+              {
+                // let form_data= new FormData();
+                alert("FIRST TIME");
+                // form_data.append('sname',userdata.username);
+                // form_data.append('semail',userdata.email);
+                // form_data.append('sgrade',userdata.standard);
+                // form_data.append('stest',quizid);
+                // form_data.append('spoint',"tempo");
+                // let resurl=`http://127.0.0.1:8000/quizrresult-list/`+userdata.email+'/';
+                // axios.post(resurl, form_data, {
+                //   headers: {
+                //     'content-type': 'multipart/form-data'
+                //   }
+                // })
+              }
+            })
+            .catch((error) => {
+              console.log("the error ",error)
+            });
+      }
       async function fetchQpaper(stand) {
             var apiavail=false;
             var qplink=`http://127.0.0.1:8000/mockqp-list/`+mockid+'/';
@@ -112,6 +153,7 @@ function Mock(){
                
     
     useEffect(() => {
+      savetempo();
       fetchQpaper();
     }, []);
 
