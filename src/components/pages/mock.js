@@ -168,43 +168,6 @@ return(
     <SNavbar/>
     <div className="inmain">
     <h1 style={center}><b>|_o_|</b></h1>
-    
-    
-    <h1><b>MOCK EXAM</b></h1>
-    <div className="qmain">
-    {
-    qp.map(item => (
-      <a key={item.id}>
-          <div className="qcard">
-        <b>{item.mockpapername}</b><br/>
-        <b>{item.paperdescription}</b><br/>
-        <b>{item.totalmarks}</b><br/>
-        <button >SUBMIT</button>
-        </div>
-      </a>
-      ))
-    }
-    </div>
-    <br/><br/><br/>
-
-<h1>HTML FORM</h1>
-    <form>
-   <label for="studentname">Student Name:</label>
-   <input type="text" id="studentname" name="studentname" value={userdata.username} readonly /><br/>
-   <label for="semail">Email:</label>
-   <input type="text" id="semail" name="semail" value={userdata.email} readonly /><br/>
-   <label for="sgrade">Grade:</label>
-   <input type="text" id="sgrade" name="sgrade" value={userdata.standard} readonly /><br/>
-   <label for="testname">Exam Name:</label>
-   <input type="text" id="testname" name="testname" value="testname" readonly /><br/>
-   <label for="totalmarks">Total Marks:</label>
-   <input type="text" id="totalmarks" name="totalmarks" value="{{i.totalmarks}}" readonly /><br/>
-   <input type="file" id="answersheet" name="answersheet" />
- 
-  <br/>
-  <button >Upload</button>
-</form>
-    <br/><br/><br/>
 
     {/* <div>
     <h2>Enter Employee Details...</h2>

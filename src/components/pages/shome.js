@@ -22,14 +22,14 @@ function Student(){
   {
     // localStorage.removeItem(quizid);
     localStorage.setItem('quizid',JSON.stringify(theid));
-    history.push("/student/attquiz/");
+    history.push("/student/qwarn/");
   }
   function attemptmock(theid,thename)
   {
     // localStorage.removeItem(quizid);
     localStorage.setItem('mockid',JSON.stringify(theid));
     localStorage.setItem('mockname',JSON.stringify(thename));
-    history.push("/student/attmock/");
+    history.push("/student/mwarn/");
   }
 
     const logout = ()=>{
