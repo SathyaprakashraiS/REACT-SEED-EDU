@@ -5,7 +5,7 @@ import SNavbar from './snavbar';
 import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
-function Student(){
+function SExam(){
   let history = useHistory();
   function viewquizans(theid)
   {
@@ -229,26 +229,8 @@ return(
     {/* <div style={page}> */}
     {/* {userdata.standard} */}
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
-    <h1><b>BOOKS</b></h1>
-    <div className="sbook">
-    {
-    book.map(item => (
-      <a key={item.id}>
-        <div >
-        <BookStruct name={item.name} img={item.image} author={item.author} subject={item.subject} file={item.file}/>
-        </div>
-          {/* <div style={bookcard}>
-        <img style={bookimg} src={item.image}/><br/>
-        <b>{item.name}</b><br/>
-        <b>{item.author}</b><br/>
-        <b>{item.subject}</b>
-        </div> */}
-      </a>
-      ))
-    }
-    </div>
-    <br/><br/><br/>
+    <h1 style={center}><b>EXAMS</b></h1>
+    
     <h1><b>QUIZ</b></h1>
     <div className="qmain">
     {
@@ -265,42 +247,7 @@ return(
     }
     </div>
     <br/><br/><br/>
-    {/* {attquizavail ? (
-      <>
-      <h1><b>ATTEMPTED QUIZ</b></h1>
-      <div style={allcard}>
-      {
-      attquiz.map(item => (
-        <a key={item.id}>
-          <div style={quizcard}>
-          <b>{item.stest}</b><br/>
-          <b>{item.spoint}</b><br/>
-          <button>view answer</button>
-          </div>
-        </a>
-        ))
-      }
-      </div>
-      </>
-    ):(
-      <>
-      <h1>NO QUIZ ATTEMPTED</h1>
-      </>
-    )} */}
-    <h1><b>ATTEMPTED QUIZ</b></h1>
-      <div className="qmain">
-      {
-      attquiz.map(item => (
-        <a key={item.id}>
-          <div className="qcard">
-          <b>{item.stest}</b><br/>
-          <b>{item.spoint}</b><br/>
-          <button onClick={() => viewquizans(item.stest)}>view answer</button>
-          </div>
-        </a>
-        ))
-      }
-      </div>
+    
     
       <h1><b>MOCKEXAMS</b></h1>
       <div className="qmain">
@@ -318,6 +265,21 @@ return(
       }
       </div>
 
+      <h1><b>ATTEMPTED QUIZ</b></h1>
+      <div className="qmain">
+      {
+      attquiz.map(item => (
+        <a key={item.id}>
+          <div className="qcard">
+          <b>{item.stest}</b><br/>
+          <b>{item.spoint}</b><br/>
+          <button onClick={() => viewquizans(item.stest)}>view answer</button>
+          </div>
+        </a>
+        ))
+      }
+      </div>
+      
       <h1><b>ATTEMPTED MOCKEXAMS</b></h1>
       <div className="qmain">
       {
@@ -335,69 +297,11 @@ return(
       </div>
   
     </div>
-    {/* </div> */}
-    {/* <ulsn>
-        <lisn>
-            <img class="profile" src={userdata.img}/>
-        </lisn>
-        <lisn>
-            <h1>{userdata.username}</h1>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="/"><b>HOME</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>COLLEGES</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>BOOKS</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>EXAMS</b></a>
-        </lisn>
-        <lisn>
-            <a class="nav-link"  href="#"><b>NEWS</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>COURSES</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>QUESTION BANK</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>STUD PORTAL</b></a>
-        </lisn>
-    </ulsn> */}
+    
 
-    {/* <nav className="navbar">
-            <ul>
-                <li className='nav-item'>
-                    <Link to="/" className="navbar-links">
-                        HOME
-                    </Link>
-                    <Link to="/book" className="navbar-links">
-                        BOOK
-                    </Link>
-                    <Link to="/" className="navbar-links">
-                        EXAM
-                    </Link>
-                    <Link to="/" className="navbar-links">
-                        QUESTION BANK
-                    </Link>
-                    <Link to="/" className="navbar-links">
-                        RESULTS
-                    </Link>
-                    <Link to="/news" className="navbar-links">
-                        NEWS
-                    </Link>
-                    <Link to="/" className="navbar-links" onClick={logout}>
-                        LOGOUT
-                    </Link>
-                </li>
-            </ul>
-    </nav> */}
+    
     </div>
     );
 }
 
-export default Student;
+export default SExam;

@@ -37,6 +37,10 @@ import Mockans from './components/pages/mockans';
 import Mock from './components/pages/mock';
 import Qwarn from './components/pages/quizwarner';
 import Mwarn from './components/pages/mockwarner';
+import Sbook from './components/pages/sbook';
+import SExam from './components/pages/sexam';
+import SNews from './components/pages/snews';
+import SQB from './components/pages/squesbank';
 
 function App() {
   return (
@@ -79,6 +83,10 @@ function App() {
         <Route path='/student/mockans' exact component={Mockans} />
         <Route path='/student/mwarn' exact component={Mwarn} />
         <Route path='/student/attmock' exact component={Mock} />
+        <Route path='/student/book' exact component={Sbook} />
+        <Route path='/student/exam' exact component={SExam} />
+        <Route path='/student/news' exact component={SNews} />
+        <Route path='/student/questionbank' exact component={SQB} />
       </Switch>
     </Router>
   </>

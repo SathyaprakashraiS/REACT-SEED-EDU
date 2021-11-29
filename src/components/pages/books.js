@@ -1,4 +1,3 @@
-
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
@@ -7,7 +6,7 @@ import GLogin from './log';
 import Navbar from '../navbar';
 import BookStruct from '../structures/BookStruct';
 
-function Disp()
+function Book()
 {
   const [book,setbook] = useState([]);
   const [api,setapi] = useState([false]);
@@ -109,7 +108,6 @@ if(api)
       {
       book.map(item => (
       <a key={item.id}>
-        {/* <libStruct img={item.img} name={item.name} /> */}
         <BookStruct img={item.image} subject = {item.bgrade}name={item.name} author={item.author} file={item.file}/>
         {/* <img src={item.image}/>
         <b>{item.name}</b>
@@ -130,4 +128,4 @@ if(api)
   );
 }
 
-export default Disp;
+export default Book;
