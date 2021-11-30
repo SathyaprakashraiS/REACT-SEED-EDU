@@ -38,7 +38,7 @@ function Course()
         
         </>
       ) : (
-        <p>Login panra dei</p>
+        <p></p>
       )}
     </div>
     <div class="titlecontext"><b>DIFFERENT TYPES OF COURSES AVAILABLE IN INDIA</b></div>

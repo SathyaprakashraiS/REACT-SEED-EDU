@@ -40,7 +40,7 @@ function College()
         
         </>
       ) : (
-        <p>Login panra dei</p>
+        <p></p>
       )}
     </div>
     <div class="titlecontext"><b>DIFFERENT COLLEGE TYPES IN INDIA</b></div>

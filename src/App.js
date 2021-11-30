@@ -41,6 +41,7 @@ import Sbook from './components/pages/sbook';
 import SExam from './components/pages/sexam';
 import SNews from './components/pages/snews';
 import SQB from './components/pages/squesbank';
+import Snotes from './components/pages/srevnotes';
 
 function App() {
   return (
@@ -87,6 +88,7 @@ function App() {
         <Route path='/student/exam' exact component={SExam} />
         <Route path='/student/news' exact component={SNews} />
         <Route path='/student/questionbank' exact component={SQB} />
+        <Route path='/student/srevnotes' exact component={Snotes} />
       </Switch>
     </Router>
   </>

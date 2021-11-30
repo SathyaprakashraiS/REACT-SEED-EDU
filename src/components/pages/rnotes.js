@@ -157,8 +157,8 @@ if(api)
         <b>{item.title}</b>
         <b>{item.sub}</b>
         <b>{item.grade}</b>
-        {/* {item.file} */}
-        <button onClick={() => redirectto(item.id)}>READ</button><br></br><br></br>
+        <a href={"http://127.0.0.1:8000"+item.file}>READ</a>
+        <br></br><br></br>
         </div>
       </a>
       ))
@@ -178,7 +178,7 @@ if(api)
         <b>{item.sub}</b>
         <b>{item.grade}</b>
         {/* {item.file} */}
-        <button onClick={() => redirectto(item.id)}>READ</button><br></br><br></br>
+        <a href={"http://127.0.0.1:8000"+item.file}>READ</a><br></br><br></br>
         </div>
       </a>
       ))

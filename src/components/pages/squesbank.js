@@ -142,7 +142,7 @@ else{
 
 
   let center={
-    marginLeft:'45%',
+    marginLeft:'30%',
 };
     
       
@@ -154,7 +154,7 @@ return(
     {/* <div style={page}> */}
     {/* {userdata.standard} */}
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
+    <h1 style={center}><b>QUESTION BANK</b></h1>
     <div className="thecard">
     {apiavail ? (
         <>
@@ -181,7 +181,7 @@ return(
 
     {(bpapers.length!=0) ? (
         <>
-        <h1 style={center}><b>BPAPERS</b></h1>
+        <h1 style={center}><b>PAPERS FOR PREPARATION</b></h1>
         <div className="thecard">
       {
       bpapers.map(item => (
@@ -193,7 +193,7 @@ return(
         <b>{item.papertype}</b>
         <b>{item.key}</b>
         <b>{item.year}</b>
-        <a href={item.paper}>VIEW PAPER</a>
+        <a href={"http://127.0.0.1:8000"+item.paper}>VIEW PAPER</a>
         </div>
       </a>
       ))

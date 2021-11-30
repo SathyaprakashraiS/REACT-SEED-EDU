@@ -4,6 +4,7 @@
 // import SNavbar from './snavbar';
 // import { Link, Redirect, useHistory } from 'react-router-dom';
 // import './attquiz.css'
+import { Prompt } from 'react-router'
 import React,{useState,useEffect, Component } from 'react';
 import './attquiz.css';
 import { GoogleLogout } from 'react-google-login';
@@ -156,15 +157,20 @@ function Quiz(){
 
     function submit(){
       let form_data= new FormData();
+      console.log("size of quesid",quesid.length)
         var q=0
         var points=0
         for(var i=0;i<(quiz.length);i++)
         {
             console.log("OVER HERE 1")
-            if(quesid[q].id==quiz[i].id)
+            console.log("checking",quiz[i].id)
+            console.log("quesid",quesid[q].id)
+            if((quesid[q].id)==(quiz[i].id))
             {
                 console.log("OVER HERE 2")
-                if(optlist[q].key==quiz[i].canswer)
+                console.log("the correct answer",optlist[q].key)
+                console.log("the chosen answer",quiz[i].canswer)
+                if((optlist[q].key)==(quiz[i].canswer))
                 {
                     console.log("OVER HERE 3")
                     points=points+1
@@ -179,6 +185,7 @@ function Quiz(){
             }
         }
         // addresult(points)
+
         form_data.append('sname',userdata.username);
         form_data.append('semail',userdata.email);
         form_data.append('sgrade',userdata.standard);
@@ -201,30 +208,34 @@ function Quiz(){
       }
     function answer(id,key){
       console.log("IN OPTIONS SUBMITTED",{id},{key})
-      var i=0
-      // quesid.push({id})
-      // optlist.push({key})
+      // var i=0
+      var flag=0
         if(quesid.length==0)
         {
+          console.log("LENGTH 0")
             quesid.push({id})
             optlist.push({key})
         }
         else
         {
-          // console.log("HERE0")
-            for(i=0;i<(quesid.length);i++)
+          console.log("HERE0 IN QUESID ELSE")
+            for(var i=0;i<(quesid.length);i++)
             {
+              console.log("LOOPING",i)
               // console.log("HERE1")
-                if(quesid[i].id==id)
+                if((quesid[i].id)==id)
                 {
                   optlist[i].key=key
-                  // console.log("SAME KEY FOUND",key,optlist[i].key)
+                  console.log("TESTING",quesid[i].id,id)
+                  console.log("SAME KEY FOUND")
+                  flag=1
                 }
-                // else
-                // {
-                //   quesid.push({id})
-                //   optlist.push({key})
-                // }
+                
+            }
+            if(flag==0)
+            {
+              quesid.push({id})
+              optlist.push({key})
             }
         }
         // for(var i=0;i<(quesid.length);i++)
@@ -268,7 +279,13 @@ function Quiz(){
           display: "flex",
           flexDirection: "row",
       };
+
       
+      
+
+  
+      
+
 return(
   <div className="aqmain">
   <SNavbar/>
@@ -280,10 +297,10 @@ return(
   quiz.map(item => (
     <a key={item.id}>
       <b>{item.cquestion}</b><br/>
-      <p>A.<button onClick={() => answer(item.id,1)}><b>{item.coption1}</b></button></p>
-      <p>B.<button onClick={() => answer(item.id,2)}><b>{item.coption2}</b></button></p>
-      <p>C.<button onClick={() => answer(item.id,3)}><b>{item.coption3}</b></button></p>
-      <p>D.<button onClick={() => answer(item.id,4)}><b>{item.coption4}</b></button></p>
+      <p>A.<button onClick={() => answer(item.id,1)}><p>{item.coption1}</p></button></p>
+      <p>B.<button onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>
+      <p>C.<button onClick={() => answer(item.id,3)}><p>{item.coption3}</p></button></p>
+      <p>D.<button onClick={() => answer(item.id,4)}><p>{item.coption4}</p></button></p>
       <b>CORRECT ANSWER: OPTION {item.canswer}</b>
     </a>
     ))
@@ -317,6 +334,7 @@ return(
   
   // </div>
   // </>
+  
   );
 }
 

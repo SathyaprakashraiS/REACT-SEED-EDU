@@ -59,7 +59,7 @@ return(
                     <Link to="/questionbank" className="navbar-links">
                         <FaQuestion/> QUESTION BANK
                     </Link>
-                    <Link  className="other">
+                    <Link to="#"  className="other">
                         <FaArrowDown/> OTHER
                         <div className="dropdown">
                     <Link to="/revnotes" onClick={clear} className="navbar-links">

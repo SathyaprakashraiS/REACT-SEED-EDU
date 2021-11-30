@@ -141,7 +141,7 @@ if(api)
     
             </>
           ) : (
-            <p>Login panra dei</p>
+            <p></p>
           )}
         </div>
         <div className="centertext">

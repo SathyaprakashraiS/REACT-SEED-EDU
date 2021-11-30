@@ -95,7 +95,7 @@ if(api)
         <img src={userdata.img} alt="not found"/> */}
         </>
       ) : (
-        <p>Login panra dei</p>
+        <p></p>
       )}
     </div>
     <div className="centertext">
