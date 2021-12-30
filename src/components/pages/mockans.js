@@ -98,6 +98,7 @@ return(
     <SNavbar/>
     <div className="inmain">
     <h1 style={center}><b>|_o_|</b></h1>
+    <button onClick={() => history.goBack()}>Go Back</button>
     <h1><b>MOCK ASNWERSHEET</b></h1>
     <div className="sbook">
     {
