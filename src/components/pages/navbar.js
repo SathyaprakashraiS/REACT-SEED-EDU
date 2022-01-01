@@ -20,12 +20,12 @@ function Navbar(){
       if(userdata)
       {
           console.log("userdata.is_staff is ",userdata.is_staff)
-        if(userdata.is_staff == true)
+        if(userdata.teacher == true)
       {
           teacher=true
           console.log("teacher here")
       }
-      if(userdata.is_staff == false){
+      if(userdata.teacher == false){
           student=true
           console.log("student here")
       }
