@@ -60,47 +60,26 @@ return(
         <lisn >
             <a class="nav-link"  href="/"><b>HOME</b></a>
         </lisn>
-        {twelvegrade ? (
-            <lisn >
-            <a class="nav-link"  href="#"><b>COLLEGES</b></a>
-        </lisn>
-        ):(
-        //     <lisn >
-        //     <a class="nav-link"  href="#"><b>DONT DISP COLLEGES</b></a>
-        // </lisn>
-        <>
-        </>
-        )}
         <lisn >
-            <a class="nav-link"  href="/student/book/"><b>BOOKS</b></a>
+            <a class="nav-link"  href="/teacher/books/"><b>CRUD BOOKS</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/student/exam/"><b>PRACTISE TEST</b></a>
-        </lisn>
-        <lisn >
-            <a class="nav-link"  href="#"><b>COMPETITIVE EXAMS</b></a>
-            {/* ITHU THEVA THERLA MOSTLY TIPS AND REVISIONNOTES AND VIDEOS PODALANUM ERUKEN */}
+            <a class="nav-link"  href="/teacher/cexams/"><b>CRUD EXAMS</b></a>
         </lisn>
         <lisn>
-            <a class="nav-link"  href="/student/srevnotes/"><b>REVISION NOTES</b></a>
-        </lisn>
-        {/* NEWS NOT REQUIREED TO BE REMOVEd */}
-        {/* <lisn>
-            <a class="nav-link"  href="/student/news/"><b>NEWS</b></a>
-        </lisn> */}
-        {twelvegrade ? (
-            <lisn >
-            <a class="nav-link"  href="#"><b>COURSES</b></a>
-        </lisn>
-        ):(
-            <>
-            </>
-        )}
-        <lisn >
-            <a class="nav-link"  href="/student/questionbank/"><b>QUESTION BANK</b></a>
+            <a class="nav-link"  href="/teacher/cquiz/"><b>CRUD QUIZ</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/student/"><b>STUD PORTAL</b></a>
+            <a class="nav-link"  href="/teacher/asses/"><b>ASSES PAPERS</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="/teacher/ccourses"><b>ADD COURSES</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="/teacher/cqbank"><b>QUESTION BANK</b></a>
+        </lisn>
+        <lisn >
+            <a class="nav-link"  href="/teacher/"><b>TEACHER PORTAL</b></a>
         </lisn>
     </ulsn>
     );

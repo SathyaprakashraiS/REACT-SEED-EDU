@@ -9,7 +9,7 @@ function home() {
     <div className="outer"> 
       <Navbar/>
      <div className="hmain">
-      <p>hello {userdata.username}</p>
+       {userdata ? <p>hello {userdata.username}</p>:<p>hello</p>}
       {/* {userdata.teacher ? <p>qqq</p>:<p>aaa</p>} */}
     </div>
  
