@@ -15,6 +15,12 @@ function Teacher(){
         <Redirect to="/"/>
         )
     }
+
+    function crudbook()
+    {
+        history.push("/teacher/books/");
+    }
+
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
     var student=false
@@ -39,6 +45,9 @@ function Teacher(){
     console.log(userdata)
     
     let center={
+        marginLeft:'38%',
+    };
+    let centerlol={
         marginLeft:'45%',
     };
 
@@ -47,8 +56,18 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={center}><b>|_o_|</b></h1>
+        <h1 style={centerlol}><b>|_o_|</b></h1>
+        <h1 style={center}><b>TEACHER PORTAL</b></h1>
         <br/><br/><br/>
+
+        <h1>BOOKS</h1>
+        <button onClick={() => crudbook()}>settings icon card</button>
+        <p>thinking to add cards where it shows already present things but a setting icon erukura oru card erukum when pressed goes to new page where all crud operation for that particular tag</p>
+        <h1>EXAMS</h1>
+        <h1>QUIZ</h1>
+        <h1>ASSES PAPERS</h1>
+        <h1>COURSES</h1>
+        <h1>QUESTION BANK</h1>
     </div>
 </div>
     );
