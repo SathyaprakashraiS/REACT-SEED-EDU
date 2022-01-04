@@ -15,6 +15,7 @@ function Teacher(){
         )
     }
 
+    const [bgrade, setBgrade] = useState("");
     const [name, setName] = useState("");
     const [subject, setSubject] = useState("");
     const [details, setDetails] = useState("");
@@ -29,21 +30,23 @@ function Teacher(){
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);        
       };
-      const imageHandler = (event) => {
+    const imageHandler = (event) => {
         setSelectedimg(event.target.files[0]);
         setIsimgPicked(true);        
       };
+    
     function createbook()
     {
-        console.log('Name',name);
-        console.log('Subject',subject);
-        console.log('Details',details);
-        console.log('Review',review);
-        console.log('Rating',rating);
-        console.log('Image',selectedimg);    
-        console.log('Author',author);
-        console.log('File',selectedFile);
-        console.log('addedby:',userdata.username);
+      console.log('Bgrade',bgrade);
+      console.log('Name',name);
+      console.log('Subject',subject);
+      console.log('Details',details);
+      console.log('Review',review);
+      console.log('Rating',rating);
+      console.log('Image',selectedimg);    
+      console.log('Author',author);
+      console.log('File',selectedFile);
+      console.log('addedby:',userdata.username);
     }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
@@ -86,6 +89,14 @@ return(
         <br/><br/><br/>
 
         <h1>ADD BOOK</h1>
+        <label>book for grade:
+          <select onChange={(e) => setBgrade(e.target.value)}>
+            <option value="grapefruit">Grapefruit</option>
+            <option value="lime">Lime</option>
+            <option value="coconut">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label><br/>
         <label>Enter book name:
         <input
           type="text" 
@@ -96,28 +107,28 @@ return(
         <label>Enter subject name:
         <input
           type="text" 
-          value={name}
+          value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
         </label><br/>
         <label>Enter book details:
         <input
           type="text" 
-          value={name}
+          value={details}
           onChange={(e) => setDetails(e.target.value)}
         />
         </label><br/>
         <label>Enter book review:
         <input
           type="text" 
-          value={name}
+          value={review}
           onChange={(e) => setReview(e.target.value)}
         />
         </label><br/>
         <label>Enter book rating:
         <input
           type="text" 
-          value={name}
+          value={rating}
           onChange={(e) => setRating(e.target.value)}
         />
         </label><br/>
@@ -141,8 +152,8 @@ return(
         <label>Enter book author:
         <input
           type="text" 
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
         />
         </label><br/>
         <label>Enter book pdf:
