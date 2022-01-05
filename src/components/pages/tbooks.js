@@ -1,5 +1,6 @@
 import React,{useState,useEffect, Component } from 'react';
 import './thome.css';
+import axios from 'axios';
 import { GoogleLogout } from 'react-google-login';
 import TNavbar from './tnavbar';
 import BookStruct from '../structures/BookStruct';
@@ -37,17 +38,42 @@ function Teacher(){
     
     function createbook()
     {
-      console.log('Bgrade',bgrade);
-      console.log('Name',name);
-      console.log('Subject',subject);
-      console.log('Details',details);
-      console.log('Review',review);
-      console.log('Rating',rating);
+      console.log('Bgrade:',bgrade);
+      console.log('Name:',name);
+      console.log('Subject:',subject);
+      console.log('Details:',details);
+      console.log('Review:',review);
+      console.log('Rating:',rating);
       console.log('Image',selectedimg);    
-      console.log('Author',author);
+      console.log('Author:',author);
       console.log('File',selectedFile);
       console.log('addedby:',userdata.username);
-    }
+      let form_data= new FormData();
+      form_data.append('bgrade',bgrade);
+      form_data.append('name',name);
+      form_data.append('subject',subject);
+      form_data.append('details',details);
+      form_data.append('review',review);
+      form_data.append('rating',rating);
+      form_data.append('image',selectedimg);
+      form_data.append('author',author);
+      form_data.append('file',selectedFile);
+      form_data.append('addby',userdata.username);
+      let resurl=`http://127.0.0.1:8000/addbook-list/`;
+      axios.post(resurl, form_data,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          alert('BOOK HAS BEEN ADDED!')
+          history.push("/teacher/");
+        })
+        .catch(err => console.log(err))
+      }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -91,10 +117,9 @@ return(
         <h1>ADD BOOK</h1>
         <label>book for grade:
           <select onChange={(e) => setBgrade(e.target.value)}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            <option value="2">Grade 10</option>
+            <option value="3">Grade 11</option>
+            <option value="4">Grade 12</option>
           </select>
         </label><br/>
         <label>Enter book name:
@@ -127,9 +152,12 @@ return(
         </label><br/>
         <label>Enter book rating:
         <input
-          type="text" 
+          type='number'
+          step="0.1"
+          min='0'
+          max='5'
           value={rating}
-          onChange={(e) => setRating(e.target.value)}
+          onChange= {(e) => setRating(e.target.value)}
         />
         </label><br/>
         <label>Add book image:
