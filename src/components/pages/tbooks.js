@@ -17,6 +17,7 @@ function Teacher(){
     }
 
     const [book,setbook] = useState([]);
+    const [loading,setloading] = useState([true]);
     const [bookpresent, setbookpresent] = useState(false);
     const [bgrade, setBgrade] = useState("");
     const [name, setName] = useState("");
@@ -99,26 +100,27 @@ function Teacher(){
     }
     
     async function fetchBook(stand) {
-      var apiavail=false;
       var booklink=`http://127.0.0.1:8000/tbook-list/`+userdata.email+'/';
       const request = await fetch(booklink)
         .then(response => {
           if(response.ok)
         {
-          console.log("here")
-          apiavail=true;
+          console.log("here trying to fetch")
           return response.json(); 
         }
         else{
+          fetchBook();
           console.log("im not here")
         }
       })
         .then(data => { 
           setbook(data)
+          setloading(false);
           console.log(setbook)
         })
         .catch((error) => {
           console.log("the error ",error)
+          setloading(false);
         });
         if(book.length>0)
         {
@@ -126,22 +128,46 @@ function Teacher(){
         }
       }
 
-    function deletebook(theid){
+    async function deletebook(theid){
       alert(theid);
-      let resurl=`http://127.0.0.1:8000/tbook-list/`+theid+`/`;
-      axios.post(resurl,
+      let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
         {
-          headers:
-          {
-            'content-type': 'multipart/form-data'
-          }
+          return response.json(); 
+        }
+        else{
+          fetchBook();
+        }
+      })
+        .then(data => { 
+          setbook(data)
+          setloading(false);
         })
-        .then(res => {
-          console.log(res.data);
-          alert('BOOK HAS BEEN DELETED!')
-          history.push("/teacher/");
-        })
-        .catch(err => console.log(err))
+        .catch((error) => {
+          setloading(false);
+        });
+        if(book.length>0)
+        {
+          setbookpresent(true);
+        }
+      // axios.post(resurl,
+      //   {
+      //     headers:
+      //     {
+      //       'content-type': 'multipart/form-data'
+      //     }
+      //   })
+      //   .then(res => {
+      //     console.log(res.data);
+      //     alert('BOOK HAS BEEN DELETED!')
+      //     history.push("/teacher/");
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //     alert('COULDNT DELETE TRY AGAIN LATER!')
+      //   })
     }
 
     useEffect(() => {
@@ -260,39 +286,25 @@ return(
 
 
         <h1>REMOVE BOOK</h1>
-        {bookpresent? 
-          
-          <div className="sbook">
+          {/* {loading?<p>Cruising the shelves</p>:<></>} */}
+          {(!loading) && (book.length>0) ?
+          <>
           {
-          book.map(item => (
-            <a key={item.id}>
-              <div >
-              <BookStruct name={item.name} img={item.image} author={item.author} subject={item.subject} file={item.file}/>
-              </div>
-            </a>
-            ))
-          }
-          </div>
-          // {
-          // book.map(item => (
-          //   <a key={item.id}>
-          //     <div classname="dispbook">
-          //     <img classname="bimg" src={item.image} />
-          //       <p>name: {item.name}</p>
-          //       <p>author: {item.author}</p>
-          //       <p>subject: {item.subject}</p>
-          //       <a href={item.file}>Read Book</a>
-          //       <br/>
-          //       <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
-          //     </div>
-          //   </a>
-          //   ))
-          // }
-          
-        :
-          <p>NO BOOKS AVAILABLE</p>
-        }
-        
+            book.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <img classname="bimg" src={item.image} />
+                  <p>name: {item.name}</p>
+                  <p>author: {item.author}</p>
+                  <p>subject: {item.subject}</p>
+                  <a href={item.file}>Read Book</a>
+                  <br/>
+                  <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
     </div>
 </div>
     );
