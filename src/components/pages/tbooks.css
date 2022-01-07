@@ -40,4 +40,31 @@
     height:auto;
   }
   
-  
+.sbook
+{
+  background: rgb(51, 150, 243);
+  height:450px;
+  padding-top:20px;
+  display: flex;
+  flex-direction: row;
+  scrollbar-width: thin;
+  overflow: scroll;
+}
+
+.dispbook
+{
+  background-color: rgb(3, 238, 23);
+  height:450px;
+  padding-top:20px;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  overflow: scroll;
+  color:#FFFFFF;
+}
+
+.bimg
+{
+  height:250px;
+  width:250px;
+}

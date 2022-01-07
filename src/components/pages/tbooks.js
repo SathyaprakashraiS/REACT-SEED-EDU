@@ -1,5 +1,5 @@
 import React,{useState,useEffect, Component } from 'react';
-import './thome.css';
+import './tbooks.css';
 import axios from 'axios';
 import { GoogleLogout } from 'react-google-login';
 import TNavbar from './tnavbar';
@@ -16,6 +16,8 @@ function Teacher(){
         )
     }
 
+    const [book,setbook] = useState([]);
+    const [bookpresent, setbookpresent] = useState(false);
     const [bgrade, setBgrade] = useState("");
     const [name, setName] = useState("");
     const [subject, setSubject] = useState("");
@@ -58,7 +60,7 @@ function Teacher(){
       form_data.append('image',selectedimg);
       form_data.append('author',author);
       form_data.append('file',selectedFile);
-      form_data.append('addby',userdata.username);
+      form_data.append('addby',userdata.email);
       let resurl=`http://127.0.0.1:8000/addbook-list/`;
       axios.post(resurl, form_data,
         {
@@ -72,7 +74,10 @@ function Teacher(){
           alert('BOOK HAS BEEN ADDED!')
           history.push("/teacher/");
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          alert('RE-CHECK THE BOOK DETAILS, FAILED TO ADD BOOK TO THE SHELF')
+        })
       }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
@@ -93,8 +98,54 @@ function Teacher(){
         }
     }
     
-    useEffect(() => {
+    async function fetchBook(stand) {
+      var apiavail=false;
+      var booklink=`http://127.0.0.1:8000/tbook-list/`+userdata.email+'/';
+      const request = await fetch(booklink)
+        .then(response => {
+          if(response.ok)
+        {
+          console.log("here")
+          apiavail=true;
+          return response.json(); 
+        }
+        else{
+          console.log("im not here")
+        }
+      })
+        .then(data => { 
+          setbook(data)
+          console.log(setbook)
+        })
+        .catch((error) => {
+          console.log("the error ",error)
+        });
+        if(book.length>0)
+        {
+          setbookpresent(true);
+        }
+      }
 
+    function deletebook(theid){
+      alert(theid);
+      let resurl=`http://127.0.0.1:8000/tbook-list/`+theid+`/`;
+      axios.post(resurl,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          alert('BOOK HAS BEEN DELETED!')
+          history.push("/teacher/");
+        })
+        .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+      fetchBook();
     }, []);
     console.log(userdata)
     
@@ -202,8 +253,45 @@ return(
 			)}
         </label><br/>
         <button onClick={() => createbook()}>ADD BOOK</button>
+
+
+
         <h1>UPDATE BOOK</h1>
+
+
         <h1>REMOVE BOOK</h1>
+        {bookpresent? 
+          
+          <div className="sbook">
+          {
+          book.map(item => (
+            <a key={item.id}>
+              <div >
+              <BookStruct name={item.name} img={item.image} author={item.author} subject={item.subject} file={item.file}/>
+              </div>
+            </a>
+            ))
+          }
+          </div>
+          // {
+          // book.map(item => (
+          //   <a key={item.id}>
+          //     <div classname="dispbook">
+          //     <img classname="bimg" src={item.image} />
+          //       <p>name: {item.name}</p>
+          //       <p>author: {item.author}</p>
+          //       <p>subject: {item.subject}</p>
+          //       <a href={item.file}>Read Book</a>
+          //       <br/>
+          //       <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
+          //     </div>
+          //   </a>
+          //   ))
+          // }
+          
+        :
+          <p>NO BOOKS AVAILABLE</p>
+        }
         
     </div>
 </div>
