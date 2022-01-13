@@ -1,12 +1,12 @@
 import React,{useState,useEffect, Component } from 'react';
-import './tbooks.css';
+import './texams.css';
 import axios from 'axios';
 import { GoogleLogout } from 'react-google-login';
 import TNavbar from './tnavbar';
 import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
-function Tbooks(){
+function Texams(){
   let history = useHistory();
   const logout = ()=>{
       localStorage.clear(); //for localStorage
@@ -41,28 +41,14 @@ function Tbooks(){
     
     function createbook()
     {
-      console.log('Bgrade:',bgrade);
-      console.log('Name:',name);
-      console.log('Subject:',subject);
-      console.log('Details:',details);
-      console.log('Review:',review);
-      console.log('Rating:',rating);
-      console.log('Image',selectedimg);    
-      console.log('Author:',author);
-      console.log('File',selectedFile);
-      console.log('addedby:',userdata.username);
       let form_data= new FormData();
-      form_data.append('bgrade',bgrade);
-      form_data.append('name',name);
-      form_data.append('subject',subject);
-      form_data.append('details',details);
-      form_data.append('review',review);
-      form_data.append('rating',rating);
-      form_data.append('image',selectedimg);
-      form_data.append('author',author);
-      form_data.append('file',selectedFile);
-      form_data.append('addby',userdata.email);
-      let resurl=`http://127.0.0.1:8000/addbook-list/`;
+      form_data.append('mpgrade',bgrade);
+      form_data.append('mockpapername',name);
+      form_data.append('paperdescription',subject);
+      form_data.append('totalmarks',rating);
+      form_data.append('mockpaper',selectedFile);
+      form_data.append('addedby',userdata.email);
+      let resurl=`http://127.0.0.1:8000/addexam-list/`;
       axios.post(resurl, form_data,
         {
           headers:
@@ -72,12 +58,12 @@ function Tbooks(){
         })
         .then(res => {
           console.log(res.data);
-          alert('BOOK HAS BEEN ADDED!')
+          alert('EXAM HAS BEEN ADDED!')
           history.push("/teacher/");
         })
         .catch(err => {
           console.log(err)
-          alert('RE-CHECK THE BOOK DETAILS, FAILED TO ADD BOOK TO THE SHELF')
+          alert('RE-CHECK THE EXAM DETAILS, FAILED TO ADD EXAM TO THE VAULT')
         })
       }
 
@@ -100,7 +86,7 @@ function Tbooks(){
     }
     
     async function fetchBook(stand) {
-      var booklink=`http://127.0.0.1:8000/tbook-list/`+userdata.email+'/';
+      var booklink=`http://127.0.0.1:8000/texam-list/`+userdata.email+'/';
       const request = await fetch(booklink)
         .then(response => {
           if(response.ok)
@@ -130,7 +116,7 @@ function Tbooks(){
 
     async function deletebook(theid){
       alert(theid);
-      let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
+      let resurl=`http://127.0.0.1:8000/tdelexam-list/`+userdata.email+'/'+theid+`/`;
       const request = await fetch(resurl)
         .then(response => {
           if(response.ok)
@@ -191,77 +177,39 @@ return(
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
         <br/><br/><br/>
 
-        <h1>ADD BOOK</h1>
-        <label>book for grade:
+        <h1>ADD EXAM</h1>
+        <label>exam for grade:
           <select onChange={(e) => setBgrade(e.target.value)}>
             <option value="2">Grade 10</option>
             <option value="3">Grade 11</option>
             <option value="4">Grade 12</option>
           </select>
         </label><br/>
-        <label>Enter book name:
+        <label>Enter exam name:
         <input
           type="text" 
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         </label><br/>
-        <label>Enter subject name:
+        <label>Enter paper description:
         <input
           type="text" 
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
         </label><br/>
-        <label>Enter book details:
-        <input
-          type="text" 
-          value={details}
-          onChange={(e) => setDetails(e.target.value)}
-        />
-        </label><br/>
-        <label>Enter book review:
-        <input
-          type="text" 
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        />
-        </label><br/>
-        <label>Enter book rating:
+        <label>Enter max marks:
         <input
           type='number'
-          step="0.1"
+          step="1"
           min='0'
-          max='5'
+          max='100'
           value={rating}
           onChange= {(e) => setRating(e.target.value)}
         />
         </label><br/>
-        <label>Add book image:
-        <input type="file" name="image" accept="image/png, image/jpeg" onChange={imageHandler} />
-			{isimgPicked ? (
-				<div>
-					<p>Image name: {selectedimg.name}</p>
-					<p>Image type: {selectedimg.type}</p>
-					<p>Size in bytes: {selectedimg.size}</p>
-					<p>
-						lastModifiedDate:{' '}
-						{selectedimg.lastModifiedDate.toLocaleDateString()}
-					</p>
-          <p><a href={selectedimg}>VIEW IMAGE</a></p>
-				</div>
-			) : (
-				<p>Select a image to show details</p>
-			)}
-        </label><br/>
-        <label>Enter book author:
-        <input
-          type="text" 
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        </label><br/>
-        <label>Enter book pdf:
+        <label>attach question paper:
         <input type="file" name="file" onChange={fileHandler} />
 			{isFilePicked ? (
 				<div>
@@ -272,42 +220,40 @@ return(
 						lastModifiedDate:{' '}
 						{selectedFile.lastModifiedDate.toLocaleDateString()}
 					</p>
-          <p><a href={selectedFile}>READ FILE</a></p>
+          <p><a href={selectedFile}>VIEW FILE</a></p>
 				</div>
 			) : (
 				<p>Select a file to show details</p>
 			)}
         </label><br/>
-        <button onClick={() => createbook()}>ADD BOOK</button>
+        <button onClick={() => createbook()}>ADD EXAM</button>
 
 
 
-        <h1>UPDATE BOOK</h1>
+        <h1>UPDATE EXAM</h1>
 
 
-        <h1>REMOVE BOOK</h1>
-          {/* {loading?<p>Cruising the shelves</p>:<></>} */}
+        <h1>REMOVE EXAM</h1>
           {(!loading) && (book.length>0) ?
           <>
           {
             book.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
-                <img classname="bimg" src={item.image} />
-                  <p>name: {item.name}</p>
-                  <p>author: {item.author}</p>
-                  <p>subject: {item.subject}</p>
-                  <a href={item.file}>Read Book</a>
+                  <p>name: {item.mockpapername}</p>
+                  <p>paperdescription: {item.paperdescription}</p>
+                  <p>marks: {item.totalmarks}</p>
+                  <a href={item.file}>View paper</a>
                   <br/>
                   <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
                 </div>
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
+          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
     </div>
 </div>
     );
 }
 
-export default Tbooks;
+export default Texams;

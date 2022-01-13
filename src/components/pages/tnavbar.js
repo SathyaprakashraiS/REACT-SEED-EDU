@@ -64,7 +64,7 @@ return(
             <a class="nav-link"  href="/teacher/books/"><b>CRUD BOOKS</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/cexams/"><b>CRUD EXAMS</b></a>
+            <a class="nav-link"  href="/teacher/exams/"><b>CRUD EXAMS</b></a>
         </lisn>
         <lisn>
             <a class="nav-link"  href="/teacher/cquiz/"><b>CRUD QUIZ</b></a>

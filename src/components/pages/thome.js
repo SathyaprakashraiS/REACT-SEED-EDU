@@ -20,6 +20,10 @@ function Teacher(){
     {
         history.push("/teacher/books/");
     }
+    function crudexam()
+    {
+        history.push("/teacher/exams/");
+    }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -64,6 +68,8 @@ return(
         <button onClick={() => crudbook()}>settings icon card</button>
         <p>thinking to add cards where it shows already present things but a setting icon erukura oru card erukum when pressed goes to new page where all crud operation for that particular tag</p>
         <h1>EXAMS</h1>
+        <p>display exams available</p>
+        <button onClick={() => crudexam()}>settings icon card</button>
         <h1>QUIZ</h1>
         <h1>ASSES PAPERS</h1>
         <h1>COURSES</h1>
