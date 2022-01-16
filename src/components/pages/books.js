@@ -108,7 +108,7 @@ if(api)
       {
       book.map(item => (
       <a key={item.id}>
-        <BookStruct img={item.image} subject = {item.bgrade}name={item.name} author={item.author} file={item.file}/>
+        <BookStruct img={item.image} subject={item.bgrade} name={item.name} author={item.author} file={item.file}/>
         {/* <img src={item.image}/>
         <b>{item.name}</b>
         <b>{item.author}</b>

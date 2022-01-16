@@ -19,7 +19,8 @@ function BookStruct(props) {
             </div>
             <div className="face back">
                   <h1>About</h1>
-                  <a href={"http://127.0.0.1:8000"+props.file}>Read</a>
+                  <a href={props.file}>Read</a>
+                  {/* <a href={"http://127.0.0.1:8000"+props.file}>Read</a> */}
             </div>
         </div>
     )

@@ -17,8 +17,11 @@ function Tbooks(){
     }
 
     const [book,setbook] = useState([]);
+    const [delbook,setdelbook] = useState([]);
     const [loading,setloading] = useState([true]);
+    const [delloading,setdelloading] = useState([true]);
     const [bookpresent, setbookpresent] = useState(false);
+    const [delbookpresent, setdelbookpresent] = useState(false);
     const [bgrade, setBgrade] = useState("");
     const [name, setName] = useState("");
     const [subject, setSubject] = useState("");
@@ -128,6 +131,35 @@ function Tbooks(){
         }
       }
 
+      async function fetchDelBook(stand) {
+        var booklink=`http://127.0.0.1:8000/tresbook-list/`+userdata.email+'/';
+        const request = await fetch(booklink)
+          .then(response => {
+            if(response.ok)
+          {
+            console.log("here trying to fetch")
+            return response.json(); 
+          }
+          else{
+            fetchDelBook();
+            console.log("im not here")
+          }
+        })
+          .then(data => { 
+            setdelbook(data)
+            setdelloading(false);
+            console.log(setdelbook)
+          })
+          .catch((error) => {
+            console.log("the error ",error)
+            setdelloading(false);
+          });
+          if(delbook.length>0)
+          {
+            setdelbookpresent(true);
+          }
+        }
+
     async function deletebook(theid){
       alert(theid);
       let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
@@ -170,8 +202,35 @@ function Tbooks(){
       //   })
     }
 
+    async function restorebook(theid){
+      alert(theid);
+      let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+        else{
+          fetchDelBook();
+        }
+      })
+        .then(data => { 
+          setdelbook(data)
+          setdelloading(false);
+        })
+        .catch((error) => {
+          setdelloading(false);
+        });
+        if(delbook.length>0)
+        {
+          setdelbookpresent(true);
+        }
+    }
+
     useEffect(() => {
       fetchBook();
+      fetchDelBook();
     }, []);
     console.log(userdata)
     
@@ -305,6 +364,26 @@ return(
               ))
             }
           </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
+
+          <h1>Previously removed books</h1>
+          {(!delloading) && (delbook.length>0) ?
+          <>
+          {
+            delbook.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <img classname="bimg" src={item.image} />
+                  <p>name: {item.name}</p>
+                  <p>author: {item.author}</p>
+                  <p>subject: {item.subject}</p>
+                  <a href={item.file}>Read Book</a>
+                  <br/>
+                  <button onClick={() => restorebook(item.id)}>RESTORE BOOK</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{delloading?<p>Minning the Bin</p>:<p>no book deleted previously</p>}</>}
     </div>
 </div>
     );
