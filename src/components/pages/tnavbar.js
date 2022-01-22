@@ -59,7 +59,6 @@ return(
         </lisn>
         <lisn >
             <a class="nav-link"  href="/"><b>HOME</b></a>
-            <a><b>{userdata.img}</b></a>
         </lisn>
         <lisn >
             <a class="nav-link"  href="/teacher/books/"><b>CRUD BOOKS</b></a>

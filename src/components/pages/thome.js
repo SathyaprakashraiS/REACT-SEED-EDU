@@ -24,6 +24,10 @@ function Teacher(){
     {
         history.push("/teacher/exams/");
     }
+    function crudqpaper()
+    {
+        history.push("/teacher/qpaper/");
+    }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -70,6 +74,10 @@ return(
         <h1>EXAMS</h1>
         <p>display exams available</p>
         <button onClick={() => crudexam()}>settings icon card</button>
+        <h1>QUESTION PAPER</h1>
+        <p>display questionpapers available</p>
+        <p>question paper is displayed to all viewrs and student but exams papers are only for signed in students</p>
+        <button onClick={() => crudqpaper()}>settings icon card</button>
         <h1>QUIZ</h1>
         <h1>ASSES PAPERS</h1>
         <h1>COURSES</h1>

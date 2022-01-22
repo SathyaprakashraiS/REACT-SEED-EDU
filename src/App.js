@@ -44,6 +44,7 @@ import SQB from './components/pages/squesbank';
 import Snotes from './components/pages/srevnotes';
 import Tbooks from './components/pages/tbooks';
 import Texams from './components/pages/texams';
+import Tqpaper from './components/pages/tqpaper';
 
 function App() {
   return (
@@ -93,6 +94,7 @@ function App() {
         <Route path='/student/srevnotes' exact component={Snotes} />
         <Route path='/teacher/books' exact component={Tbooks} />
         <Route path='/teacher/exams' exact component={Texams} />
+        <Route path='/teacher/qpaper' exact component={Tqpaper} />
       </Switch>
     </Router>
   </>
