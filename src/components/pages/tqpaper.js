@@ -17,14 +17,17 @@ function Texams(){
     }
 
     const [book,setbook] = useState([]);
+    const [respaper,setrespaper] = useState([]);
     const [papertypes,setpapertypes] = useState([]);
     const [delpaper,setdelpaper] = useState([]);
     const [papertypespresent,setpapertypespresent] = useState(false);
     const [description, setdescription] = useState("");
     const [loading,setloading] = useState([true]);
     const [delloading,setdelloading] = useState([true]);
+    const [resloading,setresloading] = useState([true]);
     const [bookpresent, setbookpresent] = useState(false);
     const [delpaperpresent, setdelpaperpresent] = useState(false);
+    const [respaperpresent, setrespaperpresent] = useState(false);
     const [pgrade, setpgrade] = useState("");
     const [child, setchild] = useState("");
     const [ptype, setptype] = useState("");
@@ -180,9 +183,63 @@ function Texams(){
         }
     }
 
+    async function fetchdeletedpapers(stand){
+      let resurl=`http://127.0.0.1:8000/respaper-list/`+userdata.email+'/';
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+        else{
+          fetchdeletedpapers();
+        }
+      })
+        .then(data => { 
+          setrespaper(data)
+          setresloading(false);
+        })
+        .catch((error) => {
+          setresloading(false);
+        });
+        if(respaper.length>0)
+        {
+          setrespaperpresent(true);
+        }
+    }
+
+    async function restorepaper(theid){
+      alert(theid);
+      let resurl=`http://127.0.0.1:8000/recoverpaper-list/`+userdata.email+'/'+theid+`/`;
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+        else{
+          fetchtodelpaper();
+        }
+      })
+        .then(data => { 
+          setdelpaper(data)
+          setdelloading(false);
+          history.push("/teacher/");
+        })
+        .catch((error) => {
+          setdelloading(false);
+        });
+        if(delpaper.length>0)
+        {
+          setdelpaperpresent(true);
+        }
+    }
+
+
     useEffect(() => {
       fetchQpapertypes();
       fetchtodelpaper();
+      fetchdeletedpapers();
     }, []);
     console.log(userdata)
     
@@ -285,6 +342,27 @@ return(
               ))
             }
           </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+        
+        <h1>DELETED QUESTION PAPER</h1>
+        {(!resloading) && (respaper.length>0) ?
+          <>
+          {
+            respaper.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.name}</p>
+                  <p>type: {item.childpaperfile}</p>
+                  <p>for grade: {item.forgrade}</p>
+                  <p>paper type: {item.papertype}</p>
+                  <p>year: {item.year}</p>
+                  <a href='/'>View paper</a>                                                                                
+                  <br/>
+                  <button onClick={() => restorepaper(item.id)}>RESTORE QUESTION PAPER</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available delete papers to restore</p>}</>}
 
         <h1>AVAILABLE QUESTION PAPER TYPES</h1>
           {(!loading) && (papertypes.length>0) ?
