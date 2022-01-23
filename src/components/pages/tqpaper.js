@@ -154,9 +154,9 @@ function Texams(){
           }
         }
 
-    async function deletebook(theid){
+    async function delquestionpaper(theid){
       alert(theid);
-      let resurl=`http://127.0.0.1:8000/tdelexam-list/`+userdata.email+'/'+theid+`/`;
+      let resurl=`http://127.0.0.1:8000/delpaper-list/`+userdata.email+'/'+theid+`/`;
       const request = await fetch(resurl)
         .then(response => {
           if(response.ok)
@@ -164,19 +164,19 @@ function Texams(){
           return response.json(); 
         }
         else{
-          fetchQpapertypes();
+          fetchtodelpaper();
         }
       })
         .then(data => { 
-          setbook(data)
-          setloading(false);
+          setdelpaper(data)
+          setdelloading(false);
         })
         .catch((error) => {
-          setloading(false);
+          setdelloading(false);
         });
-        if(papertypes.length>0)
+        if(delpaper.length>0)
         {
-          setpapertypespresent(true);
+          setdelpaperpresent(true);
         }
     }
 
@@ -259,7 +259,7 @@ return(
 				<p>Select a file to show details</p>
 			)}
         </label><br/>
-        <button onClick={() => addquestionpaper()}>ADD EXAM</button>
+        <button onClick={() => addquestionpaper()}>ADD QUESTION PAPER</button>
 
 
 
@@ -277,8 +277,9 @@ return(
                   <p>for grade: {item.forgrade}</p>
                   <p>paper type: {item.papertype}</p>
                   <p>year: {item.year}</p>
-                  <a href='/'>View paper</a>                                                                                    
+                  <a href='/'>View paper</a>                                                                                
                   <br/>
+                  <button onClick={() => delquestionpaper(item.id)}>DELETE QUESTION PAPER</button>
                 </div>
               </a>
               ))

@@ -17,8 +17,11 @@ function Texams(){
     }
 
     const [book,setbook] = useState([]);
+    const [resexam,setresexam] = useState([]);
     const [loading,setloading] = useState([true]);
+    const [resloading,setresloading] = useState([true]);
     const [bookpresent, setbookpresent] = useState(false);
+    const [resexampresent, setresexampresent] = useState(false);
     const [bgrade, setBgrade] = useState("");
     const [name, setName] = useState("");
     const [subject, setSubject] = useState("");
@@ -114,6 +117,34 @@ function Texams(){
         }
       }
 
+      async function fetchResexam(stand) {
+        var resexamlink=`http://127.0.0.1:8000/Tdeletedexam-list/`+userdata.email+'/';
+        const request = await fetch(resexamlink)
+          .then(response => {
+            if(response.ok)
+          {
+            console.log("here trying to fetch")
+            return response.json(); 
+          }
+          else{
+            fetchResexam();
+            console.log("im not here")
+          }
+        })
+          .then(data => { 
+            setresexam(data)
+            setresloading(false);
+          })
+          .catch((error) => {
+            console.log("the error ",error)
+            setresloading(false);
+          });
+          if(resexam.length>0)
+          {
+            setresexampresent(true);
+          }
+        }
+
     async function deletebook(theid){
       alert(theid);
       let resurl=`http://127.0.0.1:8000/tdelexam-list/`+userdata.email+'/'+theid+`/`;
@@ -130,6 +161,7 @@ function Texams(){
         .then(data => { 
           setbook(data)
           setloading(false);
+          history.push("/teacher/");
         })
         .catch((error) => {
           setloading(false);
@@ -138,26 +170,38 @@ function Texams(){
         {
           setbookpresent(true);
         }
-      // axios.post(resurl,
-      //   {
-      //     headers:
-      //     {
-      //       'content-type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(res => {
-      //     console.log(res.data);
-      //     alert('BOOK HAS BEEN DELETED!')
-      //     history.push("/teacher/");
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //     alert('COULDNT DELETE TRY AGAIN LATER!')
-      //   })
+    }
+
+    async function restoreexam(theid){
+      alert(theid);
+      let resurl=`http://127.0.0.1:8000/tresexam-list/`+userdata.email+'/'+theid+`/`;
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+        else{
+          fetchResexam();
+        }
+      })
+        .then(data => { 
+          setresexam(data)
+          setresloading(false);
+          history.push("/teacher/");
+        })
+        .catch((error) => {
+          setresloading(false);
+        });
+        if(resexam.length>0)
+        {
+          setresexampresent(true);
+        }
     }
 
     useEffect(() => {
       fetchBook();
+      fetchResexam();
     }, []);
     console.log(userdata)
     
@@ -245,12 +289,31 @@ return(
                   <p>marks: {item.totalmarks}</p>
                   <a href={item.file}>View paper</a>
                   <br/>
-                  <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
+                  <button onClick={() => deletebook(item.id)}>DELETE EXAM</button>
                 </div>
               </a>
               ))
             }
           </>:<>{loading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+
+        <h1>REMOVED EXAMS</h1>
+        {(!resloading) && (resexam.length>0) ?
+          <>
+          {
+            resexam.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.mockpapername}</p>
+                  <p>paperdescription: {item.paperdescription}</p>
+                  <p>marks: {item.totalmarks}</p>
+                  <a href={item.file}>View paper</a>
+                  <br/>
+                  <button onClick={() => restoreexam(item.id)}>RESTORE EXAM</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers in trash delete papers to restore them</p>}</>}
     </div>
 </div>
     );

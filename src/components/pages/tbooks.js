@@ -365,7 +365,7 @@ return(
             }
           </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
 
-          <h1>Previously removed books</h1>
+          <h1>RESTORE DELETED BOOKS</h1>
           {(!delloading) && (delbook.length>0) ?
           <>
           {
