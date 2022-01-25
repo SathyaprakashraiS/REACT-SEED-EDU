@@ -250,20 +250,25 @@ return(
     </div>
     <br/><br/><br/>
     <h1><b>QUIZ</b></h1>
+    {quiz.length>0 ? 
     <div className="qmain">
     {
     quiz.map(item => (
-      <a key={item.id}>
-          <div className="qcard">
+    <a key={item.id}>
+      <div className="qcard">
         <b>{item.cname}</b><br/>
         <b>{item.author}</b><br/>
         <b>{item.cgrade}</b><br/>
         <button onClick={() => attemptquiz(item.cname)}>attempt quiz</button>
-        </div>
-      </a>
-      ))
+      </div>
+    </a>
+    ))
     }
     </div>
+    :
+    <p>No quiz available to attend</p>
+    }
+    
     <br/><br/><br/>
     {/* {attquizavail ? (
       <>

@@ -236,6 +236,13 @@ function Tquiz(){
               }
           }
 
+        function selectquiz(theid)
+        {
+          alert(theid);
+          localStorage.setItem('modquiz',JSON.stringify(theid));
+          history.push('CRUD');
+        }
+
     async function fetchBook(stand) {
       var booklink=`http://127.0.0.1:8000/tbook-list/`+userdata.email+'/';
       const request = await fetch(booklink)
@@ -422,6 +429,24 @@ return(
               ))
             }
           </>:<>{delloading?<p>Minning the Bin</p>:<p>no quiz deleted previously</p>}</>}
+
+          <h1>SELECT QUIZ TO ALTER QUESTIONS IN IT</h1>
+          {(!loading) && (book.length>0) ?
+          <>
+          {
+            book.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.cname}</p>
+                  <p>grade: {item.cgrade}</p>
+                  <a href={item.file}>View Quiz</a>
+                  <br/>
+                  <button onClick={() => selectquiz(item.id)}>VIEW QUIZ</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to alter question</p>}</>}
     </div>
 </div>
     );
