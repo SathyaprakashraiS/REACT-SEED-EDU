@@ -47,6 +47,8 @@ import Texams from './components/pages/texams';
 import Tqpaper from './components/pages/tqpaper';
 import Tquiz from './components/pages/tquiz';
 import TMquiz from './components/pages/tquizques';
+import TCourse from './components/pages/tcourse';
+
 function App() {
   return (
     <>
@@ -98,6 +100,7 @@ function App() {
         <Route path='/teacher/qpaper' exact component={Tqpaper} />
         <Route path='/teacher/quiz' exact component={Tquiz} />
         <Route path='/teacher/quiz/CRUD' exact component={TMquiz} />
+        <Route path='/teacher/course' exact component={TCourse} />
       </Switch>
     </Router>
   </>

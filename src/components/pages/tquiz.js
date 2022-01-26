@@ -68,47 +68,6 @@ function Tquiz(){
           alert('RE-CHECK THE QUIZ DETAILS, FAILED TO ADD QUIZ TO THE GUIDE')
         })
     }
-    function createbook()
-    {
-      console.log('Bgrade:',bgrade);
-      console.log('Name:',name);
-      console.log('Subject:',subject);
-      console.log('Details:',details);
-      console.log('Review:',review);
-      console.log('Rating:',rating);
-      console.log('Image',selectedimg);    
-      console.log('Author:',author);
-      console.log('File',selectedFile);
-      console.log('addedby:',userdata.username);
-      let form_data= new FormData();
-      form_data.append('bgrade',bgrade);
-      form_data.append('name',name);
-      form_data.append('subject',subject);
-      form_data.append('details',details);
-      form_data.append('review',review);
-      form_data.append('rating',rating);
-      form_data.append('image',selectedimg);
-      form_data.append('author',author);
-      form_data.append('file',selectedFile);
-      form_data.append('addby',userdata.email);
-      let resurl=`http://127.0.0.1:8000/addbook-list/`;
-      axios.post(resurl, form_data,
-        {
-          headers:
-          {
-            'content-type': 'multipart/form-data'
-          }
-        })
-        .then(res => {
-          console.log(res.data);
-          alert('BOOK HAS BEEN ADDED!')
-          history.push("/teacher/");
-        })
-        .catch(err => {
-          console.log(err)
-          alert('RE-CHECK THE BOOK DETAILS, FAILED TO ADD BOOK TO THE SHELF')
-        })
-      }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -300,58 +259,6 @@ function Tquiz(){
             setdelbookpresent(true);
           }
         }
-
-    async function deletebook(theid){
-      alert(theid);
-      let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
-      const request = await fetch(resurl)
-        .then(response => {
-          if(response.ok)
-        {
-          return response.json(); 
-        }
-        else{
-          fetchBook();
-        }
-      })
-        .then(data => { 
-          setbook(data)
-          setloading(false);
-        })
-        .catch((error) => {
-          setloading(false);
-        });
-        if(book.length>0)
-        {
-          setbookpresent(true);
-        }
-    }
-
-    async function restorebook(theid){
-      alert(theid);
-      let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
-      const request = await fetch(resurl)
-        .then(response => {
-          if(response.ok)
-        {
-          return response.json(); 
-        }
-        else{
-          fetchDelBook();
-        }
-      })
-        .then(data => { 
-          setdelbook(data)
-          setdelloading(false);
-        })
-        .catch((error) => {
-          setdelloading(false);
-        });
-        if(delbook.length>0)
-        {
-          setdelbookpresent(true);
-        }
-    }
 
     useEffect(() => {
       fetchQuiz();

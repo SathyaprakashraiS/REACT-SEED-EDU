@@ -33,6 +33,10 @@ function Teacher(){
     {
         history.push("/teacher/quiz/");
     }
+    function crudcourses()
+    {
+        history.push("/teacher/course/");
+    }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -72,7 +76,6 @@ return(
         <h1 style={centerlol}><b>|_o_|</b></h1>
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
         <br/><br/><br/>
-
         <h1>BOOKS</h1>
         <button onClick={() => crudbook()}>settings icon card</button>
         <p>thinking to add cards where it shows already present things but a setting icon erukura oru card erukum when pressed goes to new page where all crud operation for that particular tag</p>
@@ -88,7 +91,8 @@ return(
         <button onClick={() => crudquiz()}>settings icon card</button>
         <h1>ASSES PAPERS</h1>
         <h1>COURSES</h1>
-        <h1>QUESTION BANK</h1>
+        <p>display courses that are added by user or display all available courses</p>
+        <button onClick={() => crudcourses()}>settings icon card</button>
     </div>
 </div>
     );
