@@ -6,7 +6,7 @@ import TNavbar from './tnavbar';
 import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
-function Tquiz(){
+function TMquiz(){
   let history = useHistory();
   const quizid = JSON.parse(localStorage.getItem('modquiz'));
   const logout = ()=>{
@@ -222,4 +222,4 @@ return(
     );
 }
 
-export default Tquiz;
+export default TMquiz;
