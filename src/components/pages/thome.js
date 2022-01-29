@@ -37,6 +37,10 @@ function Teacher(){
     {
         history.push("/teacher/course/");
     }
+    function assespapers()
+    {
+        history.push("/teacher/tapapers/");
+    }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -90,6 +94,7 @@ return(
         <p>edit quiz</p>
         <button onClick={() => crudquiz()}>settings icon card</button>
         <h1>ASSES PAPERS</h1>
+        <button onClick={() => assespapers()}>asses papers</button>
         <h1>COURSES</h1>
         <p>display courses that are added by user or display all available courses</p>
         <button onClick={() => crudcourses()}>settings icon card</button>
