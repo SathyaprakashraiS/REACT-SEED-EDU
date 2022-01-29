@@ -18,17 +18,40 @@ function TAsses(){
 
     const [paper,setpaper] = useState([]);
     const [epaper,setepaper] = useState([]);
+    const [asspaper,setasspaper] = useState([]);
     const [loading,setloading] = useState([true]);
     const [eloading,seteloading] = useState([true]);
+    const [asspaperloading,setasspaperloading] = useState([false]);
+    const [tmarks,settmarks] = useState("");
+    const [selectedFile, setSelectedFile] = useState();
+    const [isFilePicked, setIsFilePicked] = useState(false);
 
     function viewepaper(theid)
     {
         alert(theid);
     }
 
-    function assespaper(theid)
+    async function assespaper(theid)
     {
         alert(theid);
+        var tpaperlink=`http://127.0.0.1:8000/Tthatpaper/`+theid+'/';
+        const request = await fetch(tpaperlink)
+          .then(response => {
+            if(response.ok)
+          {
+            return response.json(); 
+          }
+          else{
+            assespaper(theid)
+          }
+        })
+          .then(data => { 
+            setasspaper(data)
+            setasspaperloading(true);
+          })
+          .catch((error) => {
+            setasspaperloading(true);
+          });
     }
 
     async function fetchPaper(stand) {
@@ -72,6 +95,30 @@ function TAsses(){
             seteloading(false);
           });
         }
+    
+        function submitpaper(theid){
+            const settrue=true;
+            let form_data= new FormData();
+            form_data.append('markobtained',tmarks);
+            form_data.append('correctedanswersheet',selectedFile);
+            form_data.append('evaluatedby',userdata.email);
+            form_data.append('evaluated',settrue);
+            let resurl=`http://127.0.0.1:8000/Tcorrectedsubmitpaper/`+theid+'/';
+            axios.post(resurl, form_data,
+            {
+                headers:
+                {
+                    'content-type': 'multipart/form-data'
+                }
+            })
+            .then(res => {
+            alert('EXAM RESULT PUBLISHED!')
+            history.push("/teacher/");
+            })
+            .catch(err => {
+            alert('RE-CHECK ANSWER DETAILS, FAILED TO POST EXAM RESULT')
+            })
+        }
 
     const [book,setbook] = useState([]);
     const [delbook,setdelbook] = useState([]);
@@ -86,8 +133,7 @@ function TAsses(){
     const [review, setReview] = useState("");
     const [rating, setRating] = useState("");
     const [author, setAuthor] = useState("");
-    const [selectedFile, setSelectedFile] = useState();
-    const [isFilePicked, setIsFilePicked] = useState(false);
+    //const [selectedFile, setSelectedFile] = useState();
     const [selectedimg, setSelectedimg] = useState();
     const [isimgPicked, setIsimgPicked] = useState(false);
     const fileHandler = (event) => {
@@ -309,6 +355,56 @@ return(
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
         <br/><br/><br/>
 
+        {(asspaperloading) && (asspaper.length>0)?
+        <>
+        <h1>TEST PAPER</h1>
+        
+          {
+            asspaper.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.studentname}</p>
+                  <p>testname: {item.testname}</p>
+                  <p>grade: {item.sgrade}</p>
+                  <p>total marks: {item.totalmarks}</p>
+                  <a href={item.answersheet}>View answersheet</a><br/>
+                  <br/>
+                  <label>Enter mark obtained:
+                    <input
+                    type='number'
+                    step="0.1"
+                    min='0'
+                    max={item.totalmarks}
+                    value={tmarks}
+                    onChange={(e) => settmarks(e.target.value)}
+                    />
+                    </label><br/>
+                  <label>attach corrected answersheet:
+                <input type="file" name="file" onChange={fileHandler} />
+                    {isFilePicked ? (
+                        <div>
+                            <p>Filename: {selectedFile.name}</p>
+                            <p>Filetype: {selectedFile.type}</p>
+                            <p>Size in bytes: {selectedFile.size}</p>
+                            <p>
+                                lastModifiedDate:{' '}
+                                {selectedFile.lastModifiedDate.toLocaleDateString()}
+                            </p>
+                <p><a href={selectedFile}>READ FILE</a></p>
+                        </div>
+                    ) : (
+                        <p>Select a file to show details</p>
+                    )}
+                </label><br/>
+                  <button onClick={() => submitpaper(item.id)}>POST EVALUATION</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:
+          <></>}
+          {/* {asspaperloading?<p>Students havent attended any exams yet!</p>:<p>Checking the Papers in Bundles</p>} */}
+
         <h1>PAPERS TO BE ASSESED</h1>
         {(!loading) && (paper.length>0) ?
           <>
@@ -319,7 +415,7 @@ return(
                   <p>name: {item.studentname}</p>
                   <p>testname: {item.testname}</p>
                   <p>grade: {item.sgrade}</p>
-                  <p>total marks: {item.markobtained}/{item.totalmarks}</p>
+                  <p>total marks:{item.totalmarks}</p>
                   <a href={item.answersheet}>View answersheet</a><br/>
                   <br/>
                   <button onClick={() => assespaper(item.id)}>ASSES PAPER</button>
@@ -327,8 +423,8 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Checking the Papers in Bundles</p>:<p>Students havent attended any exams yet!</p>}</>}
-            
+          </>:<>{!loading?<p>Checking the Papers in Bundles</p>:<p>Students havent attended any exams yet!</p>}</>}
+    
         <h1>ASSESED PAPERS</h1>
         {(!eloading) && (epaper.length>0) ?
           <>
@@ -339,7 +435,9 @@ return(
                   <p>name: {item.studentname}</p>
                   <p>testname: {item.testname}</p>
                   <p>grade: {item.sgrade}</p>
-                  <p>total marks: {item.markobtained}/{item.totalmarks}</p>
+                  <p>mark obtained: {item.markobtained}</p>
+                  <p>total marks: {item.totalmarks}</p>
+                  <p>total: {item.markobtained}/{item.totalmarks}</p>
                   <a href={item.answersheet}>View answersheet</a><br/>
                   <a href={item.correctedanswersheet}>View corrected-answersheet</a>
                   <br/>
