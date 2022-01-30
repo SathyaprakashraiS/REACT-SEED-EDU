@@ -1,10 +1,10 @@
 import React,{useState,useEffect, Component } from 'react';
 import './tbooks.css';
 import axios from 'axios';
-import { GoogleLogout } from 'react-google-login';
+// import { GoogleLogout } from 'react-google-login';
 import TNavbar from './tnavbar';
-import BookStruct from '../structures/BookStruct';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+// import BookStruct from '../structures/BookStruct';
+import { Redirect, useHistory } from 'react-router-dom';
 
 function Tbooks(){
   let history = useHistory();
@@ -15,6 +15,27 @@ function Tbooks(){
         <Redirect to="/"/>
         )
     }
+    const [updatingbook,setupdatingbook] = useState([false]);
+    const [updbdata,setupdbdata] = useState([]);
+    const [updbgrade, setupdBgrade] = useState("");
+    const [updname, setupdName] = useState("");
+    const [updsubject, setupdSubject] = useState("");
+    const [upddetails, setupdDetails] = useState("");
+    const [updreview, setupdReview] = useState("");
+    const [updrating, setupdRating] = useState("");
+    const [updauthor, setupdAuthor] = useState("");
+    const [updselectedFile, setupdSelectedFile] = useState();
+    const [updisFilePicked, setupdIsFilePicked] = useState(false);
+    const [updselectedimg, setupdSelectedimg] = useState();
+    const [updisimgPicked, setupdIsimgPicked] = useState(false);
+    const updfileHandler = (event) => {
+        setupdSelectedFile(event.target.files[0]);
+        setupdIsFilePicked(true);        
+      };
+    const updimageHandler = (event) => {
+        setupdSelectedimg(event.target.files[0]);
+        setupdIsimgPicked(true);        
+      };
 
     const [book,setbook] = useState([]);
     const [delbook,setdelbook] = useState([]);
@@ -44,16 +65,6 @@ function Tbooks(){
     
     function createbook()
     {
-      console.log('Bgrade:',bgrade);
-      console.log('Name:',name);
-      console.log('Subject:',subject);
-      console.log('Details:',details);
-      console.log('Review:',review);
-      console.log('Rating:',rating);
-      console.log('Image',selectedimg);    
-      console.log('Author:',author);
-      console.log('File',selectedFile);
-      console.log('addedby:',userdata.username);
       let form_data= new FormData();
       form_data.append('bgrade',bgrade);
       form_data.append('name',name);
@@ -180,30 +191,89 @@ function Tbooks(){
         .catch((error) => {
           setloading(false);
         });
-        if(book.length>0)
-        {
-          setbookpresent(true);
-        }
-      // axios.post(resurl,
-      //   {
-      //     headers:
-      //     {
-      //       'content-type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(res => {
-      //     console.log(res.data);
-      //     alert('BOOK HAS BEEN DELETED!')
-      //     history.push("/teacher/");
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //     alert('COULDNT DELETE TRY AGAIN LATER!')
-      //   })
     }
 
-    async function restorebook(theid){
+    async function updatebook(theid){
       alert(theid);
+      let bupdurl=`http://127.0.0.1:8000/Tupdatebookdata/`+theid+`/`;
+      const request = await fetch(bupdurl)
+        .then(response => { 
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+      })
+        .then(data => { 
+          setupdbdata(data)
+          setupdatingbook(true);
+        })
+        .catch((error) => {
+          setupdatingbook(false);
+        });
+    }
+
+    function postupdate(theid)
+    {
+      let form_data= new FormData();
+      if(updbgrade!="")
+      {
+        form_data.append('bgrade',updbgrade);
+      }
+      if(updname!="")
+      {
+        form_data.append('name',updname);
+      }
+      if(updsubject!="")
+      {
+        form_data.append('subject',updsubject);
+      }
+      if(upddetails!="")
+      {
+        form_data.append('details',upddetails);
+      }
+      if(updreview!="")
+      {
+        form_data.append('review',updreview);
+      }
+      if(updrating!="")
+      {
+        form_data.append('rating',updrating);
+      }
+      if(updauthor!="")
+      {
+        form_data.append('author',updauthor);
+      }
+      if(updisimgPicked==true)
+      {
+        form_data.append('image',updselectedimg);
+      }
+      if(updisFilePicked==true)
+      {
+        form_data.append('file',updselectedFile);
+      }
+      form_data.append('addedby',userdata.email);
+      const thetrue=true;
+      form_data.append('visible',thetrue);
+      let resurl=`http://127.0.0.1:8000/Tpostupdatedbookdata/`+theid+'/';
+      axios.post(resurl, form_data,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          alert('BOOK DETAILS HAS BEEN UPDATED!')
+          history.push("/teacher/");
+        })
+        .catch(err => {
+          console.log(err)
+          alert('RE-CHECK THE BOOK DETAILS, FAILED TO UPDATE BOOK TO THE SHELF')
+        })
+      }
+
+    async function restorebook(theid){
       let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
       const request = await fetch(resurl)
         .then(response => {
@@ -339,13 +409,134 @@ return(
         </label><br/>
         <button onClick={() => createbook()}>ADD BOOK</button>
 
-
+        {updbdata.length>0 ? <>
+          <h1>UPDATE DETAILS</h1>
+          {
+            updbdata.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                {/* <img classname="bimg" src={item.image} /> */}
+                <label>book for grade:
+                  <select onChange={(e) => setupdBgrade(e.target.value)}>
+                    <option value="2">select pls</option>
+                    <option value="2">Grade 10</option>
+                    <option value="3">Grade 11</option>
+                    <option value="4">Grade 12</option>
+                  </select>
+                </label><br/>
+                  <label>Enter book name:
+                  <input
+                    type="text" 
+                    value={updname}
+                    onChange={(e) => setupdName(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>Enter book author:
+                  <input
+                    type="text" 
+                    value={updauthor}
+                    onChange={(e) => setupdAuthor(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>Enter book subject:
+                  <input
+                    type="text" 
+                    value={updsubject}
+                    onChange={(e) => setupdSubject(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>Enter book details:
+        <input
+          type="text" 
+          value={upddetails}
+          onChange={(e) => setupdDetails(e.target.value)}
+        />
+        </label><br/>
+        <label>Enter book review:
+        <input
+          type="text" 
+          value={updreview}
+          onChange={(e) => setupdReview(e.target.value)}
+        />
+        </label><br/>
+        <label>Enter book rating:
+        <input
+          type='number'
+          step="0.1"
+          min='0'
+          max='5'
+          value={updrating}
+          onChange= {(e) => setupdRating(e.target.value)}
+        />
+        </label><br/>
+        <label>Add book image to update :<br/>
+        <input type="file" name="image" accept="image/png, image/jpeg" onChange={updimageHandler} />
+			{updisimgPicked ? (
+				<div>
+					<p>Image name: {updselectedimg.name}</p>
+					<p>Image type: {updselectedimg.type}</p>
+					<p>Size in bytes: {updselectedimg.size}</p>
+					<p>
+						lastModifiedDate:{' '}
+						{updselectedimg.lastModifiedDate.toLocaleDateString()}
+					</p>
+          <p><a href={updselectedimg}>VIEW IMAGE</a></p>
+				</div>
+			) : (
+				<p>Select a image to show details</p>
+			)}</label>
+                  <form action={item.file}>
+                    <input type="submit" value="Read Book" />
+                  </form>
+                  <label>attach new book to attach update pdf:<br/>
+                  <input type="file" name="file" onChange={updfileHandler} />
+                {updisFilePicked ? (
+                  <div>
+                    <p>Filename: {updselectedFile.name}</p>
+                    <p>Filetype: {updselectedFile.type}</p>
+                    <p>Size in bytes: {updselectedFile.size}</p>
+                    <p>
+                      lastModifiedDate:{' '}
+                      {updselectedFile.lastModifiedDate.toLocaleDateString()}
+                    </p>
+                    <p><a href={updselectedFile}>READ FILE</a></p>
+                  </div>
+                ) : (
+                  <p>Select a file to show details</p>
+                )}
+                  </label><br/>
+                  <button onClick={() => postupdate(item.id)}>POST UPDATED DETAILS</button>
+                </div>
+              </a>
+              ))
+            }
+        </>:<></>}
 
         <h1>UPDATE BOOK</h1>
-
+        {(!loading) && (book.length>0) ?
+          <>
+          {
+            book.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                {/* <img classname="bimg" src={item.image} /> */}
+                  <p>name: {item.name}</p>
+                  <p>author: {item.author}</p>
+                  <p>subject: {item.subject}</p>
+                  {item.bgrade==2?<p>grade: 10</p>:<></>}
+                  {item.bgrade==3?<p>grade: 11</p>:<></>}
+                  {item.bgrade==4?<p>grade: 12</p>:<></>}
+                  <form action={item.file}>
+                    <input type="submit" value="Read Book" />
+                  </form>
+                  <button onClick={() => updatebook(item.id)}>UPDATE BOOK DETAILS</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
 
         <h1>REMOVE BOOK</h1>
-          {/* {loading?<p>Cruising the shelves</p>:<></>} */}
           {(!loading) && (book.length>0) ?
           <>
           {
@@ -356,6 +547,9 @@ return(
                   <p>name: {item.name}</p>
                   <p>author: {item.author}</p>
                   <p>subject: {item.subject}</p>
+                  {item.bgrade==2?<p>grade: 10</p>:<></>}
+                  {item.bgrade==3?<p>grade: 11</p>:<></>}
+                  {item.bgrade==4?<p>grade: 12</p>:<></>}
                   <a href={item.file}>Read Book</a>
                   <br/>
                   <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
@@ -376,6 +570,9 @@ return(
                   <p>name: {item.name}</p>
                   <p>author: {item.author}</p>
                   <p>subject: {item.subject}</p>
+                  {item.bgrade==2?<p>grade: 10</p>:<></>}
+                  {item.bgrade==3?<p>grade: 11</p>:<></>}
+                  {item.bgrade==4?<p>grade: 12</p>:<></>}
                   <a href={item.file}>Read Book</a>
                   <br/>
                   <button onClick={() => restorebook(item.id)}>RESTORE BOOK</button>

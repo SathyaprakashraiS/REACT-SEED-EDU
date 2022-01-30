@@ -423,7 +423,7 @@ return(
               </a>
               ))
             }
-          </>:<>{!loading?<p>Checking the Papers in Bundles</p>:<p>Students havent attended any exams yet!</p>}</>}
+          </>:<>{loading?<p>Checking the Papers in Bundles</p>:<p>Students havent attended any exams yet!</p>}</>}
     
         <h1>ASSESED PAPERS</h1>
         {(!eloading) && (epaper.length>0) ?
@@ -438,10 +438,16 @@ return(
                   <p>mark obtained: {item.markobtained}</p>
                   <p>total marks: {item.totalmarks}</p>
                   <p>total: {item.markobtained}/{item.totalmarks}</p>
-                  <a href={item.answersheet}>View answersheet</a><br/>
-                  <a href={item.correctedanswersheet}>View corrected-answersheet</a>
+                  {/* <a href={item.answersheet}>View answersheet</a><br/>
+                  <a href={item.correctedanswersheet}>View corrected-answersheet</a> */}
                   <br/>
-                  <button onClick={() => viewepaper(item.id)}>VIEW PAPER</button>
+                  {/* <button onClick={() => viewepaper(item.id)}>VIEW PAPER</button> */}
+                  <form action={item.answersheet}>
+                    <input type="submit" value="View answersheet" />
+                  </form>
+                  <form action={item.correctedanswersheet}>
+                    <input type="submit" value="View evaluated answersheet" />
+                  </form>
                 </div>
               </a>
               ))
