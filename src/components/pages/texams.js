@@ -16,6 +16,19 @@ function Texams(){
         )
     }
 
+    const [updexam,setupdexam] = useState([]);
+    const [updloading,setupdloading] = useState([true]);
+    const [udpname, setudpname] = useState("");
+    const [udpdesc, setudpdesc] = useState("");
+    const [udpgrade, setudpgrade] = useState("");
+    const [udpmarks, setudpmarks] = useState("");
+    const [udpselectedFile, setudpSelectedFile] = useState();
+    const [udpisFilePicked, setudpIsFilePicked] = useState(false);
+    const udpfileHandler = (event) => {
+        setudpSelectedFile(event.target.files[0]);
+        setudpIsFilePicked(true);        
+      };
+
     const [book,setbook] = useState([]);
     const [resexam,setresexam] = useState([]);
     const [loading,setloading] = useState([true]);
@@ -199,6 +212,69 @@ function Texams(){
         }
     }
 
+    async function updateexam(theid)
+    {
+      alert(theid)
+      let resurl=`http://127.0.0.1:8000/Tupdateexamdata/`+theid+`/`;
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+      })
+        .then(data => { 
+          setupdexam(data)
+          setupdloading(false);
+        })
+        .catch((error) => {
+          setupdloading(false);
+        });
+    }
+
+    async function postexam(theid)
+    {
+      let form_data= new FormData();
+      if(udpname!="")
+      {
+        form_data.append('mockpapername',udpname);
+      }
+      if(udpdesc!="")
+      {
+        form_data.append('paperdescription',udpdesc);
+      }
+      if(udpgrade!="")
+      {
+        form_data.append('mpgrade',udpgrade);
+      }
+      if(udpmarks!="")
+      {
+        form_data.append('totalmarks',udpmarks);
+      }
+      if(udpisFilePicked==true)
+      {
+        form_data.append('mockpaper',udpselectedFile);
+      }
+      const thetrue=true;
+      form_data.append('visible',thetrue);
+      form_data.append('addedby',userdata.email);
+      let resurl=`http://127.0.0.1:8000/Tpostupdatedexamdata/`+theid+`/`;
+      axios.post(resurl, form_data,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          alert('EXAM HAS BEEN UPDATED!')
+          history.push("/teacher/");
+        })
+        .catch(err => {
+          alert('RE-CHECK THE EXAM DETAILS, FAILED TO UPDATE EXAM TO THE VAULT')
+        })
+    }
+
     useEffect(() => {
       fetchBook();
       fetchResexam();
@@ -272,10 +348,87 @@ return(
         </label><br/>
         <button onClick={() => createbook()}>ADD EXAM</button>
 
-
+        {(updexam.length>0) && (!updloading)?<>
+          <h1>UPDATE EXAM DETAILS</h1>
+          {
+            updexam.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <label>Enter exam name:
+                  <input
+                    type="text" 
+                    value={udpname}
+                    onChange={(e) => setudpname(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>Enter exam description:
+                  <input
+                    type="text" 
+                    value={udpdesc}
+                    onChange={(e) => setudpdesc(e.target.value)}
+                  />
+                  </label><br/>
+                <label>exam for grade:
+                  <select onChange={(e) => setudpgrade(e.target.value)}>
+                    <option value="10">select pls</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                  </select>
+                </label><br/>
+                <label>Enter total marks:
+                  <input
+                    type='number'
+                    step="1"
+                    min='0'
+                    max='200'
+                    value={udpmarks}
+                    onChange= {(e) => setudpmarks(e.target.value)}
+                  />
+                  </label><br/>
+                <label>attach new pdf to update exam paper:<br/>
+                  <input type="file" name="file" onChange={udpfileHandler} />
+                {udpisFilePicked ? (
+                  <div>
+                    <p>Filename: {udpselectedFile.name}</p>
+                    <p>Filetype: {udpselectedFile.type}</p>
+                    <p>Size in bytes: {udpselectedFile.size}</p>
+                    <p>
+                      lastModifiedDate:{' '}
+                      {udpselectedFile.lastModifiedDate.toLocaleDateString()}
+                    </p>
+                    <p><a href={udpselectedFile}>VIEW PAPER</a></p>
+                  </div>
+                ) : (
+                  <p>Select a file to show details</p>
+                )}
+                  </label><br/>
+                  <button onClick={() => postexam(item.id)}>UPDATE EXAM</button>
+                </div>
+              </a>
+              ))
+            }
+        </>:<></>}
 
         <h1>UPDATE EXAM</h1>
-
+        {(!loading) && (book.length>0) ?
+          <>
+          {
+            book.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.mockpapername}</p>
+                  <p>paperdescription: {item.paperdescription}</p>
+                  <p>marks: {item.totalmarks}</p>
+                  <form action={item.mockpaper}>
+                    <input type="submit" value="View paper"/>
+                  </form>
+                  <button onClick={() => updateexam(item.id)}>UPDATE EXAM</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
 
         <h1>REMOVE EXAM</h1>
           {(!loading) && (book.length>0) ?
@@ -287,8 +440,9 @@ return(
                   <p>name: {item.mockpapername}</p>
                   <p>paperdescription: {item.paperdescription}</p>
                   <p>marks: {item.totalmarks}</p>
-                  <a href={item.file}>View paper</a>
-                  <br/>
+                  <form action={item.mockpaper}>
+                    <input type="submit" value="View paper"/>
+                  </form>
                   <button onClick={() => deletebook(item.id)}>DELETE EXAM</button>
                 </div>
               </a>
