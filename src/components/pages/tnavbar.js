@@ -81,6 +81,9 @@ return(
         <lisn >
             <a class="nav-link"  href="/"><b>HOME</b></a>
         </lisn>
+        <lisn >
+            <Link to="/" className="navbar-links" onClick={logout}><b>LOGOUT</b></Link>
+        </lisn>
     </ulsn>
     );
 }

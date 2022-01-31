@@ -58,7 +58,7 @@ return(
             <h1>{userdata.username}</h1>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/"><b>HOME</b></a>
+            <a class="nav-link"  href="/student/"><b>STUD PORTAL</b></a>
         </lisn>
         {twelvegrade ? (
             <lisn >
@@ -96,11 +96,14 @@ return(
             <>
             </>
         )}
-        <lisn >
+        <lisn>
             <a class="nav-link"  href="/student/questionbank/"><b>QUESTION BANK</b></a>
         </lisn>
-        <lisn >
-            <a class="nav-link"  href="/student/"><b>STUD PORTAL</b></a>
+        <lisn>
+            <a class="nav-link"  href="/"><b>HOME</b></a>
+        </lisn>
+        <lisn>
+            <Link to="/" className="navbar-links" onClick={logout}><b>LOGOUT</b></Link>
         </lisn>
     </ulsn>
     );
