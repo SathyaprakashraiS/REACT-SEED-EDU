@@ -17,9 +17,14 @@ function Tquiz(){
     }
 
     const [Qname,setQname] = useState([]);
+    const [updquiz,setupdquiz] = useState([]);
+    const [updloading,setupdloading] = useState([false]);
+    const [updname, setupdname] = useState("");
+    const [updgrade, setupdgrade] = useState("");
 
-    const [book,setbook] = useState([]);
-    const [delbook,setdelbook] = useState([]);
+    const [quiz,setquiz] = useState([]);
+    const [delquiz,setdelquiz] = useState([]);
+    const [grade, setgrade] = useState("");
     const [loading,setloading] = useState([true]);
     const [delloading,setdelloading] = useState([true]);
     const [bookpresent, setbookpresent] = useState(false);
@@ -49,7 +54,9 @@ function Tquiz(){
         let form_data= new FormData();
         form_data.append('cname',Qname);
         form_data.append('author',userdata.email);
-        form_data.append('cgrade',userdata.standard);
+        form_data.append('cgrade',grade);
+        const thetrue=true;
+        form_data.append('visible',thetrue);
         let resurl=`http://127.0.0.1:8000/Taddquiz-list/`;
         axios.post(resurl, form_data,
         {
@@ -93,27 +100,26 @@ function Tquiz(){
           .then(response => {
             if(response.ok)
           {
-            console.log("here trying to fetch")
+            // console.log("here trying to fetch")
             return response.json(); 
           }
           else{
             fetchQuiz();
-            console.log("im not here")
+            // console.log("im not here")
           }
         })
           .then(data => { 
-            setbook(data)
+            setquiz(data)
             setloading(false);
-            console.log(setbook)
           })
           .catch((error) => {
-            console.log("the error ",error)
+            // console.log("the error ",error)
             setloading(false);
           });
-          if(book.length>0)
-          {
-            setbookpresent(true);
-          }
+          // if(quiz.length>0)
+          // {
+          //   setbookpresent(true);
+          // }
         }
 
         async function deletequiz(theid){
@@ -130,17 +136,17 @@ function Tquiz(){
               }
             })
               .then(data => { 
-                setbook(data)
+                setquiz(data)
                 setloading(false);
                 history.push('/teacher/');
               })
               .catch((error) => {
                 setloading(false);
               });
-              if(book.length>0)
-              {
-                setbookpresent(true);
-              }
+              // if(book.length>0)
+              // {
+              //   setbookpresent(true);
+              // }
           }
 
           async function restorequizlist(){
@@ -156,16 +162,16 @@ function Tquiz(){
               }
             })
               .then(data => { 
-                setdelbook(data)
+                setdelquiz(data)
                 setdelloading(false);
               })
               .catch((error) => {
                 setdelloading(false);
               });
-              if(delbook.length>0)
-              {
-                setdelbookpresent(true);
-              }
+              // if(delquiz.length>0)
+              // {
+              //   setdelbookpresent(true);
+              // }
           }
 
           async function restorequiz(theid){
@@ -182,17 +188,17 @@ function Tquiz(){
               }
             })
               .then(data => { 
-                setbook(data)
+                setquiz(data)
                 setloading(false);
                 history.push('/teacher/');
               })
               .catch((error) => {
                 setloading(false);
               });
-              if(book.length>0)
-              {
-                setbookpresent(true);
-              }
+              // if(quiz.length>0)
+              // {
+              //   setbookpresent(true);
+              // }
           }
 
         function selectquiz(theid)
@@ -202,63 +208,116 @@ function Tquiz(){
           history.push('CRUD');
         }
 
-    async function fetchBook(stand) {
-      var booklink=`http://127.0.0.1:8000/tbook-list/`+userdata.email+'/';
-      const request = await fetch(booklink)
-        .then(response => {
-          if(response.ok)
-        {
-          console.log("here trying to fetch")
-          return response.json(); 
-        }
-        else{
-          fetchBook();
-          console.log("im not here")
-        }
-      })
-        .then(data => { 
-          setbook(data)
-          setloading(false);
-          console.log(setbook)
-        })
-        .catch((error) => {
-          console.log("the error ",error)
-          setloading(false);
-        });
-        if(book.length>0)
-        {
-          setbookpresent(true);
-        }
-      }
+    // async function fetchBook(stand) {
+    //   var booklink=`http://127.0.0.1:8000/tbook-list/`+userdata.email+'/';
+    //   const request = await fetch(booklink)
+    //     .then(response => {
+    //       if(response.ok)
+    //     {
+    //       console.log("here trying to fetch")
+    //       return response.json(); 
+    //     }
+    //     else{
+    //       fetchBook();
+    //       console.log("im not here")
+    //     }
+    //   })
+    //     .then(data => { 
+    //       setbook(data)
+    //       setloading(false);
+    //       console.log(setbook)
+    //     })
+    //     .catch((error) => {
+    //       console.log("the error ",error)
+    //       setloading(false);
+    //     });
+    //     if(book.length>0)
+    //     {
+    //       setbookpresent(true);
+    //     }
+    //   }
 
-      async function fetchDelBook(stand) {
-        var booklink=`http://127.0.0.1:8000/tresbook-list/`+userdata.email+'/';
-        const request = await fetch(booklink)
-          .then(response => {
-            if(response.ok)
+      // async function fetchDelBook(stand) {
+      //   var booklink=`http://127.0.0.1:8000/tresbook-list/`+userdata.email+'/';
+      //   const request = await fetch(booklink)
+      //     .then(response => {
+      //       if(response.ok)
+      //     {
+      //       console.log("here trying to fetch")
+      //       return response.json(); 
+      //     }
+      //     else{
+      //       fetchDelBook();
+      //       console.log("im not here")
+      //     }
+      //   })
+      //     .then(data => { 
+      //       setdelbook(data)
+      //       setdelloading(false);
+      //       console.log(setdelbook)
+      //     })
+      //     .catch((error) => {
+      //       console.log("the error ",error)
+      //       setdelloading(false);
+      //     });
+      //     if(delbook.length>0)
+      //     {
+      //       setdelbookpresent(true);
+      //     }
+      //   }
+
+      async function updatequiz(theid)
+      {
+        alert(theid);
+        let bupdurl=`http://127.0.0.1:8000/Tupdatequizdata/`+theid+`/`;
+        const request = await fetch(bupdurl)
+        .then(response => { 
+          if(response.ok)
           {
-            console.log("here trying to fetch")
             return response.json(); 
           }
-          else{
-            fetchDelBook();
-            console.log("im not here")
+        })
+        .then(data => { 
+          setupdquiz(data)
+          setupdloading(true);
+        })
+        .catch((error) => {
+          setupdloading(false);
+        });
+      }
+
+      function postupdate(theid)
+      {
+        alert(theid)
+        let form_data= new FormData();
+        if(updname!="")
+        {
+          form_data.append('cname',updname);
+        }
+        if(updgrade!="")
+        {
+          form_data.append('cgrade',updgrade);
+        }
+        const thetrue=true;
+        form_data.append('visible',thetrue);
+        let resurl=`http://127.0.0.1:8000/Tpostupdatedquizdata/`+theid+'/';
+        axios.post(resurl, form_data,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
           }
         })
-          .then(data => { 
-            setdelbook(data)
-            setdelloading(false);
-            console.log(setdelbook)
-          })
-          .catch((error) => {
-            console.log("the error ",error)
-            setdelloading(false);
-          });
-          if(delbook.length>0)
-          {
-            setdelbookpresent(true);
-          }
-        }
+        .then(res => {
+          console.log(res.data);
+          alert('QUIZ DETAILS HAS BEEN UPDATED!')
+          history.push("/teacher/");
+        })
+        .catch(err => {
+          console.log(err)
+          alert('RE-CHECK THE QUIZ DETAILS, FAILED TO UPDATE QUIZ TO THE SHELF')
+        })
+      }
 
     useEffect(() => {
       fetchQuiz();
@@ -290,22 +349,70 @@ return(
           onChange={(e) => setQname(e.target.value)}
         />
         </label><br/>
-        <label><b>Author:</b>{userdata.username}
+        <label>quiz for grade:
+          <select onChange={(e) => setgrade(e.target.value)}>
+            <option value="10">Grade 10</option>
+            <option value="11">Grade 11</option>
+            <option value="12">Grade 12</option>
+          </select>
+        </label><br/>
+        {/* <label><b>Author:</b>{userdata.username}
         </label><br/>
         <label><b>Standard:</b>{userdata.standard}
-        </label><br/>
+        </label><br/> */}
         <button onClick={() => createquiz()}>ADD QUIZ</button>
 
-
+        {(updloading) && (updquiz.length>0)?
+        <>
+          <h1>UPDATE QUIZ DETAILS</h1>
+          {
+            updquiz.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <label><b>change quiz name:</b>
+                <input
+                  type="text" 
+                  value={updname}
+                  onChange={(e) => setupdname(e.target.value)}
+                />
+                </label><br/>
+                <label>quiz for grade:
+                <select onChange={(e) => setupdgrade(e.target.value)}>
+                  <option value="10">Grade 10</option>
+                  <option value="11">Grade 11</option>
+                  <option value="12">Grade 12</option>
+                </select>
+                </label><br/>
+                  <button onClick={() => postupdate(item.id)}>UPDATE QUIZ DETAILS</button>
+                </div>
+              </a>
+              ))
+            }
+        </>:<></>}
 
         <h1>UPDATE QUIZ</h1>
-
-
-        <h1>REMOVE QUIZ</h1>
-          {(!loading) && (book.length>0) ?
+        {(!loading) && (quiz.length>0) ?
           <>
           {
-            book.map(item => (
+            quiz.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.cname}</p>
+                  <p>grade: {item.cgrade}</p>
+                  <a href={item.file}>View Quiz</a>
+                  <br/>
+                  <button onClick={() => updatequiz(item.id)}>UPDATE QUIZ</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to delete</p>}</>}
+
+        <h1>REMOVE QUIZ</h1>
+          {(!loading) && (quiz.length>0) ?
+          <>
+          {
+            quiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
                   <p>name: {item.cname}</p>
@@ -320,10 +427,10 @@ return(
           </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to delete</p>}</>}
 
           <h1>RESTORE DELETED QUIZ</h1>
-          {(!delloading) && (delbook.length>0) ?
+          {(!delloading) && (delquiz.length>0) ?
           <>
           {
-            delbook.map(item => (
+            delquiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
                   <p>name: {item.cname}</p>
@@ -338,17 +445,17 @@ return(
           </>:<>{delloading?<p>Minning the Bin</p>:<p>no quiz deleted previously</p>}</>}
 
           <h1>SELECT QUIZ TO ALTER QUESTIONS IN IT</h1>
-          {(!loading) && (book.length>0) ?
+          {(!loading) && (quiz.length>0) ?
           <>
           {
-            book.map(item => (
+            quiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
                   <p>name: {item.cname}</p>
                   <p>grade: {item.cgrade}</p>
                   <a href={item.file}>View Quiz</a>
                   <br/>
-                  <button onClick={() => selectquiz(item.id)}>VIEW QUIZ</button>
+                  <button onClick={() => selectquiz(item.id)}>VIEW QUIZ QUESTIONS</button>
                 </div>
               </a>
               ))

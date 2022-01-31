@@ -19,7 +19,7 @@ function TMquiz(){
 
     const [Qname,setQname] = useState([]);
     //const [quizid,setquizid] = useState([]);
-    const [book,setbook] = useState([]);
+    const [quizques,setquizques] = useState([]);
     const [delbook,setdelbook] = useState([]);
     const [loading,setloading] = useState([true]);
     const [question,setquestion] = useState([""]);
@@ -27,7 +27,16 @@ function TMquiz(){
     const [option2,setoption2] = useState([""]);
     const [option3,setoption3] = useState([""]);
     const [option4,setoption4] = useState([""]);
-    const [answer,setanswer] = useState([]);
+    const [answer,setanswer] = useState([""]);
+
+    const [updquizques,setupdquizques] = useState([]);
+    const [updloading,setupdloading] = useState([true]);
+    const [updquestion,setupdquestion] = useState([""]);
+    const [updoption1,setupdoption1] = useState([""]);
+    const [updoption2,setupdoption2] = useState([""]);
+    const [updoption3,setupdoption3] = useState([""]);
+    const [updoption4,setupdoption4] = useState([""]);
+    const [updanswer,setupdanswer] = useState([""]);
     
     function addquestion()
     {
@@ -92,12 +101,10 @@ function TMquiz(){
           }
         })
           .then(data => { 
-            setbook(data)
+            setquizques(data)
             setloading(false);
-            console.log(setbook)
           })
           .catch((error) => {
-            console.log("the error ",error)
             setloading(false);
           });
         }
@@ -116,7 +123,7 @@ function TMquiz(){
               }
             })
               .then(data => { 
-                setbook(data)
+                setquizques(data)
                 setloading(false);
                 localStorage.removeItem('modquiz');
                 history.push('/teacher/');
@@ -126,6 +133,73 @@ function TMquiz(){
               });
           }
 
+        async function updatequizques(theid)
+        {
+          alert(theid)
+          let updquiz=`http://127.0.0.1:8000/Tupdatequizquesdata/`+theid+`/`;
+          const request = await fetch(updquiz)
+          .then(response => {
+          if(response.ok)
+          {
+            return response.json(); 
+          }
+        })
+        .then(data => { 
+          setupdquizques(data)
+          setupdloading(true);
+        })
+        .catch((error) => {
+          setupdloading(false);
+        });
+        }
+
+        async function postupdate(theid,thegrade)
+        {
+          alert(theid)
+          let form_data= new FormData();
+          form_data.append('testgrade',thegrade);
+          if(updquestion!="")
+          {
+            form_data.append('cquestion',updquestion);
+          }
+          if(updoption1!="")
+          {
+            form_data.append('coption1',updoption1);
+          }
+          if(updoption2!="")
+          {
+            form_data.append('coption2',updoption2);
+          }
+          if(updoption3!="")
+          {
+            form_data.append('coption3',updoption3);
+          }
+          if(updoption4!="")
+          {
+            form_data.append('coption4',updoption4);
+          }
+          if(updanswer!="")
+          {
+            form_data.append('canswer',updanswer);
+          }
+          let resurl=`http://127.0.0.1:8000/Tpostupdatedquizquesdata/`+theid+'/';
+          axios.post(resurl, form_data,
+          {
+            headers:
+            {
+              'content-type': 'multipart/form-data'
+            }
+          })
+          .then(res => {
+            console.log(res.data);
+            alert('QUESTION HAS BEEN UPDATED!')
+            history.push("/teacher/");
+          })
+          .catch(err => {
+            console.log(err)
+            alert('RE-CHECK THE ENTERED QUESTION DETAILS, FAILED TO UPDATE QUESTION TO THE QUIZ')
+          })
+        }
         
     useEffect(() => {
         fetchQuizques();
@@ -184,7 +258,7 @@ return(
           onChange={(e) => setoption4(e.target.value)}
         />
         </label><br/>
-        <label>Enter asnwer option:
+        <label>Enter answer option:
         <input
           type='number'
           step="1"
@@ -196,13 +270,89 @@ return(
         </label><br/>
         <button onClick={() => addquestion()}>ADD QUESTION</button>
 
+        {(updloading) && (updquizques.length>0) ? <>
+        <h1>DETAILS TO UPDATE QUESTION</h1>
+        {
+          updquizques.map(item => (
+          <a key={item.id}>
+            <div classname="dispbook">
+            <label><b>Enter question:</b>
+        <input
+          type="text" 
+          value={updquestion}
+          onChange={(e) => setupdquestion(e.target.value)}
+        />
+        </label><br/>
+        <label><b>Enter option1:</b>
+        <input
+          type="text" 
+          value={updoption1}
+          onChange={(e) => setupdoption1(e.target.value)}
+        />
+        </label><br/>
+        <label><b>Enter option2:</b>
+        <input
+          type="text" 
+          value={updoption2}
+          onChange={(e) => setupdoption2(e.target.value)}
+        />
+        </label><br/>
+        <label><b>Enter option3:</b>
+        <input
+          type="text" 
+          value={updoption3}
+          onChange={(e) => setupdoption3(e.target.value)}
+        />
+        </label><br/>
+        <label><b>Enter option4:</b>
+        <input
+          type="text" 
+          value={updoption4}
+          onChange={(e) => setupdoption4(e.target.value)}
+        />
+        </label><br/>
+        <label>Enter answer option:
+        <input
+          type='number'
+          step="1"
+          min='1'
+          max='4'
+          value={updanswer}
+          onChange= {(e) => setupdanswer(e.target.value)}
+        />
+        </label><br/>
+              <button onClick={() => postupdate(item.id,item.testgrade)}>UPDATE QUESTION</button>
+            </div>
+          </a>
+          ))
+        }
+        </>:<></>}
 
-
-        <h1>REMOVE QUESTION FROM QUIZ</h1>
-          {(!loading) && (book.length>0) ?
+        <h1>SELECT QUESTION TO UPDATE IT</h1>
+        {(!loading) && (quizques.length>0) ?
           <>
           {
-            book.map(item => (
+            quizques.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>question: {item.cquestion}</p>
+                  <p>option1: {item.coption1}</p>
+                  <p>option2: {item.coption2}</p>
+                  <p>option3: {item.coption3}</p>
+                  <p>option4: {item.coption4}</p>
+                  <p>answer: {item.canswer}</p>
+                  <button onClick={() => updatequizques(item.id)}>UPDATE QUESTION</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to delete</p>}</>}
+
+        <h1>REMOVE QUESTION FROM QUIZ</h1>
+          {(!loading) && (quizques.length>0) ?
+          <>
+          {
+            quizques.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
                   <p>question: {item.cquestion}</p>
