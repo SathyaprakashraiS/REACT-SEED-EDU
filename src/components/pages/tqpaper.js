@@ -15,9 +15,21 @@ function Texams(){
         <Redirect to="/"/>
         )
     }
+    const [updchild, setupdchild] = useState("");
+    const [updname, setupdName] = useState("");
+    const [updpgrade, setupdpgrade] = useState("");
+    const [updptype, setupdptype] = useState("");
+    const [updyear, setupdYear] = useState("");
+    const [updselectedFile, setupdSelectedFile] = useState();
+    const [updisFilePicked, setupdIsFilePicked] = useState(false);
+    const updfileHandler = (event) => {
+        setupdSelectedFile(event.target.files[0]);
+        setupdIsFilePicked(true);        
+      };
 
     const [book,setbook] = useState([]);
     const [respaper,setrespaper] = useState([]);
+    const [updpaper,setupdpaper] = useState([]);
     const [papertypes,setpapertypes] = useState([]);
     const [delpaper,setdelpaper] = useState([]);
     const [papertypespresent,setpapertypespresent] = useState(false);
@@ -25,6 +37,7 @@ function Texams(){
     const [loading,setloading] = useState([true]);
     const [delloading,setdelloading] = useState([true]);
     const [resloading,setresloading] = useState([true]);
+    const [updloading,setupdloading] = useState([true]);
     const [bookpresent, setbookpresent] = useState(false);
     const [delpaperpresent, setdelpaperpresent] = useState(false);
     const [respaperpresent, setrespaperpresent] = useState(false);
@@ -235,6 +248,77 @@ function Texams(){
         }
     }
 
+    async function updatepaper(theid){
+      let resurl=`http://127.0.0.1:8000/Tupdateqpaperdata/`+theid+`/`;
+      const request = await fetch(resurl)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+      })
+        .then(data => { 
+          setupdpaper(data)
+          setupdloading(false);
+        })
+        .catch((error) => {
+          setupdloading(false);
+        });
+    }
+
+    function postupdatepaper(theid,thechild)
+    {
+      alert("hlo")
+      let form_data= new FormData();
+      if(updchild!="")
+      {
+        form_data.append('childpaperfile',updchild);
+      }
+      if(updchild=="")
+      {
+        form_data.append('childpaperfile',thechild);
+      }
+      if(updname!="")
+      {
+        form_data.append('name',updname);
+      }
+      if(updpgrade!="")
+      {
+        form_data.append('forgrade',updpgrade);
+      }
+      if(updptype!="")
+      {
+        form_data.append('papertype',updptype);
+      }
+      if(updyear!="")
+      {
+        form_data.append('year',updyear);
+      }
+      if(updisFilePicked==true)
+      {
+        form_data.append('paper',updselectedFile);
+      }
+      form_data.append('addedby',userdata.email);
+      const thetrue=true;
+      form_data.append('visible',thetrue);
+      let resurl=`http://127.0.0.1:8000/Tpostupdatedqpaperdata/`+theid+'/';
+      axios.post(resurl, form_data,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          alert('QUESTION PAPER DETAILS HAS BEEN UPDATED!')
+          history.push("/teacher/");
+        })
+        .catch(err => {
+          console.log(err)
+          alert('RE-CHECK THE QUESTION PAPER DETAILS, FAILED TO UPDATE QUESTION PAPER')
+        })
+    }
 
     useEffect(() => {
       fetchQpapertypes();
@@ -318,9 +402,102 @@ return(
         </label><br/>
         <button onClick={() => addquestionpaper()}>ADD QUESTION PAPER</button>
 
+        {/* UPDATE A PARTICULAR PAPER */}
+        {updpaper.length>0?<>
+        <h1>DETAILS TO UPDATE</h1>
+          {
+            updpaper.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <label>paper name:
+        <input
+          type="text" 
+          value={updname}
+          onChange={(e) => setupdName(e.target.value)}
+        />
+        </label><br/>
+        <label>paper for grade:
+          <select onChange={(e) => setupdpgrade(e.target.value)}>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </label><br/>
+        <label>paper class:
+          <select onChange={(e) => setupdchild(e.target.value)}>
+            <option value="2">CBSE 10</option>
+            <option value="3">CBSE 11</option>
+            <option value="4">CBSE 12</option>
+            <option value="5">ACLAT</option>
+            <option value="6">AIEED</option>
+            <option value="7">AIIMS</option>
+          </select>
+        </label><br/>
+        <label>paper type:
+          <select onChange={(e) => setupdptype(e.target.value)}>
+            <option value="practise paper">practise paper</option>
+            <option value="solution paper">solution paper</option>
+            <option value="session paper">session paper</option>
+            <option value="session paper key">session paper key</option>
+          </select>
+        </label><br/>
+        <label>paper year:
+        <input
+          type="text" 
+          value={updyear}
+          onChange={(e) => setupdYear(e.target.value)}
+        />
+        </label><br/>
+        <label>attach question paper:
+        <input type="file" name="file" onChange={updfileHandler} />
+			{updisFilePicked ? (
+				<div>
+					<p>Filename: {updselectedFile.name}</p>
+					<p>Filetype: {updselectedFile.type}</p>
+					<p>Size in bytes: {updselectedFile.size}</p>
+					<p>
+						lastModifiedDate:{' '}
+						{updselectedFile.lastModifiedDate.toLocaleDateString()}
+					</p>
+          <p><a href={updselectedFile}>VIEW FILE</a></p>
+				</div>
+			) : (
+				<p>Select a file to show details</p>
+			)}
+        </label><br/>
+                  <form action={item.paper}>
+                    <input type="submit" value="View paper" />
+                  </form>                                                                               
+                  <br/>
+                  <button onClick={() => postupdatepaper(item.id,item.childpaperfile)}>UPDATE QUESTION PAPER</button>
+                </div>
+              </a>
+              ))
+            }
+        </>:<></>}
 
-
-        <h1>UPDATE QUESTION PAPER</h1>
+        <h1>SELECT QUESTION PAPER TO UPDATE</h1>
+        {(!delloading) && (delpaper.length>0) ?
+          <>
+          {
+            delpaper.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                  <p>name: {item.name}</p>
+                  <p>type: {item.childpaperfile}</p>
+                  <p>for grade: {item.forgrade}</p>
+                  <p>paper type: {item.papertype}</p>
+                  <p>year: {item.year}</p>
+                  <form action={item.paper}>
+                    <input type="submit" value="View paper" />
+                  </form>                                                                               
+                  <br/>
+                  <button onClick={() => updatepaper(item.id)}>UPDATE QUESTION PAPER</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
 
         <h1>REMOVE QUESTION PAPER</h1>
         {(!delloading) && (delpaper.length>0) ?
@@ -334,7 +511,9 @@ return(
                   <p>for grade: {item.forgrade}</p>
                   <p>paper type: {item.papertype}</p>
                   <p>year: {item.year}</p>
-                  <a href='/'>View paper</a>                                                                                
+                  <form action={item.paper}>
+                    <input type="submit" value="View paper" />
+                  </form>                                                                              
                   <br/>
                   <button onClick={() => delquestionpaper(item.id)}>DELETE QUESTION PAPER</button>
                 </div>
@@ -355,7 +534,9 @@ return(
                   <p>for grade: {item.forgrade}</p>
                   <p>paper type: {item.papertype}</p>
                   <p>year: {item.year}</p>
-                  <a href='/'>View paper</a>                                                                                
+                  <form action={item.paper}>
+                    <input type="submit" value="View paper" />
+                  </form>                                                                              
                   <br/>
                   <button onClick={() => restorepaper(item.id)}>RESTORE QUESTION PAPER</button>
                 </div>
@@ -374,7 +555,9 @@ return(
                   <p>name: {item.parentpaperfile}</p>
                   <p>paperdescription: {item.description}</p>
                   <p>marks: {item.forgrade}</p>
-                  <a href='/'>View papers</a>                                                                                    
+                  <form action={item.paper}>
+                    <input type="submit" value="View paper" />
+                  </form>                                                                                    
                   <br/>
                 </div>
               </a>
