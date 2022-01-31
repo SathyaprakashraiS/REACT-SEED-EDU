@@ -58,28 +58,28 @@ return(
             <h1>{userdata.username}</h1>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/"><b>HOME</b></a>
+            <a class="nav-link"  href="/teacher/"><b>TEACHER PORTAL</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/books/"><b>CRUD BOOKS</b></a>
+            <a class="nav-link"  href="/teacher/books/"><b>BOOKS</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/exams/"><b>CRUD EXAMS</b></a>
+            <a class="nav-link"  href="/teacher/exams/"><b>EXAMS</b></a>
         </lisn>
         <lisn>
-            <a class="nav-link"  href="/teacher/cquiz/"><b>CRUD QUIZ</b></a>
+            <a class="nav-link"  href="/teacher/quiz/"><b>QUIZ</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/asses/"><b>ASSES PAPERS</b></a>
+            <a class="nav-link"  href="/teacher/tapapers/"><b>ASSES PAPERS</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/ccourses"><b>ADD COURSES</b></a>
+            <a class="nav-link"  href="/teacher/course/"><b>COURSES</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/cqbank"><b>QUESTION BANK</b></a>
+            <a class="nav-link"  href="/teacher/qpaper/"><b>QUESTION BANK</b></a>
         </lisn>
         <lisn >
-            <a class="nav-link"  href="/teacher/"><b>TEACHER PORTAL</b></a>
+            <a class="nav-link"  href="/"><b>HOME</b></a>
         </lisn>
     </ulsn>
     );

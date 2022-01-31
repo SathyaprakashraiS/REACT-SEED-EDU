@@ -15,6 +15,19 @@ function Tcourse(){
         <Redirect to="/"/>
         )
     }
+    const [updcourses,setupdcourses] = useState([]);
+    const [updloading,setupdloading] = useState([false]);
+    const [updcname,setupdcname] = useState([]);
+    const [updcrating,setupdcrating] = useState([]);
+    const [updcdes,setupdcdes] = useState([]);
+    const [updcprice,setupdcprice] = useState([]);
+    const [updclink,setupdclink] = useState([]);
+    const [updselectedimg, setupdSelectedimg] = useState();
+    const [updisimgPicked, setupdIsimgPicked] = useState(false);
+    const updimageHandler = (event) => {
+      setupdSelectedimg(event.target.files[0]);
+      setupdIsimgPicked(true);
+    };
 
     const [cname,setcname] = useState([]);
     const [crating,setcrating] = useState([]);
@@ -184,6 +197,74 @@ function Tcourse(){
           });
       }
 
+    async function updatecourse(theid)
+    {
+      alert(theid)
+      var ocourselink=`http://127.0.0.1:8000/Tupdateocoursedata/`+theid+'/';
+      const request = await fetch(ocourselink)
+        .then(response => {
+          if(response.ok)
+        {
+          return response.json(); 
+        }
+      })
+        .then(data => { 
+          setupdcourses(data)
+          setupdloading(true);
+        })
+        .catch((error) => {
+          setupdloading(false);
+        });
+    }
+
+    async function postupdate(theid)
+    {
+      alert(theid)
+      let form_data= new FormData();
+      if(updcname!="")
+      {
+        form_data.append('name',updcname);
+      }
+      if(updcdes!="")
+      {
+        form_data.append('description',updcdes);
+      }
+      if(updcrating!="")
+      {
+        form_data.append('rating',updcrating);
+      }
+      if(updcprice!="")
+      {
+        form_data.append('price',updcprice);
+      }
+      if(updisimgPicked==true)
+      {
+        form_data.append('image',updselectedimg);
+      }
+      if(updclink!="")
+      {
+        form_data.append('link',updclink);
+      }
+      const thetrue=true;
+      form_data.append('addedby',userdata.email);
+      form_data.append('visible',thetrue);
+      let resurl=`http://127.0.0.1:8000/Tpostupdatedocoursedata/`+theid+'/';
+      axios.post(resurl, form_data,
+        {
+          headers:
+          {
+            'content-type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          alert('COURSE DETAILS HAS BEEN UPDATED!')
+          history.push("/teacher/");
+        })
+        .catch(err => {
+          alert('RE-CHECK THE COURSE DETAILS, FAILED TO UPDATE COURSE TO THE LIST')
+        })
+    }
+
     useEffect(() => {
       fetchCourse();
       fetchDeletedCourse();
@@ -264,10 +345,113 @@ return(
         </label><br/>
         <button onClick={() => createcourse()}>ADD COURSE</button>
 
+        {(updloading) && (updcourses.length>0) ? <>
+          
+        <h1>UPDATE DETAILS OF COURSE</h1>
+        {
+          updcourses.map(item => (
+            <a key={item.id}>
+              <div classname="dispbook">
+              <label><b>Enter course name:</b>
+                <input
+                  type="text" 
+                  value={updcname}
+                  onChange={(e) => setupdcname(e.target.value)}
+                />
+                </label><br/>
+                <label><b>Enter course description:</b>
+                <input
+                  type="text" 
+                  value={updcdes}
+                  onChange={(e) => setupdcdes(e.target.value)}
+                />
+                </label><br/>
+                <label>Enter course rating:
+                <input
+                  type='number'
+                  step="0.1"
+                  min='0'
+                  max='5'
+                  value={updcrating}
+                  onChange= {(e) => setupdcrating(e.target.value)}
+                />
+                </label><br/>
+                <label>Enter course price[in rs or "Free"]:
+                <input
+                  type="text" 
+                  value={updcprice}
+                  onChange={(e) => setupdcprice(e.target.value)}
+                />
+                </label><br/>
+                <label><b>Enter course link:</b>
+                <input
+                  type="text" 
+                  value={updclink}
+                  onChange={(e) => setupdclink(e.target.value)}
+                />
+                </label><br/>
+                <label>Add course image:
+                <input type="file" name="image" accept="image/png, image/jpeg" onChange={updimageHandler} />
+              {updisimgPicked ? (
+                <div>
+                  {/* <p>Image name: {selectedimg.name}</p>
+                  <p>Image type: {selectedimg.type}</p>
+                  <p>Size in bytes: {selectedimg.size}</p>
+                  <p>
+                    lastModifiedDate:{' '}
+                    {selectedimg.lastModifiedDate.toLocaleDateString()}
+                  </p> */}
+                  <p><a href={updselectedimg}>VIEW IMAGE</a></p>
+                </div>
+              ) : (
+                <p>Select a image to show details</p>
+              )}
+                </label><br/>
+                <button onClick={() => postupdate(item.id)}>POST UPDATED DETAILS</button>
+              </div>
+            </a>
+            ))
+          }
+        {/* {
+            updcourses.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <img classname="bimg" src={item.image} />
+                  <p>name: {item.name}</p>
+                  <p>description: {item.description}</p>
+                  <p>rating: {item.rating}</p>
+                  <p>price: {item.price}</p>
+                  <a href={item.link}>View Course</a>
+                  <br/>
+                  <button onClick={() => updatecourse(item.id)}>UPDATE COURSE</button>
+                </div>
+              </a>
+              
+              ))
+        } */}
+        </>:<></>}
 
-
-        <h1>UPDATE COURSE</h1>
-
+        <h1>SELECT COURSE TO UPDATE</h1>
+        {(!loading) && (courses.length>0) ?
+          <>
+          {
+            courses.map(item => (
+              <a key={item.id}>
+                <div classname="dispbook">
+                <img classname="bimg" src={item.image} />
+                  <p>name: {item.name}</p>
+                  <p>description: {item.description}</p>
+                  <p>rating: {item.rating}</p>
+                  <p>price: {item.price}</p>
+                  <form action={item.link}>
+                    <input type="submit" value="View Course" />
+                  </form>
+                  <button onClick={() => updatecourse(item.id)}>UPDATE COURSE</button>
+                </div>
+              </a>
+              ))
+            }
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course available add course to delete</p>}</>}
 
         <h1>REMOVE COURSE</h1>
           {(!loading) && (courses.length>0) ?
@@ -281,8 +465,9 @@ return(
                   <p>description: {item.description}</p>
                   <p>rating: {item.rating}</p>
                   <p>price: {item.price}</p>
-                  <a href={item.link}>View Course</a>
-                  <br/>
+                  <form action={item.link}>
+                    <input type="submit" value="View Course" />
+                  </form>
                   <button onClick={() => deletecourse(item.id)}>DELETE COURSE</button>
                 </div>
               </a>
@@ -302,8 +487,9 @@ return(
                   <p>description: {item.description}</p>
                   <p>rating: {item.rating}</p>
                   <p>price: {item.price}</p>
-                  <a href={item.link}>View Course</a>
-                  <br/>
+                  <form action={item.link}>
+                    <input type="submit" value="View Course" />
+                  </form>
                   <button onClick={() => restorecourse(item.id)}>RESTORE COURSE</button>
                 </div>
               </a>
