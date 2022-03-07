@@ -102,7 +102,7 @@ function Quiz(){
                 form_data.append('semail',userdata.email);
                 form_data.append('sgrade',userdata.standard);
                 form_data.append('stest',quizid);
-                form_data.append('spoint',"tempo");
+                form_data.append('spoint',"0");
                 let resurl=`http://127.0.0.1:8000/quizrresult-list/`+userdata.email+'/';
                 axios.post(resurl, form_data, {
                   headers: {
@@ -301,7 +301,7 @@ return(
       <p>B.<button onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>
       <p>C.<button onClick={() => answer(item.id,3)}><p>{item.coption3}</p></button></p>
       <p>D.<button onClick={() => answer(item.id,4)}><p>{item.coption4}</p></button></p>
-      <b>CORRECT ANSWER: OPTION {item.canswer}</b>
+      {/* <b>CORRECT ANSWER: OPTION {item.canswer}</b> */}
     </a>
     ))
   }

@@ -25,7 +25,7 @@ function Qwarn(){
       const mockname = JSON.parse(localStorage.getItem('mockname'));
 
       function accept(){
-        history.push("/student/attquiz");
+        history.push("/student/attmock");
       }
 
       function goback(){

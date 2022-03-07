@@ -21,6 +21,7 @@ function Mock(){
       const userdata = JSON.parse(localStorage.getItem('theuser'));
       const mockid = JSON.parse(localStorage.getItem('mockid'));
       const mockname = JSON.parse(localStorage.getItem('mockname'));
+      const mockmark = JSON.parse(localStorage.getItem('mockmark'));
       //var isSelected=false;
       
         const [selectedFile, setSelectedFile] = useState();
@@ -29,13 +30,16 @@ function Mock(){
           setSelectedFile(event.target.files[0]);
           setIsFilePicked(true);        
         };
-        function sendsaveans(){
+        function sendsaveans()
+        {
           let form_data= new FormData();
           form_data.append('studentname',userdata.username);
           form_data.append('semail',userdata.email);
           form_data.append('sgrade',userdata.standard);
-          //form_data.append('stest',quizid);
+          form_data.append('testname',mockname);
+          form_data.append('totalmarks',mockmark);
           form_data.append('answersheet',selectedFile);
+          form_data.append('tempo',2315);
           console.log("FORM DATA: ",selectedFile)
           let resurl=`http://127.0.0.1:8000/mockrresult-list/`+userdata.email+'/';
           axios.post(resurl, form_data, {
@@ -45,8 +49,10 @@ function Mock(){
           })
           .then(res => {
             console.log(res.data);
+            history.push("/student/");
           })
           .catch(err => console.log(err))
+          history.push("/student/");
         }
         const handleSubmission = () => {
         };
@@ -83,7 +89,8 @@ function Mock(){
      
       const [qp,setqp] = useState([]);
 
-      async function savetempo(stand) {
+      async function savetempo(stand)
+      {
         var attlink=`http://127.0.0.1:8000/mocktempo-list/`+mockname+'/'+userdata.email+'/';
           const request = await fetch(attlink)
             .then(response => {
@@ -104,19 +111,19 @@ function Mock(){
               }
               else
               {
-                // let form_data= new FormData();
+                let form_data= new FormData();
                 alert("FIRST TIME");
-                // form_data.append('sname',userdata.username);
-                // form_data.append('semail',userdata.email);
-                // form_data.append('sgrade',userdata.standard);
-                // form_data.append('stest',quizid);
-                // form_data.append('spoint',"tempo");
-                // let resurl=`http://127.0.0.1:8000/quizrresult-list/`+userdata.email+'/';
-                // axios.post(resurl, form_data, {
-                //   headers: {
-                //     'content-type': 'multipart/form-data'
-                //   }
-                // })
+                form_data.append('studentname',userdata.username);
+                form_data.append('testname',mockname);
+                form_data.append('semail',userdata.email);
+                form_data.append('sgrade',userdata.standard);
+                form_data.append('totalmarks',mockmark);
+                let resurl=`http://127.0.0.1:8000/mockrresult-list/`+userdata.email+'/';
+                axios.post(resurl, form_data, {
+                  headers: {
+                    'content-type': 'multipart/form-data'
+                  }
+                })
               }
             })
             .catch((error) => {
@@ -224,7 +231,8 @@ return(
 
 <div>
 			<input type="file" name="file" onChange={changeHandler} />
-			{isFilePicked ? (
+			{
+      isFilePicked ? (
 				<div>
 					<p>Filename: {selectedFile.name}</p>
 					<p>Filetype: {selectedFile.type}</p>
@@ -234,15 +242,21 @@ return(
 						{selectedFile.lastModifiedDate.toLocaleDateString()}
 					</p>
           <p><a href={selectedFile}>READ FILE</a></p>
+          <button onClick={() => sendsaveans()}>SUBMIT</button>
 				</div>
 			) : (
-				<p>Select a file to show details</p>
-			)}
-			<div>
+        <div>
+				<p>Select a file to show details</p><br/><br/>
+        <p>Submit button only gets enabled when a file is attached</p>
+        </div>
+			)
+
+      }
+			{/* <div>
 				<button onClick={handleSubmission}>Submit</button>sendsaveans
-			</div>
+			</div> */}
 		</div>
-    <button onClick={() => sendsaveans()}>API REQ</button>
+    {/* <button onClick={() => sendsaveans()}>SUBMIT</button> */}
     <br/><br/><br/>
 
       

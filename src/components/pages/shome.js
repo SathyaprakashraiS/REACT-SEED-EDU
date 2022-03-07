@@ -23,11 +23,12 @@ function Student(){
     localStorage.setItem('quizid',JSON.stringify(theid));
     history.push("/student/qwarn/");
   }
-  function attemptmock(theid,thename)
+  function attemptmock(theid,thename,themark)
   {
     // localStorage.removeItem(quizid);
     localStorage.setItem('mockid',JSON.stringify(theid));
     localStorage.setItem('mockname',JSON.stringify(thename));
+    localStorage.setItem('mockmark',JSON.stringify(themark));
     history.push("/student/mwarn/");
   }
 
@@ -293,19 +294,22 @@ return(
       </>
     )} */}
     <h1><b>ATTEMPTED QUIZ</b></h1>
-      <div className="qmain">
-      {
-      attquiz.map(item => (
-        <a key={item.id}>
-          <div className="qcard">
-          <b>{item.stest}</b><br/>
-          <b>{item.spoint}</b><br/>
-          <button onClick={() => viewquizans(item.stest)}>view answer</button>
-          </div>
-        </a>
-        ))
-      }
-      </div>
+    {attquiz.length>0 ? 
+    <div className="qmain">
+    {
+    attquiz.map(item => (
+      <a key={item.id}>
+        <div className="qcard">
+        <b>{item.stest}</b><br/>
+        <b>Marks: {item.spoint}</b><br/>
+        <button onClick={() => viewquizans(item.stest)}>view answer</button>
+        </div>
+      </a>
+      ))
+    }
+    </div>
+    : <p>No quiz attended to view</p>
+    }
     
       <h1><b>MOCKEXAMS</b></h1>
       <div className="qmain">
@@ -316,7 +320,7 @@ return(
           <b>{item.mockpapername}</b><br/>
           <b>{item.paperdescription}</b><br/>
           <b>{item.totalmarks}</b><br/>
-          <button onClick={() => attemptmock(item.id,item.mockpapername)}>ATTEMPT EXAM</button>
+          <button onClick={() => attemptmock(item.id,item.mockpapername,item.totalmarks)}>ATTEMPT EXAM</button>
           </div>
         </a>
         ))
@@ -324,6 +328,7 @@ return(
       </div>
 
       <h1><b>ATTEMPTED MOCKEXAMS</b></h1>
+      {attmock.length>0 ? 
       <div className="qmain">
       {
       attmock.map(item => (
@@ -338,6 +343,10 @@ return(
         ))
       }
       </div>
+      :
+      <p>No Mock exams attended to view</p>
+      }
+      
   
     </div>
     {/* </div> */}
