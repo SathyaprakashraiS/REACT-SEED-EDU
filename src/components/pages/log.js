@@ -10,6 +10,7 @@ class GLogin extends Component
 {
   render()
   {
+    console.log("overhere")
         const responseGoogle = async(response) => {
             let googleResponse  = await googleLogin(response.accessToken)
             const googleresponseData = {
@@ -122,7 +123,7 @@ class GLogin extends Component
             <GoogleLogin
               clientId="576119017330-jpt7fm9m1k2476fd8aadl6lrr4smstd0.apps.googleusercontent.com"
               buttonText="LOGIN WITH GOOGLE"
-              onSuccess={console.log("logined"),responseGoogle}
+              onSuccess={responseGoogle}
               onFailure={console.log("login failed")}
             />
           </div>

@@ -534,7 +534,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to update them</p>}</>}
 
         <h1>REMOVE BOOK</h1>
           {(!loading) && (book.length>0) ?
@@ -580,7 +580,7 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Minning the Bin</p>:<p>no book deleted previously</p>}</>}
+          </>:<>{delloading?<p>Minning the Bin</p>:<><p>no books have been deleted previously,</p><p>delete books to restore them</p></>}</>}
     </div>
 </div>
     );

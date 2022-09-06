@@ -406,7 +406,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to delete</p>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<><p>no quiz created by you were found,</p><p>add quiz to update</p></>}</>}
 
         <h1>REMOVE QUIZ</h1>
           {(!loading) && (quiz.length>0) ?
@@ -424,7 +424,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to delete</p>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<><p>no quiz created by you were found,</p><p>add quiz to delete</p></>}</>}
 
           <h1>RESTORE DELETED QUIZ</h1>
           {(!delloading) && (delquiz.length>0) ?
@@ -442,7 +442,7 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Minning the Bin</p>:<p>no quiz deleted previously</p>}</>}
+          </>:<>{delloading?<p>Minning the Bin</p>:<><p>no quiz deleted by you were found,</p><p>delete quiz to restore them</p></>}</>}
 
           <h1>SELECT QUIZ TO ALTER QUESTIONS IN IT</h1>
           {(!loading) && (quiz.length>0) ?
@@ -460,7 +460,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no quiz available add quiz to alter question</p>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<><p>no quiz created by you were found,</p><p>add quiz to alter questions</p></>}</>}
     </div>
 </div>
     );

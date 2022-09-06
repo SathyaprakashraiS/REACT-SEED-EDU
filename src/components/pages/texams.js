@@ -428,7 +428,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+          </>:<>{loading?<p>Opening the Vault</p>:<><p>no exams created by you were found,</p><p>add exams to update them</p></>}</>}
 
         <h1>REMOVE EXAM</h1>
           {(!loading) && (book.length>0) ?
@@ -448,7 +448,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+          </>:<>{loading?<p>Opening the Vault</p>:<><p>no exams created by you were found,</p><p>add exams to delete them</p></>}</>}
 
         <h1>REMOVED EXAMS</h1>
         {(!resloading) && (resexam.length>0) ?
@@ -467,7 +467,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers in trash delete papers to restore them</p>}</>}
+          </>:<>{loading?<p>Opening the Vault</p>:<><p>no exams in trash,</p><p>delete exams to restore them</p></>}</>}
     </div>
 </div>
     );
