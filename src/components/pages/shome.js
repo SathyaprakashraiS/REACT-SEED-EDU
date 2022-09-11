@@ -31,6 +31,12 @@ function Student(){
     localStorage.setItem('mockmark',JSON.stringify(themark));
     history.push("/student/mwarn/");
   }
+  function gotochat(theid)
+  {
+    localStorage.setItem('chatid',JSON.stringify(theid));
+    console.log("chatid is this",theid);
+    history.push("/student/chat/");
+  }
 
     const logout = ()=>{
         localStorage.clear(); //for localStorage
@@ -380,7 +386,7 @@ return(
         <a key={item.id}>
           <div className="qcard">
           <b>{item.commname}</b><br/>
-          <button onClick={() => viewmockans(item.id)}>GO TO CHAT</button>
+          <button onClick={() => gotochat(item.id)}>GO TO CHAT</button>
           </div>
         </a>
         ))

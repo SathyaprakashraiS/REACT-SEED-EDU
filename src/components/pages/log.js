@@ -54,7 +54,8 @@ class GLogin extends Component
                   var logedemail=locdata.email
                   if(checkemail==logedemail)
                     {
-                      localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));
+                      localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));
+                      localStorage.setItem('theuser',JSON.stringify(apilocdata[i]));
                       console.log("user from api: ",apilocdata[i].username)
                       console.log("auto reload")
                       window.location.reload(false);

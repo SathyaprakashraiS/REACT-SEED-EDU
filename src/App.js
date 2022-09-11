@@ -49,6 +49,8 @@ import Tquiz from './components/pages/tquiz';
 import TMquiz from './components/pages/tquizques';
 import TCourse from './components/pages/tcourse';
 import TAsses from './components/pages/tapapers';
+import Achat from './components/pages/chatscreen';
+import Lchat from './components/pages/chatlist';
 
 function App() {
   return (
@@ -103,6 +105,9 @@ function App() {
         <Route path='/teacher/quiz/CRUD' exact component={TMquiz} />
         <Route path='/teacher/course' exact component={TCourse} />
         <Route path='/teacher/tapapers' exact component={TAsses} />
+        <Route path='/student/chat' exact component={Achat} />
+        <Route path='/teacher/chatlist' exact component={Lchat} />
+        <Route path='/teacher/chat' exact component={Achat} />
       </Switch>
     </Router>
   </>

@@ -41,6 +41,10 @@ function Teacher(){
     {
         history.push("/teacher/tapapers/");
     }
+    function crudchats()
+    {
+        history.push("/teacher/chatlist/");
+    }
 
     const userdata = JSON.parse(localStorage.getItem('theuser'));
     var teacher=false
@@ -98,6 +102,9 @@ return(
         <h1>COURSES</h1>
         <p>display courses that are added by user or display all available courses</p>
         <button onClick={() => crudcourses()}>settings icon card</button>
+        <h1>CHAT COMMUNITIES</h1>
+        <p>create delete or modify a chat community</p>
+        <button onClick={() => crudchats()}>settings icon card</button>
     </div>
 </div>
     );

@@ -1,0 +1,19 @@
+.mychat{
+    background-color: #00FF00;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left:100%-100px;
+}
+.elsechat{
+    background-color: #FF0000;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left:0%;
+}
+.cmain{
+    background-color: #0000FF;
+    height:100%;
+    margin:5%;
+}
