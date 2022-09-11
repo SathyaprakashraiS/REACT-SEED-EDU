@@ -423,7 +423,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Checking the Papers in Bundles</p>:<p>Students havent attended any exams yet!</p>}</>}
+          </>:<>{loading?<p>Checking the Papers in Bundles</p>:<p>No unevaluated papers found!</p>}</>}
     
         <h1>ASSESED PAPERS</h1>
         {(!eloading) && (epaper.length>0) ?
@@ -452,7 +452,7 @@ return(
               </a>
               ))
             }
-          </>:<>{eloading?<p>Checking the Paper Bundles</p>:<p>Student papers are yet to be corrected to view!</p>}</>}
+          </>:<>{eloading?<p>Checking the Paper Bundles</p>:<p>Papers left for evaluation!</p>}</>}
 
     
     </div>

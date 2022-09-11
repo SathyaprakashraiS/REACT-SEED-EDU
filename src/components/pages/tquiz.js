@@ -460,7 +460,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<><p>no quiz created by you were found,</p><p>add quiz to alter questions</p></>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<><p>no quiz created by you were found,</p><p>create quiz to alter questions</p></>}</>}
     </div>
 </div>
     );

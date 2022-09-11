@@ -451,7 +451,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course available add course to delete</p>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course created by you were found, add course to delete</p>}</>}
 
         <h1>REMOVE COURSE</h1>
           {(!loading) && (courses.length>0) ?
@@ -473,7 +473,7 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course available add course to delete</p>}</>}
+          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course created by you were found, add course to delete</p>}</>}
 
           <h1>RESTORE DELETED COURSE</h1>
           {(!delloading) && (delcourses.length>0) ?
@@ -495,7 +495,7 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Minning the Bin</p>:<p>no courses deleted previously</p>}</>}
+          </>:<>{delloading?<p>Minning the Bin</p>:<><p>no courses deleted previously,</p><p>delete course to restore!</p></>}</>}
     </div>
 </div>
     );

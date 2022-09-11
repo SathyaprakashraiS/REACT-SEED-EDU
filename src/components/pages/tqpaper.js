@@ -266,6 +266,11 @@ function Texams(){
         });
     }
 
+    function pusher()
+    {
+      history.push("/teacher/");
+    }
+
     function postupdatepaper(theid,thechild)
     {
       alert("hlo")
@@ -545,7 +550,7 @@ return(
             }
           </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available delete papers to restore</p>}</>}
 
-        <h1>AVAILABLE QUESTION PAPER TYPES</h1>
+        {/* <h1>AVAILABLE QUESTION PAPER TYPES</h1>
           {(!loading) && (papertypes.length>0) ?
           <>
           {
@@ -555,15 +560,14 @@ return(
                   <p>name: {item.parentpaperfile}</p>
                   <p>paperdescription: {item.description}</p>
                   <p>marks: {item.forgrade}</p>
-                  <form action={item.paper}>
-                    <input type="submit" value="View paper" />
-                  </form>                                                                                    
+                                                                                                   
                   <br/>
+                  <button onClick={() => pusher()}>VIEW QUESTION PAPERS</button>
                 </div>
               </a>
               ))
             }
-          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+          </>:<>{loading?<p>Opening the Vault</p>:<p>no papers found!</p>}</>} */}
     </div>
 </div>
     );

@@ -61,7 +61,7 @@ function Student(){
       const [attquiz,setattquiz] = useState([]);
       const [mock,setmock] = useState([]);
       const [attmock,setattmock] = useState([]);
-      
+      const [chatcomm,setchatcomm]=useState([]);
 
 
       var attquizavail=false;
@@ -182,6 +182,30 @@ function Student(){
                       console.log("the error ",error)
                     });
                   }
+                  async function fetchChatrgoup(stand) {
+                    var apiavail=false;
+                    var chatgrouplink=`http://127.0.0.1:8000/Tviewchatcomm/`+userdata.standard;
+                    console.log("ASDASDASDASDASDASDASDASDASDASDASDASDASDASDasd",chatgrouplink)
+                    const request = await fetch(chatgrouplink)
+                      .then(response => {
+                        if(response.ok)
+                      {
+                        console.log("here")
+                        apiavail=true;
+                        return response.json(); 
+                      }
+                      else{
+                        console.log("im not here")
+                      }
+                    })
+                      .then(data => { 
+                        setchatcomm(data)
+                        console.log(setchatcomm)
+                      })
+                      .catch((error) => {
+                        console.log("the error ",error)
+                      });
+                    }
     
     useEffect(() => {
       fetchBook();
@@ -189,6 +213,7 @@ function Student(){
       fetchAttquiz();
       fetchMock();
       fetchAttMock();
+      fetchChatrgoup();
     }, []);
 
       console.log(userdata)
@@ -347,7 +372,24 @@ return(
       <p>No Mock exams attended to view</p>
       }
       
-  
+      <h1><b>CHAT COMMNITIES</b></h1>
+      {(chatcomm.length)>0 ? 
+      <div className="qmain">
+      {
+      chatcomm.map(item => (
+        <a key={item.id}>
+          <div className="qcard">
+          <b>{item.commname}</b><br/>
+          <button onClick={() => viewmockans(item.id)}>GO TO CHAT</button>
+          </div>
+        </a>
+        ))
+      }
+      </div>
+      :
+      <p>No groups available</p>
+      }
+      
     </div>
     {/* </div> */}
     {/* <ulsn>
