@@ -190,7 +190,7 @@ function Student(){
                   }
                   async function fetchChatrgoup(stand) {
                     var apiavail=false;
-                    var chatgrouplink=`http://127.0.0.1:8000/Tviewchatcomm/`+userdata.standard;
+                    var chatgrouplink=`http://127.0.0.1:8000/Tviewchatcomm/`;
                     console.log("ASDASDASDASDASDASDASDASDASDASDASDASDASDASDasd",chatgrouplink)
                     const request = await fetch(chatgrouplink)
                       .then(response => {
