@@ -39,5 +39,18 @@
   ulsn img{
     height:auto;
   }
+
+  @media only screen and (max-width: 600px){
+    .qmain{
+        align-self: center;
+    }
+    .inmain{
+        margin-left: 0%;
+    }
+    .sbook{
+        width:80vw;
+        margin:0 0 10px 10px;
+    }
+}
   
   

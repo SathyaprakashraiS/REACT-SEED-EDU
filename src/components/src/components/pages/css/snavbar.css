@@ -1,0 +1,33 @@
+ulsn
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 220px;
+  background-color: white;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+lisn a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+lisn a.active {
+  background-color: #E7E7E7;
+  color: black;
+}
+
+lisn a:hover:not(.active)
+{
+  background-color: #E7E7E7;
+  color: white;
+}
+
+ulsn img{
+  height:auto;
+}

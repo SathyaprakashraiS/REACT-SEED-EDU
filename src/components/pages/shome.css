@@ -3,7 +3,7 @@
     scroll-behavior: smooth;
 }
 
-.main{
+.main{ 
     margin-top:-8px;
     background:#150A41;
     height:100%;
@@ -50,7 +50,7 @@
 
 .sbook{
    
-    
+    width:60vw;
     background: rgb(51, 150, 243);
     height:450px;
     padding-top:20px;
@@ -61,16 +61,26 @@
    
     overflow: scroll;
 }
-
+ 
 .inmain{
-    width:80vw;
+    width:47vw;
     background:#150A41;
     color: white;
     margin-left: 20%;
     margin-top:-14px;
     padding-left: 2%;
+    /* cursor: e-resize; */
 }
 
-.mychat{
-    background-color: #FF0000;
+@media only screen and (max-width: 600px){
+    .qmain{
+        align-self: center;
+    }
+    .inmain{
+        margin-left: 0%;
+    }
+    .sbook{
+        width:80vw;
+        margin:0 0 10px 10px;
+    }
 }

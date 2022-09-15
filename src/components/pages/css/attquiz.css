@@ -1,0 +1,116 @@
+.aqmain{
+    width:100vw;
+    position: absolute;
+    height:100%;
+    margin-top: -22px;
+    color:black;
+    background: #150A41;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    
+}
+.ques_potti{
+    width:100%;
+    height:auto;
+    background-color: beige;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.ques_potti > img{
+    width:auto;
+    height:300px;
+    background-size: cover;
+}
+.ques_potti > img:hover{
+transform: scale(2);
+}
+.quiz_potti_outer{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 2em;
+    padding:3%;
+}
+.quiz_potti{
+    width:100%;
+    height:3em;
+    background: black;
+    color:white;
+    margin-bottom: .5em;
+    margin-left: .2em;
+}
+.qus{
+    width:80%;
+    color:black;
+    background: rgb(8, 81, 216);
+    margin-left:3em;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.qus_item{
+    width:90%;
+    margin-bottom: 10px;
+    background:rgb(206, 138, 13);
+    padding:3%;
+    
+
+}
+.subbut{
+    width:100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.subbut > button{
+    width:5em;
+    height: 3em;
+    border:0;
+    background-color: black;
+    text-transform: uppercase;
+    color:white;
+    margin-right: 2em;
+}
+.subbut > button:hover{
+    background-color: green;
+    transform: scale(1.5);
+}
+
+.warn_model{
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width:100vw;
+    height:100vh;
+    top:0;
+    left:0;
+    z-index:999;
+    background-color: none;
+    
+   
+}
+
+.warn_inner{
+    width:300px;
+    height:300px;
+    background: red;
+    color:white;
+}
+
+.show_warn{
+    visibility: visible;
+}
+
+
+
+
+
+
+

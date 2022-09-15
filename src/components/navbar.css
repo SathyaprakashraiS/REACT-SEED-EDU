@@ -12,6 +12,10 @@ ul {
   .navbar{
     position: relative;
   }
+
+  .nav_tog{
+    display: none;
+  }
   .dropdown{
     display:none;
     z-index:999;
@@ -60,6 +64,50 @@ ul {
   }
 
   nav{
-    position: relative;
+    position: relative; 
   }
 
+
+  @media only screen and (max-width: 600px){
+    .nav-item{
+      display: none;
+      width:0vw;
+      height:100%;
+      flex-direction: column;
+      
+    } 
+    .nav_tog{
+      display: block;
+      height:5vh;
+      
+     
+
+    }
+    .nav-tog-icon{
+      font-size:1.8em;
+      margin-left: 2%;
+      color:red;
+      border:1px solid grey;
+    }
+
+    @keyframes navani {
+      0%{
+        width:50vw;
+      }
+      50%{
+        width:70vw;
+      }
+      100%{
+        width:100vw;
+      }
+    }
+    .nav_show{
+      display: block;
+      width:100vw;
+      animation:navani 1.5s;
+      
+    }
+
+    
+
+  }

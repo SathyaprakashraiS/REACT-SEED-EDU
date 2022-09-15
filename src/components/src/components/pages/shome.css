@@ -1,0 +1,73 @@
+/* background:#150A41; */
+*{
+    scroll-behavior: smooth;
+}
+
+.main{
+    margin-top:-8px;
+    background:#150A41;
+    height:100%;
+    overflow-x: hidden;
+    
+    
+}
+.qmain{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+    
+    
+}
+.qcard{
+    width:300px;
+    height:300px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    flex-direction: column;
+    background: rgb(246, 247, 246);
+    background-image: url("https://media.istockphoto.com/photos/magnifier-and-question-mark-on-purple-background-picture-id1263395015?k=20&m=1263395015&s=612x612&w=0&h=DhOloVjYcCexGB0gsdfpZAQQy9lw8Ile0dv4MrxqmOY=");
+}
+
+.qcard > button{
+    padding:0;
+    border: none;
+    color:white;
+    background:black;
+    width:150px;
+    height:40px;
+    text-transform: uppercase;
+}
+.qcard > button:hover{
+    background:lightblue;
+    color:black;
+}
+
+
+.sbook{
+   
+    
+    background: rgb(51, 150, 243);
+    height:450px;
+    padding-top:20px;
+    display: flex;
+    flex-direction: row;
+    scrollbar-width: thin;
+  
+   
+    overflow: scroll;
+}
+
+.inmain{
+    width:47vw;
+    background:#150A41;
+    color: white;
+    margin-left: 20%;
+    margin-top:-14px;
+    padding-left: 2%;
+    /* cursor: e-resize; */
+}

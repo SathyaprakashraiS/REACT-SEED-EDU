@@ -1,0 +1,41 @@
+/* .outer:nth-child(1){
+    z-index:999;
+}
+.outer:nth-child(2){
+    z-index:-1;
+} */
+
+
+
+.hmain{
+    position: absolute; 
+    width: 100%;
+    height:10vh;
+    background:#150A41;
+    height:100vh;
+    z-index: -1;
+    color:white;
+}
+
+.hban_out{
+    width:80%;
+    height:500px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10vh;
+}
+
+.hban_title{
+    width:5%;
+    height:500px;
+    background: green;
+
+}
+.hban_inner{
+    width:80%;
+    background: red;
+}
+
+.hban_icons{
+    text-align: center;
+}

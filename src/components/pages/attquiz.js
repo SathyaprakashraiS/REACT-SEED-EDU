@@ -6,18 +6,19 @@
 // import './attquiz.css'
 import { Prompt } from 'react-router'
 import React,{useState,useEffect, Component } from 'react';
-import './attquiz.css';
+import './css/attquiz.css';
 import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
-import axios from 'axios';
+import axios from 'axios'; 
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import Warning from '../structures/Warning';
 
-function Quiz(){
+const Quiz = () => {
 
   let history = useHistory();
 
     const logout = ()=>{
-        localStorage.clear(); //for localStorage
+        localStorage.clear(); //for localStorage 
         sessionStorage.clear(); //for sessionStorage
         // window.location.reload(false);
         return(
@@ -45,6 +46,7 @@ function Quiz(){
     
       const [quiz,setquiz] = useState([]);
       const [att,setatt] = useState([]);
+      let tc = 0;
     //   const [ansopt,setansopt] = useState([]);
       var optlist=[]
       var quesid=[]
@@ -92,6 +94,7 @@ function Quiz(){
               if(data.length!=0)
               {
                 alert("U CHEAT RELOAD PANRIYA DA BODYSODA");
+                tc=0;
                 history.push("/student");
               }
               else
@@ -102,7 +105,7 @@ function Quiz(){
                 form_data.append('semail',userdata.email);
                 form_data.append('sgrade',userdata.standard);
                 form_data.append('stest',quizid);
-                form_data.append('spoint',"0");
+                form_data.append('spoint',"tempo");
                 let resurl=`http://127.0.0.1:8000/quizrresult-list/`+userdata.email+'/';
                 axios.post(resurl, form_data, {
                   headers: {
@@ -258,29 +261,60 @@ function Quiz(){
     }
       console.log(userdata)
 
-      let content = {
-        marginLeft: '220px',
-        paddingBottom:'100px',
-        // width: '250px',
-        // height: '250px',
-        backgroundColor: 'yellow',
-      };
-      let page = {
-        // marginLeft: '220px',
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'red',
-      };
-      let center={
-          marginLeft:'45%',
-      };
-      let allcard={
-          width:'20%',
-          display: "flex",
-          flexDirection: "row",
-      };
 
-      
+      let center={
+          textAlign:"center",
+          fontSize:"2em"
+      };
+   
+
+      //for tab change
+const [ts,setts] = useState(0)
+var tsc = 0
+
+
+useEffect(()=>{
+  let check = document.querySelector(".aqmain")
+  let warn_check = document.querySelector(".warn_model")
+  // const ok= ()=>{
+  //   let warn_check = document.querySelector(".warn_model")
+  //   warn_check.classList.remove("show_warn")
+  
+  // }
+  console.log(check)
+  document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === 'visible') {
+      console.log("hello")
+      // warn_check.classList.add("show_warn")
+    } else {
+     console.log("poda veliya")
+     tsc++
+     setts(ts+1)
+     if(ts===3){
+      alert("You exceed the limit of tab switching..veliya poda ")
+      history.push("/student");
+     }
+     console.log(tsc)
+     warn_check.classList.add("show_warn")
+     setInterval(() => {
+      warn_check.classList.remove("show_warn")
+     }, 6000);
+    }
+
+
+  });
+
+// document.addEventListener("visibilitychange",(e)=>{
+//   tsc = tsc + 1
+//   console.log(tsc)
+// })
+})
+    
+     
+
+     
+
+        
       
 
   
@@ -288,27 +322,45 @@ function Quiz(){
 
 return(
   <div className="aqmain">
-  <SNavbar/>
+  <div className="warn_model"><div className='warn_inner'>
+    <p>TIMES YOU SWICHED TABS:COUNT {ts} <br></br>switching TABS more than 3 times</p>
+  {/* <button Onclick={ok()}>OK</button> */}
+  </div></div>
+  {/* <SNavbar/> */}
   <div >
   <h1 style={center}><b>|_o_|</b></h1>
   <h1 style={center}><b>{quizid}</b></h1>
+  <form>
   <div className="qus">
   {
   quiz.map(item => (
+    <div className="qus_item">
     <a key={item.id}>
-      <b>{item.cquestion}</b><br/>
-      <p>A.<button onClick={() => answer(item.id,1)}><p>{item.coption1}</p></button></p>
-      <p>B.<button onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>
-      <p>C.<button onClick={() => answer(item.id,3)}><p>{item.coption3}</p></button></p>
-      <p>D.<button onClick={() => answer(item.id,4)}><p>{item.coption4}</p></button></p>
-      {/* <b>CORRECT ANSWER: OPTION {item.canswer}</b> */}
+      <div className='ques_potti'><p>{item.cquestion}</p><img src="https://c.ndtvimg.com/2019-11/ask3nj1g_cbse-sample-question-paper_625x300_07_November_19.jpg"/></div><br/>
+      <div className='quiz_potti_outer'>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption2}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption3}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption4}</label><br /></div>
+      </div>
+      {/* <p>A.<button className="optionq" onClick={() => answer(item.id,1)}><p>{item.coption1}</p></button></p>
+      <p>B.<button className="optionq" onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>
+      <p>C.<button className="optionq" onClick={() => answer(item.id,3)}><p>{item.coption3}</p></button></p>
+      <p>D.<button className="optionq" onClick={() => answer(item.id,4)}><p>{item.coption4}</p></button></p> */}
+      <b>CORRECT ANSWER: OPTION {item.canswer}</b>
     </a>
+    </div>
     ))
   }
 
-  <div className="subbut"><button onClick={() => submit()}>SUBMIT</button></div>
+  <div className="subbut">
+  <button className="quiz_submit" onClick={() => submit()}>SUBMIT</button>
+  <input type="reset" value="RESET"></input>
+  </div>
+ 
   <br/><br/><br/>
   </div>
+  </form>
   </div>
   </div>
   // <>

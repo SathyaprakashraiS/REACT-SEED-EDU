@@ -6,7 +6,7 @@ import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 function Teacher(){
-  let history = useHistory();
+  let history = useHistory(); 
   localStorage.removeItem('modquiz');
   const logout = ()=>{
       localStorage.clear(); //for localStorage

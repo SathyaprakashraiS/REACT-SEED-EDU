@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link,NavLink } from 'react-router-dom';
 import './navbar.css';
+import React,{useState} from 'react';
 import { GoogleLogout } from 'react-google-login';
 import { Redirect } from 'react-router';
-import { FaPlay,FaSchool,FaUniversity,FaBook, FaNewspaper, FaList, FaClock, FaQuestion, FaListAlt, FaDotCircle, FaDropbox, FaArrowDown, FaNotesMedical, FaWeebly, FaInternetExplorer, FaGlobe, FaGrav, FaUserAlt } from "react-icons/fa";
+import { FaPlay,FaSchool,FaUniversity,FaBook, FaNewspaper, FaList, FaClock, FaQuestion, FaListAlt, FaDotCircle, FaDropbox, FaArrowDown, FaNotesMedical, FaWeebly, FaInternetExplorer, FaGlobe, FaGrav, FaUserAlt,FaBars} from "react-icons/fa";
 
 function Navbar(){
+
+    const [tog,settog] = useState(0)
 
     const clear = ()=>{
         localStorage.removeItem("paperid")
@@ -34,59 +37,86 @@ function Navbar(){
           console.log("student here")
       }
       }
+
+      //for tog function
+      const togfunction = ()=>{
+        let bars = document.querySelector(".nav_tog")
+        let navBar = document.querySelector(".nav-item")
+        let navicon = document.querySelector(".nav-tog-icon")
+      
+            
+          if(tog === 0){
+            console.log("hello world")
+            navBar.classList.add("nav_show")
+            navicon.style.transform  = "rotate(90deg)"
+            settog(1)
+          }
+          else if(tog!==0){
+              console.log("close")
+              navBar.classList.remove("nav_show")
+              navicon.style.transform  = "rotate(180deg)"
+              settog(0)
+          }
+      
+      
+        
+    }
+      
+      
 return(
     <nav className="navbar">
+            <div className="nav_tog" onClick={togfunction}><FaBars className='nav-tog-icon'/></div>
             <ul>
                 <li className='nav-item'>
                 <Link to="/" onClick={clear} className="navbar-links">
                         SEED
                     </Link>
-                    <Link to="/colleges" onClick={clear} className="navbar-links">
+                    <NavLink to="/colleges" onClick={clear} className="navbar-links">
                     <FaUniversity/> COLLEGES
-                    </Link>
-                    <Link to="/book" onClick={clear} className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/book" onClick={clear} className="navbar-links">
                        <FaBook/> LIBRARY
-                    </Link>
-                    <Link to="/news" onClick={clear} className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/news" onClick={clear} className="navbar-links" >
                         <FaNewspaper/> NEWS
-                    </Link>
-                    <Link to="/courses" onClick={clear} className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/courses" onClick={clear} className="navbar-links">
                         <FaList/> COURSES
-                    </Link>
-                    <Link to="/dates" onClick={clear} className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/dates" onClick={clear} className="navbar-links">
                         <FaClock/> DATES
-                    </Link>
-                    <Link to="/questionbank" className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/questionbank" className="navbar-links">
                         <FaQuestion/> QUESTION BANK
-                    </Link>
+                    </NavLink>
                     <Link to="#"  className="other">
                         <FaArrowDown/> OTHER
                         <div className="dropdown">
-                    <Link to="/revnotes" onClick={clear} className="navbar-links">
+                    <NavLink to="/revnotes" onClick={clear} className="navbar-links">
                         <FaBook/>REVISION NOTES
-                    </Link>
-                    <Link to="/video" onClick={clear} className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/video" onClick={clear} className="navbar-links">
                     <FaPlay/> VIDEO
-                    </Link>
-                    <Link to="/ocourses" onClick={clear} className="navbar-links">
+                    </NavLink>
+                    <NavLink to="/ocourses" onClick={clear} className="navbar-links">
                         <FaGlobe/> ONLINE COURSES
-                    </Link>
+                    </NavLink>
                     </div>
                     </Link>
                     
                     {userdata ? (
                         <></>
                     ):(
-                        <Link to="/login" onClick={clear} className="navbar-links">
+                        <NavLink to="/login" onClick={clear} className="navbar-links">
                             LOGIN
-                        </Link>
+                        </NavLink>
                     )}
                     {teacher && userdata ? (
                         <>
-                        <Link to="/teacher" onClick={clear} className="navbar-links">
+                        <NavLink to="/teacher" onClick={clear} className="navbar-links">
                             <FaUserAlt/>TEACHER PORTAL
-                        </Link>
-                        <Link to="/" className="navbar-links" onClick={logout}>LOGOUT
+                        </NavLink>
+                        <NavLink to="/" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
                     className="logout"
                     theme="dark"
@@ -95,7 +125,7 @@ return(
                     onLogoutSuccess={logout}
                     >
                     </GoogleLogout> */}
-                    </Link>
+                    </NavLink>
                     </>
                     ):(
                         <>

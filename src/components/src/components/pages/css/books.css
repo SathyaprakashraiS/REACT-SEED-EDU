@@ -1,0 +1,15 @@
+.bhome{
+    background:#150A41;
+}
+
+.libmain{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 4%;
+}
+
+.centertext{
+    text-align: center;
+    color:white;
+} 

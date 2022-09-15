@@ -212,6 +212,13 @@ function Student(){
                         console.log("the error ",error)
                       });
                     }
+
+                    const togbooks = ()=>{
+                      console.log("woeks")
+                      let sobj=document.querySelector(".sbook")
+                      sobj.scrollLeft+=600;
+                   
+                    }
     
     useEffect(() => {
       fetchBook();
@@ -280,6 +287,7 @@ return(
       ))
     }
     </div>
+    <button onClick={(e)=>togbooks()}>NEXT</button>
     <br/><br/><br/>
     <h1><b>QUIZ</b></h1>
     {quiz.length>0 ? 

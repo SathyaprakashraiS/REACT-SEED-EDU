@@ -1,0 +1,40 @@
+.onmain{
+    background:#150A41;
+}
+.onmain > h1{
+    color:white;
+    text-align: center;
+}
+
+.onl_outer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left:4%;
+}
+.onl_inner{
+    width:400px;
+    height:250px;
+    background: red;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left:10px;
+    margin-bottom: 10px;;
+}
+.onl_inner > img{
+    width:200px;
+    height:100%;
+}
+.onl_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:10px;
+}
+.onl_info > button{
+    border:0;
+    color:white;
+    background:black;
+    margin-bottom:2px;
+    margin:2px;
+}
