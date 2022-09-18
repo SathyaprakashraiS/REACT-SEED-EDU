@@ -116,6 +116,20 @@ return(
                         <NavLink to="/teacher" onClick={clear} className="navbar-links">
                             <FaUserAlt/>TEACHER PORTAL
                         </NavLink>
+                        <Link to="#"  className="other">
+                            <FaArrowDown/> {userdata.username}
+                            <div className="dropdown">
+                                <NavLink to="/" onClick={clear} className="navbar-links">
+                                    <FaBook/>VIEW PROFILE
+                                </NavLink>
+                                <NavLink to="/" onClick={clear} className="navbar-links">
+                                    <FaPlay/>EDIT PROFILE
+                                </NavLink>
+                            </div>
+                        </Link>
+                        {/* <Link to="/" className="navbar-links">
+                            <FaUserAlt/> {userdata.username}
+                        </Link> */}
                         <NavLink to="/" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
                     className="logout"
@@ -136,6 +150,20 @@ return(
                         <Link to="/student" className="navbar-links">
                             <FaUserAlt/> STUDENT PORTAL
                         </Link>
+                        <Link to="#"  className="other">
+                            <FaArrowDown/> {userdata.username}
+                            <div className="dropdown">
+                                <NavLink to="/" onClick={clear} className="navbar-links">
+                                    <FaBook/>VIEW PROFILE
+                                </NavLink>
+                                <NavLink to="/" onClick={clear} className="navbar-links">
+                                    <FaPlay/>EDIT PROFILE
+                                </NavLink>
+                            </div>
+                        </Link>
+                        {/* <Link to="/" className="navbar-links">
+                            <FaUserAlt/> {userdata.username}
+                        </Link> */}
                         <Link to="/" className="navbar-links" onClick={logout}>LOGOUT
                     {/* <GoogleLogout 
                     className="logout"
