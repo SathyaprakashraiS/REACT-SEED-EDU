@@ -1,10 +1,11 @@
 import React from 'react'
 import Navbar from '../navbar';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import './css/eprofile.css'
 
-import './css/vprofile.css'
 
-function Vprofile() {
+
+function Eprofile() {
     let history = useHistory();
     function pushout()
     {
@@ -18,7 +19,7 @@ function Vprofile() {
             <div className="outer"> 
                 <Navbar/>
                 <div className="hmain">
-                <p>view profile</p>
+                <p>edit profile</p>
                 </div>
             </div>
         </>:
@@ -30,4 +31,4 @@ function Vprofile() {
   )
 }
 
-export default Vprofile
+export default Eprofile

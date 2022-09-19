@@ -153,10 +153,10 @@ return(
                         <Link to="#"  className="other">
                             <FaArrowDown/> {userdata.username}
                             <div className="dropdown">
-                                <NavLink to="/" onClick={clear} className="navbar-links">
+                                <NavLink to="/viewprofile" onClick={clear} className="navbar-links">
                                     <FaBook/>VIEW PROFILE
                                 </NavLink>
-                                <NavLink to="/" onClick={clear} className="navbar-links">
+                                <NavLink to="/editprofile" onClick={clear} className="navbar-links">
                                     <FaPlay/>EDIT PROFILE
                                 </NavLink>
                             </div>

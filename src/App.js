@@ -51,6 +51,8 @@ import TCourse from './components/pages/tcourse';
 import TAsses from './components/pages/tapapers';
 import Achat from './components/pages/chatscreen';
 import Lchat from './components/pages/chatlist';
+import Vprofile from './components/pages/vprofile';
+import Eprofile from './components/pages/eprofile';
 
 function App() {
   return (
@@ -108,6 +110,8 @@ function App() {
         <Route path='/student/chat' exact component={Achat} />
         <Route path='/teacher/chatlist' exact component={Lchat} />
         <Route path='/teacher/chat' exact component={Achat} />
+        <Route path='/viewprofile' exact component={Vprofile} />
+        <Route path='/editprofile' exact component={Eprofile} />
       </Switch>
     </Router>
   </>
