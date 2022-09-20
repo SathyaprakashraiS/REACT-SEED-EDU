@@ -59,7 +59,7 @@ function Vprofile() {
                 </div>
                 
                 {
-                userdata.teacher=false?<>
+                userdata.teacher==false?<>
                 <div className="sbox">
                   <p>STUDENT PROFILE</p>
                   {

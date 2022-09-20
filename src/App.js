@@ -54,6 +54,7 @@ import Lchat from './components/pages/chatlist';
 import Vprofile from './components/pages/vprofile';
 import Eprofile from './components/pages/eprofile';
 import Contacts from './components/pages/contacts';
+import CompetitiveElilst from './components/pages/competitiveexam';
 
 function App() {
   return (
@@ -114,6 +115,7 @@ function App() {
         <Route path='/viewprofile' exact component={Vprofile} />
         <Route path='/editprofile' exact component={Eprofile} />
         <Route path='/contacts' exact component={Contacts} />
+        <Route path='/student/comexlist' exact component={CompetitiveElilst} />
       </Switch>
     </Router>
   </>

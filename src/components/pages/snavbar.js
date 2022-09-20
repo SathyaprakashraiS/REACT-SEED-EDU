@@ -92,7 +92,7 @@ return(
             <a class="nav-link"  href="/student/exam/"><b>PRACTISE TEST</b></a>
         </li>
         <li className='shome_nav_item'>
-            <a class="nav-link"  href="#"><b>COMPETITIVE EXAMS</b></a>
+            <a class="nav-link"  href="/student/comexlist"><b>COMPETITIVE EXAMS</b></a>
             {/* ITHU THEVA THERLA MOSTLY TIPS AND REVISIONNOTES AND VIDEOS PODALANUM ERUKEN */}
         </li>
         <li className='shome_nav_item'>
