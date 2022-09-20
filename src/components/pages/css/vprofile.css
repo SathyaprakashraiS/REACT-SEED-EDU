@@ -5,4 +5,15 @@
 
 .hmain{
     background:#150A41;
+    margin-bottom:25px;
+}
+.tbox
+{
+    margin-top:2%;
+    background-color: #FF0000;;
+}
+.sbox
+{
+    margin-top:2%;
+    background-color: #00FF00;;
 }

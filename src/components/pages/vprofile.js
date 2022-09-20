@@ -57,16 +57,41 @@ function Vprofile() {
                 <div className="hmain">
                 <p>view profile</p>
                 </div>
+                
                 {
+                userdata.teacher=false?<>
+                <div className="sbox">
+                  <p>STUDENT PROFILE</p>
+                  {
                     profdetails.map(item => (
                     <a key={item.id}>
                         <img className="bimg" src={item.img} />
-                        <p><b>{item.username}</b></p>
-                        <p><b>{item.email}</b></p>
-                        <p><b>{item.status}</b></p>
-                        <p><b>{item.hide}</b></p>
-                        <p><b>{item.standard}</b></p>
-                        <p><b>{item.resume}</b></p>
+                        <p><b>USERNAME:{item.username}</b></p>
+                        <p><b>EMAIL:{item.email}</b></p>
+                        <p><b>ABOUT:{item.status}</b></p>
+                        {
+                          item.hide?<>
+                            <b><p>HIDE STATUS:ENABLED</p></b>
+                          </>:<>
+                            <b><p>HIDE STATUS:DISABLED</p></b>
+                          </>
+                        }
+                        <p><b>GRADE:{item.standard}</b></p>
+                        {
+                          item.needassist?<>
+                            <p><b>REQUEST TUTORING:ENABLED</b></p>
+                          </>:
+                          <>
+                            <p><b>REQUEST TUTORING:DISABLED</b></p>
+                          </>
+                        }
+                        {
+                          item.contactnumber=="9876543210"?<>
+                            <p><b>CONTACT NOT YET ADDED</b></p>
+                          </>:<>
+                            <p><b>CONTACT NUMBER:{item.contactnumber}</b></p>
+                          </>
+                        }
                         <button onClick={()=>goback()}>Go back</button>
                         <button onClick={()=>editprofile()}>edit profile</button>
                         <br></br>
@@ -74,6 +99,54 @@ function Vprofile() {
                     ))
                 
                 }
+                </div>
+                  </>
+                  :<>
+                  <br/>
+                  <div className="tbox">
+                  <p>TEACHER PROFILE</p>
+                  {
+                    profdetails.map(item => (
+                    <a key={item.id}>
+                        <img className="bimg" src={item.img} />
+                        <p><b>NAME:{item.username}</b></p>
+                        <p><b>MAIL:{item.email}</b></p>
+                        <p><b>ABOUT:{item.status}</b></p>
+                        {
+                          item.hide?<>
+                            <b><p>HIDE STATUS:ENABLED</p></b>
+                          </>:<>
+                            <b><p>HIDE STATUS:DISABLED</p></b>
+                          </>
+                        }
+                        <p><b>GRADE:{item.standard}</b></p>
+                        {
+                          item.advertise?<>
+                            <p><b>ADVERTISE:ENABLED</b></p>
+                          </>:
+                          <>
+                            <p><b>ADVERTISE:DISABLED</b></p>
+                          </>
+                        }
+                        {
+                          item.contactnumber=="9876543210"?<>
+                            <p><b>CONTACT NOT YET ADDED</b></p>
+                          </>:<>
+                            <p><b>CONTACT NUMBER:{item.contactnumber}</b></p>
+                          </>
+                        }
+                        <p><a href={item.resume}><b>CLICK TO VIEW RESUME</b></a></p>
+                        <button onClick={()=>goback()}>Go back</button>
+                        <button onClick={()=>editprofile()}>edit profile</button>
+                        <br></br>
+                    </a>
+                    ))
+                
+                }
+                </div>
+                  </>
+                }
+                
             </div>
         </>:
         <>

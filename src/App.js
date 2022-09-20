@@ -53,6 +53,7 @@ import Achat from './components/pages/chatscreen';
 import Lchat from './components/pages/chatlist';
 import Vprofile from './components/pages/vprofile';
 import Eprofile from './components/pages/eprofile';
+import Contacts from './components/pages/contacts';
 
 function App() {
   return (
@@ -112,6 +113,7 @@ function App() {
         <Route path='/teacher/chat' exact component={Achat} />
         <Route path='/viewprofile' exact component={Vprofile} />
         <Route path='/editprofile' exact component={Eprofile} />
+        <Route path='/contacts' exact component={Contacts} />
       </Switch>
     </Router>
   </>

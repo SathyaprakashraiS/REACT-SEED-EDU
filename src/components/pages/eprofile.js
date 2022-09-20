@@ -11,12 +11,21 @@ function Eprofile() {
     const [newname, setnewname] = useState("");
     const [newstatus, setnewstatus] = useState("");
     const [newstandard, setnewstandard] = useState("");
+    const [newcontactnumber, setnewcontactnumber] = useState("");
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [selectedimg, setSelectedimg] = useState();
     const [isimgPicked, setIsimgPicked] = useState(false);
     const [isstaffstatchanged, setisstaffstatchanged] = useState(false);
+    const [isstudentstatchanged, setisstudentstatchanged] = useState(false);
+    const [ishidestatuschanged, sethidestatuschanged] = useState(false);
+    const [isadvertisestatchanged, setisadvertisestatchanged] = useState(false);
+    const [ishelptatchanged, setishelptatchanged] = useState(false);
     const [teacher,setteacher]=useState(false);
+    const [student,setstudent]=useState(false);
+    const [hidestatus,sethidestatus]=useState(false);
+    const [advertisestatus,setadvertisestatus]=useState(false);
+    const [helpstatus,sethelpstatus]=useState(false);
     const fileHandler = (event) => {
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);        
@@ -27,7 +36,23 @@ function Eprofile() {
       };
       const staffstatusHandler = () => {
         setteacher(true);
-        isstaffstatchanged(true);        
+        setisstaffstatchanged(true);        
+      };
+      const studentstatusHandler = () => {
+        setstudent(true);
+        setisstudentstatchanged(true);        
+      };
+      const hidestatusHandler = () => {
+        sethidestatus(true);
+        sethidestatuschanged(true);        
+      };
+      const advertisestatusHandler = () => {
+        setadvertisestatus(true);
+        setisadvertisestatchanged(true);        
+      };
+      const helpstatusHandler = () => {
+        sethelpstatus(true);
+        setishelptatchanged(true);        
       };
     
     function postupdate()
@@ -57,13 +82,41 @@ function Eprofile() {
       {
         form_data.append('username',userdata.username);
       }
-      if(isstaffstatchanged)
+      if(isstaffstatchanged && !isstudentstatchanged)
       {
-        form_data.append('teacher',teacher);
+        form_data.append('upgreq',teacher);
       }
-      if(!isstaffstatchanged)
+      if(!isstaffstatchanged && isstudentstatchanged)
+      {
+        form_data.append('upgreq',student);
+      }
+      if(isstaffstatchanged && isstudentstatchanged)
+      {
+        form_data.append('teacher',false);
+      }
+      if(!isstaffstatchanged && !isstudentstatchanged)
       {
         form_data.append('teacher',userdata.teacher);
+      }
+      if(ishidestatuschanged)
+      {
+        form_data.append('hide',hidestatus);
+      }
+      if(!ishidestatuschanged)
+      {
+        form_data.append('hide',userdata.hide);
+      }
+      if(newcontactnumber!="")
+      {
+        form_data.append('contactnumber',newcontactnumber);
+      }
+      if(isadvertisestatchanged)
+      {
+        form_data.append('advertise',advertisestatus);
+      }
+      if(ishelptatchanged)
+      {
+        form_data.append('needassist',helpstatus);
       }
       form_data.append('password',"thepassword");
       let resurl=`http://127.0.0.1:8000/updateprofile/`+userdata.email;
@@ -99,11 +152,15 @@ function Eprofile() {
     <>
     {userdata?
         <>
-            <div className="outer"> 
+            {/* <div className="outer">  */}
                 <Navbar/>
                 <div className="hmain">
                     <div className="pagemain">
-                    <label>standard:
+                    {userdata.teacher?<>
+                      <>
+                      <p>TEACHER</p>
+                      <div className="sbox">
+                      <label>standard:
                   <select onChange={(e) => setnewstandard(e.target.value)}>
                     <option value="10">select pls</option>
                     <option value="10">Grade 10</option>
@@ -123,6 +180,13 @@ function Eprofile() {
                     type="text" 
                     value={newstatus}
                     onChange={(e) => setnewstatus(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>contact number:
+                  <input
+                    type="text" 
+                    value={newcontactnumber}
+                    onChange={(e) => setnewcontactnumber(e.target.value)}
                   />
                   </label><br/>
                   <label>Add image to update DP:<br/>
@@ -159,10 +223,76 @@ function Eprofile() {
                 )}
                   </label><br/>
                   <label><b>teacher:</b><input type="checkbox" name="staffstatus" onChange={staffstatusHandler} /></label><br/>
+                  <label><b>student:</b><input type="checkbox" name="studentstatus" onChange={studentstatusHandler} /></label><br/>
+                  <label><b>hide status:</b><input type="checkbox" name="hidestatus" onChange={hidestatusHandler} /></label><br/>
+                  <label><b>ADVERTISE:</b><input type="checkbox" name="advertstatus" onChange={advertisestatusHandler} /></label><br/>
+                  
+                        <button onClick={()=>postupdate()}>update details</button>
+                    </div>
+                    <button onClick={()=>goback()}>Go back</button>
+                      
+                      </>
+                      </>:
+                      <>
+                      <p>STUDENT</p>
+                      <div className="sbox">
+                      <label>standard:
+                  <select onChange={(e) => setnewstandard(e.target.value)}>
+                    <option value="10">select pls</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                  </select>
+                </label><br/>
+                <label>user name:(username must contain only letters number and special charecters not spaces)
+                  <input
+                    type="text" 
+                    value={newname}
+                    onChange={(e) => setnewname(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>status:
+                  <input
+                    type="text" 
+                    value={newstatus}
+                    onChange={(e) => setnewstatus(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>contact number:
+                  <input
+                    type="text" 
+                    value={newcontactnumber}
+                    onChange={(e) => setnewcontactnumber(e.target.value)}
+                  />
+                  </label><br/>
+                  <label>Add image to update DP:<br/>
+        <input type="file" name="image" accept="image/png, image/jpeg" onChange={imageHandler} />
+			{isimgPicked ? (
+				<div>
+					<p>Image name: {selectedimg.name}</p>
+					<p>Image type: {selectedimg.type}</p>
+					<p>Size in bytes: {selectedimg.size}</p>
+					<p>
+						lastModifiedDate:{' '}
+						{selectedimg.lastModifiedDate.toLocaleDateString()}
+					</p>
+          {/* <p><a href={selectedimg}>VIEW IMAGE</a></p> */}
+				</div>
+			) : (
+				<p>Select a image to show details</p>
+			)}</label>
+                  <label><b>teacher:</b><input type="checkbox" name="staffstatus" onChange={staffstatusHandler} /></label><br/>
+                  <label><b>student:</b><input type="checkbox" name="studentstatus" onChange={studentstatusHandler} /></label><br/>
+                  <label><b>hide status:</b><input type="checkbox" name="hidestatus" onChange={hidestatusHandler} /></label><br/>
+                  <label><b>NEED ASSIST:</b><input type="checkbox" name="helpreqstatus" onChange={helpstatusHandler} /></label><br/>
   
                         <button onClick={()=>postupdate()}>update details</button>
                     </div>
                     <button onClick={()=>goback()}>Go back</button>
+                      
+                      </>
+                    }
+                    
                 </div>
             </div>
         </>:
