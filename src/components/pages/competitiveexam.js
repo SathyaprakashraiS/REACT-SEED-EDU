@@ -42,7 +42,7 @@ function CompetitiveElilst(){
 
     async function fetchexamname(){
         var apiavail=false;
-        const request = await fetch(`http://127.0.0.1:8000/Scompexamlist/`+'12')
+        const request = await fetch(`http://127.0.0.1:8000/Scompexamlist/`+userdata.standard)
           .then(response => {
             if(response.ok)
           {

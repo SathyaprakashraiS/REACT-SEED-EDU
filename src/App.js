@@ -57,6 +57,7 @@ import Contacts from './components/pages/contacts';
 import CompetitiveElilst from './components/pages/competitiveexam';
 import Compexamwarn from './components/pages/compwarn';
 import Compexamination from './components/pages/attcompex';
+import Tutors from './components/pages/tutors'
 
 function App() {
   return (
@@ -120,6 +121,7 @@ function App() {
         <Route path='/student/comexlist' exact component={CompetitiveElilst} />
         <Route path='/student/compwarn' exact component={Compexamwarn} />
         <Route path='/student/attcompex' exact component={Compexamination} />
+        <Route path='/student/tutors' exact component={Tutors} />
       </Switch>
     </Router>
   </>
