@@ -130,6 +130,7 @@ function Mock(){
               console.log("the error ",error)
             });
       }
+      console.log(qp)
       async function fetchQpaper(stand) {
             var apiavail=false;
             var qplink=`http://127.0.0.1:8000/mockqp-list/`+mockid+'/';
@@ -228,8 +229,17 @@ return(
     </form>
     </div> */}
 
-<p>QUESTION PAPER</p>
+
 <div>
+  <div>
+    {
+      qp.map(item =>(
+        <a key={item.id}>
+          <iframe src={item.mockpaper} width="100" height="100"></iframe>
+        </a>
+      ))
+    }
+  </div>
 			<input type="file" name="file" onChange={changeHandler} />
 			{
       isFilePicked ? (
@@ -238,8 +248,8 @@ return(
 					<p>Filetype: {selectedFile.type}</p>
 					<p>Size in bytes: {selectedFile.size}</p>
 					<p>
-						lastModifiedDate:{' '}
-						{selectedFile.lastModifiedDate.toLocaleDateString()}
+						{/* lastModifiedDate:{' '}
+						{selectedFile.lastModifiedDate.toLocaleDateString()} */}
 					</p>
           <p><a href={selectedFile}>READ FILE</a></p>
           <button onClick={() => sendsaveans()}>SUBMIT</button>

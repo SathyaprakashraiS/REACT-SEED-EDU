@@ -1,0 +1,59 @@
+.qpdisp{
+    background:#150A41;
+
+}
+
+.centertext{
+    color:rgb(255, 255, 255);
+    background:#150A41;
+}
+
+.qpdcard{
+    background:#150A41;
+}
+
+.qpd_outer{
+    width: 100vw;
+    height:auto;
+    display: flex;
+    flex-direction: row;
+
+}
+.qpdcard{
+    width:20%;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap:2rem;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scroll-behavior: auto;
+}
+.qpd_item{
+    background: linear-gradient(160deg, rgba(21,90,179,1) 40%, rgba(185,174,238,1) 77%);
+    color:white;
+    display:flex;
+    flex-direction: column;
+    padding:10%;
+    text-align: center;
+    
+}
+.qpd_item > button{
+    background:green;
+    color:black;
+    border:0;
+    height:30px;
+    margin:5%;
+    font-weight: 600;
+}
+.qpd_item > button:hover{
+    transform: scale(0.8);
+    transition: all;
+}
+
+.qpd_viewer{
+    width:80%;
+    background: url("https://static.vecteezy.com/system/resources/previews/002/418/180/original/opened-book-in-abstract-futuristic-style-vector.jpg");
+    background-position: center center;
+    background-size: cover;
+}

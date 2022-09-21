@@ -22,7 +22,7 @@ function Video()
   var authenticated=false;
 
   // try{
-  //   state = this.props.location
+  //   state = this.props.location 
   //   authenticated=true
   // }
   // catch{
@@ -91,40 +91,59 @@ if(api)
     alert(`${desc}`);
   }
 
+  const passLink = (link)=>{
+    let frame = document.querySelector(".framevid")
+    frame.src = link
+
+  }
+
   return(
     <div className="vidmain">
     <Navbar />
-    <h1>VIDEOS</h1>
+  
     {apiavail ? (
-        <>
-        <p>{api}</p>
+     
+    <div className='outervidmain'>
+         <h1 className="vhead">VIDEOS</h1> 
         <div className="outervid">
+       
       {
       video.map(item => (
       <a key={item.id}>
          <div className="innervid">
-            <div className="cont fron">
-             <div className="imge">
+           
+             <div className="v_imge">
              <img src={item.thumbnail}/>
-                </div>
-             <div className="infos">
-              <b>{item.name}</b>
-              <b>{item.grade}</b>
-              <b>{item.description}</b>
+              </div>
+             <div className="v_infos">
+              <p>{item.name}</p>
+              <p>{item.grade}</p>
+              <p>{item.description}</p>
+              <button className="viewvid" onClick={(e)=>passLink(item.link)}>WATCH NOW</button>
                  
              </div>
              
-            </div>
-            <div className="cont bac">
-              <YoutubeEmbed link={item.link}/>
-            </div>
+           
+           
         </div>
+        
         
       </a>
       ))
       }
       </div>
-        </>
+      <div className="videoplayer">
+              {/* <YoutubeEmbed link={item.link}/> */}
+              <iframe className='framevid'
+      src=""
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      title="Embedded youtube"
+        />
+          </div>
+     
+        </div>
       ) : (
         <p>no api to fetch from :(</p>
       )}

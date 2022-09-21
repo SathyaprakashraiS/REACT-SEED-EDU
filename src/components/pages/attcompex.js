@@ -1,19 +1,13 @@
-// import React,{useState,useEffect, Component } from 'react';
-// import './shome.css';
-// import { GoogleLogout } from 'react-google-login';
-// import SNavbar from './snavbar';
-// import { Link, Redirect, useHistory } from 'react-router-dom';
-// import './attquiz.css'
 import { Prompt } from 'react-router'
 import React,{useState,useEffect, Component } from 'react';
-import './css/attquiz.css';
+import './css/attcompex.css';
 import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
 import axios from 'axios'; 
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import Warning from '../structures/Warning';
+// import Warning from '../structures/Warning';
 
-const Quiz = () => {
+const Compexamination = () => {
 
   let history = useHistory();
 
@@ -26,8 +20,8 @@ const Quiz = () => {
         )
       }
       const userdata = JSON.parse(localStorage.getItem('theuser'));
-      const quizid=JSON.parse(localStorage.getItem('quizid'));
-      console.log(quizid)
+      const comepxid=JSON.parse(localStorage.getItem('compexamid'));
+      console.log(comepxid)
       var teacher=false
       var student=false
       if(userdata)
@@ -44,7 +38,7 @@ const Quiz = () => {
       }
       }
     
-      const [quiz,setquiz] = useState([]);
+      const [questions,setquestions] = useState([]);
       const [att,setatt] = useState([]);
       let tc = 0;
     //   const [ansopt,setansopt] = useState([]);
@@ -52,10 +46,10 @@ const Quiz = () => {
       var quesid=[]
       var attquizavail=false;
 
-      async function fetchQuiz(stand) {
+      async function fetchQuestions(stand) {
         var apiavail=false;
-        var booklink=`http://127.0.0.1:8000/quizans-list/`+quizid+'/';
-        const request = await fetch(booklink)
+        var compexqueslink=`http://127.0.0.1:8000/comexquestion-list/`+comepxid;
+        const request = await fetch(compexqueslink)
           .then(response => {
             if(response.ok)
           {
@@ -68,8 +62,8 @@ const Quiz = () => {
           }
         })
           .then(data => {
-            setquiz(data)
-            console.log(setquiz)
+            setquestions(data)
+            console.log(setquestions)
           })
           .catch((error) => {
             console.log("the error ",error)
@@ -77,7 +71,10 @@ const Quiz = () => {
         }
 
         async function fetchAattended(stand) {
-          var attlink=`http://127.0.0.1:8000/quizansatt-list/`+quizid+'/'+userdata.email+'/';
+            var points=0
+            var crt=0
+            var wrong=0
+          var attlink=`http://127.0.0.1:8000/Sattendedcompcheck/`+comepxid+'/'+userdata.email;
           const request = await fetch(attlink)
             .then(response => {
               if(response.ok)
@@ -100,13 +97,12 @@ const Quiz = () => {
               else
               {
                 let form_data= new FormData();
-                alert("FIRST TIME");
                 form_data.append('sname',userdata.username);
                 form_data.append('semail',userdata.email);
                 form_data.append('sgrade',userdata.standard);
-                form_data.append('stest',quizid);
+                form_data.append('stest',comepxid);
                 form_data.append('spoint',"tempo");
-                let resurl=`http://127.0.0.1:8000/quizrresult-list/`+userdata.email+'/';
+                let resurl=`http://127.0.0.1:8000/Scompexattresulttempo/`+userdata.username+'/'+comepxid+'/'+userdata.email+'/'+userdata.standard;
                 axios.post(resurl, form_data, {
                   headers: {
                     'content-type': 'multipart/form-data'
@@ -118,44 +114,10 @@ const Quiz = () => {
               console.log("the error ",error)
             });
           }
-
-            function addresult(points) {
-            var reslink=`http://127.0.0.1:8000/quizresult-list/`+userdata.username+'/'+userdata.email+'/'+userdata.standard+'/'+quizid+'/'+points+'/';
-            const request = fetch(reslink)
-              .then(response => {
-                if(response.ok)
-              {
-                attquizavail=true;
-                return response.json(); 
-              }
-              else{
-                console.log("im not here")
-              }
-            })
-            // .then(data => {
-            //   alert("lo al");
-            // })
-            // .catch((error) => {
-            //   console.log("the error ",error)
-            // });
-
-
-              // .then(data => {
-              //   setatt(data)
-              //   if(data.length!=0)
-              //   {
-              //     alert("U CHEAT RELOAD PANRIYA DA BODYSODA");
-              //     history.push("/student");
-              //   }
-              // })
-              // .catch((error) => {
-              //   console.log("the error ",error)
-              // });
-            }
     
     useEffect(() => {
       fetchAattended();
-      fetchQuiz();
+      fetchQuestions();
     }, []);
 
     function submit(){
@@ -163,25 +125,30 @@ const Quiz = () => {
       console.log("size of quesid",quesid.length)
         var q=0
         var points=0
-        for(var i=0;i<(quiz.length);i++)
+        var crt=0
+        var wrong=0
+        for(var i=0;i<(questions.length);i++)
         {
             console.log("OVER HERE 1")
-            console.log("checking",quiz[i].id)
+            console.log("checking",questions[i].id)
             console.log("quesid",quesid[q].id)
-            if((quesid[q].id)==(quiz[i].id))
+            if((quesid[q].id)==(questions[i].id))
             {
                 console.log("OVER HERE 2")
                 console.log("the correct answer",optlist[q].key)
-                console.log("the chosen answer",quiz[i].canswer)
-                if((optlist[q].key)==(quiz[i].canswer))
+                console.log("the chosen answer",questions[i].canswer)
+                if((optlist[q].key)==(questions[i].canswer))
                 {
                     console.log("OVER HERE 3")
-                    points=points+1
+                    points=points+4
+                    crt=crt+1
                     q=q+1
                     console.log("correct")
                 }
                 else
                 {
+                    points=points-1
+                    wrong=wrong+1
                     console.log("OVER HERE 4")
                     console.log("wrong answer")
                 }
@@ -192,9 +159,9 @@ const Quiz = () => {
         form_data.append('sname',userdata.username);
         form_data.append('semail',userdata.email);
         form_data.append('sgrade',userdata.standard);
-        form_data.append('stest',quizid);
+        form_data.append('stest',comepxid);
         form_data.append('spoint',points);
-        let resurl=`http://127.0.0.1:8000/quizrresult-list/`+userdata.email+'/';
+        let resurl=`http://127.0.0.1:8000/Scompexattresult/`+userdata.username+'/'+comepxid+'/'+userdata.email+'/'+userdata.standard+'/'+points+'/'+crt+'/'+wrong;
         axios.post(resurl, form_data, {
           headers: {
             'content-type': 'multipart/form-data'
@@ -203,10 +170,10 @@ const Quiz = () => {
         .then(res => {
           console.log(res.data);
         })
-        .catch(err => console.log(err))
+        .catch(err => alert("save agala"))
 
-        alert(`YOU SCORED ${points}/${quiz.length}`);
-        alert("QUIZ SUBMITTED")
+        alert(`YOU SCORED ${points}/${questions.length*4}`);
+        alert("COMP EXAM SUBMITTED")
         history.push("/student");
       }
     function answer(id,key){
@@ -241,23 +208,6 @@ const Quiz = () => {
               optlist.push({key})
             }
         }
-        // for(var i=0;i<(quesid.length);i++)
-        // {
-        //     if(quesid[i]==id)
-        //     {
-        //         optlist[i]=key
-        //     }
-        //     else
-        //     {
-        //         quesid.push({id})
-        //         optlist.push({key})
-        //     }
-        // }
-        // quesid.push({id})
-        // optlist.push({key})
-        // alert(`id and key is : ${id} = ${key}`);
-
-        // console.log("QUES ID: ",quesid,"OPTIONS",optlist)
     }
       console.log(userdata)
 
@@ -329,14 +279,17 @@ return(
   {/* <SNavbar/> */}
   <div >
   <h1 style={center}><b>|_o_|</b></h1>
-  <h1 style={center}><b>{quizid}</b></h1>
+  <h1 style={center}><b>{comepxid}</b></h1>
   <form>
   <div className="qus">
   {
-  quiz.map(item => (
+  questions.map(item => (
     <div className="qus_item">
+        <b>{item.cquestion}</b>
     <a key={item.id}>
-      <div className='ques_potti'><p>{item.cquestion}</p><img src="https://c.ndtvimg.com/2019-11/ask3nj1g_cbse-sample-question-paper_625x300_07_November_19.jpg"/></div><br/>
+        {item.cimgadded?<><div className='ques_potti'><p>{item.cquestion}</p><img src="https://c.ndtvimg.com/2019-11/ask3nj1g_cbse-sample-question-paper_625x300_07_November_19.jpg"/></div><br/>
+      </>:<></>}
+      {/* <div className='ques_potti'><p>{item.cquestion}</p><img src="https://c.ndtvimg.com/2019-11/ask3nj1g_cbse-sample-question-paper_625x300_07_November_19.jpg"/></div><br/> */}
       <div className='quiz_potti_outer'>
       <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
       <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,2)}  />{item.coption2}</label><br /></div>
@@ -363,31 +316,7 @@ return(
   </form>
   </div>
   </div>
-  // <>
-  // <SNavbar/>
-  // <div style={content}>
-  // <h1 style={center}><b>|_o_|</b></h1>
-  // <h1 style={center}><b>{quizid}</b></h1>
-  
-  // {
-  // quiz.map(item => (
-  //   <a key={item.id}>
-  //     <b>{item.cquestion}</b><br/>
-  //     <p>A.<button onClick={() => answer(item.id,1)}><b>{item.coption1}</b></button></p>
-  //     <p>B.<button onClick={() => answer(item.id,2)}><b>{item.coption2}</b></button></p>
-  //     <p>C.<button onClick={() => answer(item.id,3)}><b>{item.coption3}</b></button></p>
-  //     <p>D.<button onClick={() => answer(item.id,4)}><b>{item.coption4}</b></button></p>
-  //     <b>CORRECT ANSWER: OPTION {item.canswer}</b>
-  //   </a>
-  //   ))
-  // }
-  // <p><button onClick={() => submit()}>SUBMIT</button></p>
-  // <br/><br/><br/>
-  
-  // </div>
-  // </>
-  
   );
 }
 
-export default Quiz;
+export default Compexamination;

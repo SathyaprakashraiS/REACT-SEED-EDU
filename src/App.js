@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './components/navbar';
 import React from 'react';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
-import Home from './components/pages/home';
+import Home from './components/pages/Home';
 import Book from './components/pages/books';
 import GLogin from './components/pages/log';
 import NewHome from './components/pages/newhome';
@@ -55,6 +55,8 @@ import Vprofile from './components/pages/vprofile';
 import Eprofile from './components/pages/eprofile';
 import Contacts from './components/pages/contacts';
 import CompetitiveElilst from './components/pages/competitiveexam';
+import Compexamwarn from './components/pages/compwarn';
+import Compexamination from './components/pages/attcompex';
 
 function App() {
   return (
@@ -84,7 +86,7 @@ function App() {
         <Route path='/student' exact component={Student} />
         <Route path='/teacher' exact component={Teacher} />
         <Route path='/questionbank' exact component={Quesbank} />
-        <Route path='/questionbank/quespapers' exact component={Quesbankdisp} />
+        <Route path='/questionbank/quesbankdisp' exact component={Quesbankdisp} />
         <Route path='/FAQ' exact component={FAQ} />
         <Route path='/revnotes' exact component={Rnotes} />
         <Route path='/revnotes/rnotesdisp' exact component={Rnotesdisp} />
@@ -116,6 +118,8 @@ function App() {
         <Route path='/editprofile' exact component={Eprofile} />
         <Route path='/contacts' exact component={Contacts} />
         <Route path='/student/comexlist' exact component={CompetitiveElilst} />
+        <Route path='/student/compwarn' exact component={Compexamwarn} />
+        <Route path='/student/attcompex' exact component={Compexamination} />
       </Switch>
     </Router>
   </>

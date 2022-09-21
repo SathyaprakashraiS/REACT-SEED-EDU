@@ -74,11 +74,13 @@ ul {
       width:0vw;
       height:100%;
       flex-direction: column;
+      transition: all 2s ease-in;
       
     } 
     .nav_tog{
       display: block;
       height:5vh;
+      transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
       
      
 
@@ -88,25 +90,27 @@ ul {
       margin-left: 2%;
       color:red;
       border:1px solid grey;
+      transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 
-    @keyframes navani {
-      0%{
-        width:50vw;
-      }
-      50%{
-        width:70vw;
-      }
-      100%{
-        width:100vw;
-      }
-    }
     .nav_show{
       display: block;
       width:100vw;
       animation:navani 1.5s;
+      transition: transform 1s;
       
     }
+
+    @keyframes navani {
+      0%{
+        transform: translateX(-80vw);
+      }
+  
+      100%{
+        transform: translateX(0);
+      }
+    }
+ 
 
     
 

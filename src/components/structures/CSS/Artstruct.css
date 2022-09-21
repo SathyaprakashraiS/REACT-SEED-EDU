@@ -1,14 +1,17 @@
 .CTable{
+    width:90vw;
     display:grid;
     text-align: center;
-    grid-template-columns: 30vw 30vw 40vw;
-    grid-column-gap: 10px;
-    border:2px solid rgb(3, 175, 255);
+    grid-template-columns: 55% 20% 15% 10%;
+    /* grid-column-gap: 10px; */
+    border:2px solid rgb(0, 139, 53);
+    
+    background: linear-gradient(rgba(32,32,32,.9),rgba(32,32,32,.9));;
+   
     color:white;
+    border-radius: 10px;;
 }
 
 .CTable *{
-    border-right: 2px solid black;
     height:100%;
-    margin-top:-2px;
 }

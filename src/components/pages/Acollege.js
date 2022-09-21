@@ -61,16 +61,16 @@ function Acollege()
     for(var i in college){
       // console.log(college[i].city)
         if(college[i].city === vcity){
-            console.log(college[i].name)
-            cools.push(college[i].name)
+        
+            cools.push(college[i])
             console.log(typeof(city))
             
         }
         else if(college[i].state === vcity){
-          cools.push(college[i].name)
+          cools.push(college[i])
         }
         else if(college[i].name === vcity){
-          cools.push(college[i].name)
+          cools.push(college[i])
         }
         
     }
@@ -144,25 +144,30 @@ if(api)
             <p></p>
           )}
         </div>
-        <div className="centertext">
-        <a href="/colleges/" >Go back</a>
-        <h1>ALL COLLEGES IN INDIA</h1>
+      
+        <div className='ac_main_div'>
+        <div className="acentertext">
+         <div className='act'> <h1>ALL COLLEGES IN INDIA</h1></div>
+          <div className='acin'>
+          <h4>SEARCH COLLEGE BY ENTERING CITY OR STATE:</h4>
+          <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
+          </div>
+       
         </div>
         {apiavail ? (
-            <><p>{api}</p>
-                
-                <div>
-                  <h4>SEARCH COLLEGE BY ENTERING CITY OR STATE:</h4>
-                    <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
-                    <h3>Colleges in {cname}</h3>
+            <>  
+                <div className='searchdivc'>
+                    <h3>COLLEGES IN: {cname}</h3>
                     {/* <button onClick={SortCity}>Search</button> */}
                     <div>
                       
                     {
                       city.map(item=>(
-                        <a>
-                          <p>{item}</p>
-                        </a>
+                        <a key={item.id}>
+              
+              <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
+          
+          </a>
                       ))
                     }
                       
@@ -170,29 +175,29 @@ if(api)
                     </div>
                     
                 </div>
+                <div className='table_out'>
             <div className="header">
            <p>Name</p>
            <p>City</p>
            <p>State</p>
-           <p>Rating</p>
+           <p>Rating</p> 
            </div>
           {
           college.map(item => (
           <a key={item.id}>
               
               <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
-          {/* {item.name}
-          {item.city}
-          {item.state}
-          {item.rating}  */}
+          
           </a>
           ))
     }
+    </div>
     
             </>
           ) : (
             <p>no api to fetch from :(</p>
           )}
+          </div>
         </>
       )
     }

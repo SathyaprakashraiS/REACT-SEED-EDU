@@ -18,7 +18,7 @@ function AllCollege(props) {
 
     // for(var i in city){
     //     console.log(city)
-    // }
+    // } 
     // useEffect(() => {
     //     SortCity();
     //   }, []);

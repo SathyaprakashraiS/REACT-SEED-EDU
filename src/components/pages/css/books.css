@@ -2,14 +2,103 @@
     background:#150A41;
 }
 
-.libmain{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding-left: 4%;
+.lib_outer{
+    width:100vw;
+    height:100vh;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: auto auto;
+
 }
 
-.centertext{
-    text-align: center;
-    color:white;
-} 
+.libmain{
+    width:60vw;
+    height:auto;
+    background: #222A21;
+    padding: 2%;
+    display: grid;
+    grid-template-columns:20vw 20vw 20vw ;
+    grid-template-rows: auto;
+    row-gap: 20px;
+    column-gap: 10px;
+    
+}
+
+.lib_inner{
+    width:18vw;
+    height:auto;
+    padding:2%;
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.lib_image {
+    width:50%;
+    height:100%;
+}
+.lib_reader{
+    width:40vw;
+    background: url("https://static.vecteezy.com/system/resources/previews/002/418/180/original/opened-book-in-abstract-futuristic-style-vector.jpg");
+    background-position: center center;
+    background-size: cover;
+}
+
+
+
+.libhead{
+    width:60vw;
+    background: #222A21;
+    color: white;
+}
+.lib_info{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:1%;
+}
+
+.bt_read{
+    width:80%;
+    height:20px;
+    border:0;
+    background:green;
+}
+
+
+.moveout{
+    /* display: none; */
+   width:20vw;
+   height:100vh;
+   overflow-y: scroll;
+   display: flex;
+   flex-direction: column;
+   height:auto;
+   
+
+}
+
+
+.fullmode{
+    width:80vw;
+    height:100%;
+   
+    
+}
+
+.lib_frame{
+    width:100%;
+    height:100%;
+}
+
+.libtog{
+    width:100px;
+    height: 30px;;
+}
+
+.turn{
+    transform: rotate(180deg);
+}

@@ -94,7 +94,7 @@ if(api)
     <h1>PROFESSIONAL COURSE</h1>
     </div>
   
-    <div className="cheader">
+    <div className="header">
     <h2>course</h2>
     <h2>duration</h2>
     <h2>About</h2>

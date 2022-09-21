@@ -2,15 +2,16 @@
     width:300px;
     height:300px;
 }
-
-.hmain{
+ 
+/* .hmain{
     background:#150A41;
     margin-bottom:25px;
-}
+} */
 .tbox
 {
     margin-top:2%;
     background-color: #FF0000;;
+    color:black;
 }
 .sbox
 {

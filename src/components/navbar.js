@@ -89,9 +89,7 @@ return(
                     <NavLink to="/questionbank" className="navbar-links">
                         <FaQuestion/> QUESTION BANK
                     </NavLink>
-                    <NavLink to="/contacts" className="navbar-links">
-                        <FaQuestion/> CONTACTS
-                    </NavLink>
+                   
                     <Link to="#"  className="other">
                         <FaArrowDown/> OTHER
                         <div className="dropdown">
@@ -103,6 +101,9 @@ return(
                     </NavLink>
                     <NavLink to="/ocourses" onClick={clear} className="navbar-links">
                         <FaGlobe/> ONLINE COURSES
+                    </NavLink>
+                    <NavLink to="/contacts" className="navbar-links">
+                        <FaQuestion/> CONTACTS
                     </NavLink>
                     </div>
                     </Link>

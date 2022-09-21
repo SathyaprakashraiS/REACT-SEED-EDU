@@ -337,8 +337,8 @@ return(
 					<p>Filetype: {selectedFile.type}</p>
 					<p>Size in bytes: {selectedFile.size}</p>
 					<p>
-						lastModifiedDate:{' '}
-						{selectedFile.lastModifiedDate.toLocaleDateString()}
+						{/* lastModifiedDate:{' '} */}
+						{/* {selectedFile.lastModifiedDate.toLocaleDateString()} */}
 					</p>
           <p><a href={selectedFile}>VIEW FILE</a></p>
 				</div>

@@ -95,7 +95,7 @@ if(api)
     <a href="/courses/">Go back</a>
     <h1>COMMERCE COURSE</h1>
     </div>
-    <div className="cheader">
+    <div className="header">
     <h2>course</h2>
     <h2>duration</h2>
     <h2>About</h2>

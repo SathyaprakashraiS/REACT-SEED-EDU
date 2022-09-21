@@ -18,6 +18,6 @@ function ArtStructure(props) {
         </div>
     )
 }
-
+ 
 export default ArtStructure
 

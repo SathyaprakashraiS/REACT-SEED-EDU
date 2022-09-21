@@ -6,6 +6,34 @@ import './css/rnotes.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import { Link, Redirect,useHistory } from 'react-router-dom';
+import { PdfView } from '../structures/PdfView';
+
+
+function hello(s){
+console.log("hello")
+let val  = s;
+ const rview = document.querySelectorAll(".rview")
+ const close = document.querySelectorAll(".close_view")
+ const butt = document.querySelectorAll(".view_but")
+ const len = rview.length
+ for(let i = 0;i<len;i++){
+
+butt[i].onclick = ()=>{
+  rview[i].classList.add("rview_show")
+}
+
+ 
+
+
+  close[i].onclick = ()=>{
+    rview[i].classList.remove("rview_show")
+  }
+ }
+ 
+
+
+      
+}
 
 function Rnotes()
 {
@@ -16,7 +44,7 @@ function Rnotes()
   const [sub,setSub] = useState([])
   const [sname,setsname] = useState('')
 
-  
+
   
   const locdata = JSON.parse(localStorage.getItem('user'));
   const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
@@ -34,7 +62,7 @@ function Rnotes()
    
     for(var i in notes){
       // console.log(college[i].city)
-        if(notes[i].sub === subn){
+        if(notes[i].sub.toUpperCase() === subn.toUpperCase()){
             console.log(notes[i].sub)
             subs.push(notes[i])
             console.log(typeof(sub))
@@ -148,6 +176,7 @@ if(api)
                     {/* <button onClick={SortCity}>Search</button> */}
                 
                     <div className="revcard">
+                      {/* PART TO DISPLAY SEARCHED RESULT */}
       {
       
       sub.map(item => (
@@ -157,17 +186,20 @@ if(api)
         <b>{item.title}</b>
         <b>{item.sub}</b>
         <b>{item.grade}</b>
-        <a href={"http://127.0.0.1:8000"+item.file}>READ</a>
+        <a href={"http://127.0.0.1:8000"+item.file}>REA</a>
+    
         <br></br><br></br>
         </div>
       </a>
       ))
      
-  
+   
       }
       </div> 
                     
                 </div>
+
+        {/* DISPLAY ALL PART */}
        <div className="revcard">
       {
       notes.map(item => (
@@ -178,12 +210,20 @@ if(api)
         <b>{item.sub}</b>
         <b>{item.grade}</b>
         {/* {item.file} */}
-        <a href={"http://127.0.0.1:8000"+item.file}>READ</a><br></br><br></br>
+        {/* <a  href={"http://127.0.0.1:8000"+item.file}>READ</a> */}
+        <button className="view_but" onClick={(e)=>hello(item.file)}>HELLO</button>
+        <div className="rview">
+<button className="close_view">close</button>
+<a>{item.file}</a>
+<PdfView pdf={item.file}/>
+</div>
         </div>
+   
       </a>
       ))
   
       }
+ 
       </div> 
     
         </>

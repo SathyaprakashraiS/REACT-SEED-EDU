@@ -44,6 +44,7 @@ function College()
       )}
     </div>
     <div class="titlecontext"><b>DIFFERENT COLLEGE TYPES IN INDIA</b></div>
+    
 <div class="container">
   <div class="card-box">
     <div class="card-img">

@@ -10,7 +10,7 @@ function BookStruct(props) {
                     <img src={props.img}/>
                 </div>
              <div className="info">
-                 <p>{props.subject}</p>
+                 <p>{props.subject}</p> 
                  <p>{props.name}</p>
                  <p>{props.author}</p>
                  

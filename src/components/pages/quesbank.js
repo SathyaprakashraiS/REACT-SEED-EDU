@@ -7,6 +7,7 @@ import './css/quesbank.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import { Link, Redirect,useHistory } from 'react-router-dom';
+import { FaArrowCircleRight } from 'react-icons/fa';
 
 function Quesbank()
 {
@@ -14,6 +15,35 @@ function Quesbank()
   const [qtype,setqtype] = useState([]);
   const [api,setapi] = useState([false]);
   const [loading,setloading] = useState(false);
+  const [sub,setSub] = useState([])
+  const [sname,setsname] = useState('')
+
+  const Sortqp = (qpn) =>{
+    const subs = []
+    var csubn = qpn.toLowerCase()
+    setsname(qpn)
+    // console.log(cname)
+   
+    for(var i in qtype){
+      // console.log(college[i].city)
+        if(qtype[i].parentpaperfile === qpn){
+    
+            subs.push(qtype[i])
+            
+            
+        }
+        else if(qtype[i].parentpaperfile === csubn){
+          subs.push(qtype[i])
+        }
+       
+        
+    }
+   
+    setSub(subs)
+   
+    
+
+}
   
   const locdata = JSON.parse(localStorage.getItem('user'));
   const apilocdata = JSON.parse(localStorage.getItem('apiuser'));
@@ -89,13 +119,13 @@ if(api)
   }
 
   function redirectto(id) {
-    alert(`hello, ${id}`);
+    // alert(`hello, ${id}`);
     papersfetched=true
     localStorage.setItem('paperid',JSON.stringify(id));
   //   return(
   //     <Redirect to="/"/>
   // )
-    history.push("/questionbank/quespapers/");
+    history.push("/questionbank/quesbankdisp");
     // history.push({
     //   pathname: '/questionbank/quespapers/',
     //   state: papersfetched // your data array of objects
@@ -116,22 +146,46 @@ if(api)
     <div className="centertext">
     <h1>QUESTION PAPERS</h1>
     </div>
+   
     <div className="qbouter">
     {apiavail ? (
         <>
-      {
-      qtype.map(item => (
+         <div className='qpsearch'>
+                  <h4>SEARCH QP:</h4>
+                    <input type="input " id="colle" onChange={ (event) => Sortqp(event.target.value) }></input>
+                    <h3>YOUR SEARCH: {sname}</h3>
+                    {
+      sub.map(item => (
       <a key={item.id}>
         <div className="qbcard">
-        <b>{item.id}</b>
+        {/* <b>{item.id}</b> */}
         <b>{item.parentpaperfile}</b>
         <b>{item.description}</b>
-        <button onClick={() => redirectto(item.id)}>VIEW</button><br></br><br></br>
+        <button onClick={() => redirectto(item.id)}><FaArrowCircleRight className='arrow'/></button><br></br><br></br>
         </div>
       </a>
       ))
   
       }
+          </div>
+          <h3>QP AVAILABLE</h3>
+       <div className='qptype'>
+       {
+      qtype.map(item => (
+      <a key={item.id}>
+        <div className="qbcard">
+        {/* <b>{item.id}</b> */}
+        <b>{item.parentpaperfile}</b>
+        <b>{item.description}</b>
+        <button onClick={() => redirectto(item.id)}><FaArrowCircleRight className='arrow'/></button><br></br><br></br>
+        </div>
+      </a>
+      ))
+  
+      }
+
+       </div>
+     
     
         </>
       ) : (

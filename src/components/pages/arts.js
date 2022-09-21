@@ -95,17 +95,17 @@ if(api)
       )}
     </div>
     <div className="centertext">
-    <a href="/courses/">Go back</a>
+    {/* <a href="/courses/">Go back</a> */}
     <h1>ARTS COURSE</h1>
     </div>
-    <div className="cheader">
-    <h2>course</h2>
-    <h2>duration</h2>
-    <h2>About</h2>
-    </div>
- 
-    {apiavail ? (
-        <><p>{api}</p>
+    <div className='course_out'>
+        <div className="header">
+        <h2>course</h2>
+        <h2>duration</h2>
+        <h2>About</h2>
+        </div>
+        {apiavail ? (
+        <>
          {
           course.map(item => (
           <a key={item.id}>
@@ -119,6 +119,9 @@ if(api)
       ) : (
         <p>no api to fetch from :(</p>
       )}
+    </div>
+ 
+
     </div>
     
   );

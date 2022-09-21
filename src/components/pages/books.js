@@ -5,6 +5,7 @@ import './css/books.css';
 import GLogin from './log';
 import Navbar from '../navbar';
 import BookStruct from '../structures/BookStruct';
+import { FaArrowLeft } from 'react-icons/fa';
 
 function Book()
 {
@@ -84,6 +85,31 @@ if(api)
     console.log(apiavail)
   }
 
+  let tog  = 0
+  const closeWin = ()=>{
+    let win = document.querySelector(".libmain")
+    let reader = document.querySelector(".lib_reader")
+    let but = document.querySelector(".libtog")
+    if(tog===0){
+      win.classList.add("moveout")
+      reader.classList.add("fullmode")
+      but.classList.add("turn")
+      tog+=1
+    }
+    else{
+      win.classList.remove("moveout")
+      reader.classList.remove("fullmode")
+      but.classList.remove("turn")
+      tog = 0
+    }
+   
+  }
+
+  const readNow = (file)=>{
+    let frame = document.querySelector(".lib_frame")
+    frame.src = file
+  }
+
   return(
     <div className="bhome">
     <Navbar />
@@ -98,28 +124,40 @@ if(api)
         <p></p>
       )}
     </div>
-    <div className="centertext">
-    <h1>BOOKS</h1>
-    </div>
+    
     {apiavail ? (
-        <><p>{api}</p>
-        
+        <div className='lib_outer'>
+      
       <div className="libmain">
+      <div className="libhead">
+        <h1>LIBRARY</h1>
+        <button className="libtog" onClick={(e)=>closeWin()}><FaArrowLeft/></button>
+    </div>
+       
       {
       book.map(item => (
       <a key={item.id}>
-        <BookStruct img={item.image} subject={item.bgrade} name={item.name} author={item.author} file={item.file}/>
-        {/* <img src={item.image}/>
-        <b>{item.name}</b>
-        <b>{item.author}</b>
-        <b>{item.bgrade}</b><br></br> */}
+        {/* <BookStruct img={item.image} subject={item.bgrade} name={item.name} author={item.author} file={item.file}/> */}
+        <div className='lib_inner'>
+          <div className='lib_image'>
+            <img src={item.image}></img>
+          </div>
+          <div className='lib_info'>
+            <p>{item.name}</p>
+            <p>{item.author}</p>
+            <button className='bt_read' onClick={(e)=>readNow(item.file)}> READ NOW</button>
+          </div>
+        </div>
       </a>
       ))
   
       }
       </div>
+      <div className='lib_reader'>
+        <iframe src="" className='lib_frame'></iframe>
+      </div>
     
-        </>
+        </div>
       ) : (
         <p>no api to fetch from :(</p>
       )}

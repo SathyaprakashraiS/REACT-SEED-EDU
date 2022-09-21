@@ -1,15 +1,23 @@
 
 
 .Table{
+    width:90vw;
     display:grid;
     text-align: center;
-    grid-template-columns: 400px 200px 200px auto;
-    grid-column-gap: 10px;
-    border:2px solid rgb(0, 37, 139);
+    grid-template-columns: 55% 20% 15% 10%;
+    /* grid-column-gap: 10px; */
+    border:2px solid rgb(0, 139, 53);
+    
+    background: linear-gradient(rgba(32,32,32,.9),rgba(32,32,32,.9));;
+  
+    color:white;
+    border-radius: 10px;;
+   
+
 }
 
 .Table *{
-    border-right: 3px solid black;
+    /* border-right: 2px solid black; */
     height:100%;
-    margin-top:-2px;
+    
 }

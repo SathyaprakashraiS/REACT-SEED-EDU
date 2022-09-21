@@ -69,6 +69,7 @@ article{
   padding-left:50%;
   position: relative;
   margin-top: -15%;
+
   
  }
 
@@ -94,8 +95,9 @@ article{
   border-radius: 50%;
   text-align: center;
   background:rgb(0, 0, 0);
-  outline: 8px solid rgb(4, 77, 211);
+  outline: 8px solid rgb(36, 66, 199);
 }
+
 .od > p{
     margin-top: 40%;
     color: white;
@@ -107,7 +109,11 @@ article{
 
 
 
+
+
 .ename{
+
+ 
   background:rgb(0, 0, 0);
   color: white;;
   padding-left: 10%;
@@ -125,7 +131,7 @@ article{
   border-bottom-right-radius: 30px;
 
 
-   background: rgb(11, 106, 138); 
+   background: rgba(255, 255, 255, 0.774); 
   
 }
 

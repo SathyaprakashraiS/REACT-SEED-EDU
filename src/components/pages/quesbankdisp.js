@@ -103,43 +103,73 @@ if(api)
     //   pathname: '/questionbank/quespapers/',
     // })
   }
+
+  let tempstore = []
+
+
+
+  const passpaper = (file) => {
+    console.log("in ")
+    tempstore.length = 0
+    let frame = document.querySelector(".qpdframe")
+    console.log(file)
+    frame.src = file
+    
+
+  }
   
   return(
-    <>
+    <div className='qpdisp'>
     <Navbar />
-    <div>
+ 
       {authenticated ? (
         <>
         </>
       ) : (
         <p></p>
       )}
-    </div>
-    <div className="centertext">
-    <h1>QUESTION PAPERS</h1>
-    </div>
+  
+  
     {apiavail && papid ? (
-        <>
+      <div className="qpd_outer">
+    
+  
+      <div className='qpdcard'>
+      <div className="centertext">
+    <h2>QUESTION PAPERS</h2> 
+    </div>
         {
       qpaper.map(item => (
       <a key={item.id}>
-        <b>{item.name}</b><br></br>
-        <b>{item.papertype}</b><br></br>
-        <b>{item.key}</b><br></br>
-        <b>{item.year}</b><br></br>
-        {/* {item.paper} */}
-        <br></br><br></br>
+        <div className="qpd_item">
+        <b>{item.name}</b>
+        <b>{item.papertype}</b>
+        {/* <b>{item.key}</b><br></br> */}
+        <b>{item.year}</b>
+        <button onClick={(e)=>passpaper(item.paper)}>VIEW</button>
+        </div>
+      
+      
+      
+
       </a>
       ))
   
       }
-        </>
+       </div>
+        <div className='qpd_viewer'>
+        <iframe src="" width="100%" height="100%" className="qpdframe" ></iframe>
+       
+        </div>
+        </div>
+       
+       
       ) : (
         <>
         {history.push("/questionbank")}
         </>
       )}
-    </>
+    </div>
     
   );
 }

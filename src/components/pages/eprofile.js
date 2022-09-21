@@ -272,10 +272,10 @@ function Eprofile() {
 					<p>Image name: {selectedimg.name}</p>
 					<p>Image type: {selectedimg.type}</p>
 					<p>Size in bytes: {selectedimg.size}</p>
-					<p>
+					{/* <p>
 						lastModifiedDate:{' '}
 						{selectedimg.lastModifiedDate.toLocaleDateString()}
-					</p>
+					</p> */}
           {/* <p><a href={selectedimg}>VIEW IMAGE</a></p> */}
 				</div>
 			) : (
