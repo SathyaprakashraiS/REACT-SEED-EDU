@@ -5,7 +5,7 @@ import Navbar from '../navbar';
 import himage from "./images/homepage.jpg"
 
 import './css/home.css'
-import { FaRocket } from 'react-icons/fa';
+import { FaRocket ,FaMapMarkerAlt,FaInstagram,FaFacebookF,FaDiscord,FaTwitter,FaPhoneAlt} from 'react-icons/fa';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 const Home = ()=>{
@@ -141,15 +141,37 @@ const Home = ()=>{
         </div>
       </div>
     </div>
-    {/* <footer>
+    <footer>
       <div className='foot_main'>
-        <div className='footer_info'>
-
+        <h1>CONTACT US</h1>
+        <div className="social_h">
+        <a href="https:\\www.google.com" target="_blank"><FaInstagram className="h_insta"/></a>
+        <a href="https:\\www.google.com" target="_blank"><FaFacebookF className="h_fb"/></a>
+        <a href="https:\\www.google.com" target="_blank"><FaTwitter className="h_twit"/></a>
+        <a href="https:\\www.google.com" target="_blank"><FaDiscord className="h_dis"/></a>
         </div>
-        <div className='footer_social'></div>
-        <div className='copyrights'></div>
+        <div className="d_info">
+          <div className="d_location">
+            <p><FaMapMarkerAlt/> </p>
+            <b>VELLORE INSTITITE OF TECHNLOGY</b>
+            <p><b>VELLORE</b></p>
+            <p><b>TAMIL NADU </b></p>
+            <p><b>INDIA</b></p>
+            <p><FaPhoneAlt/>+91 78882 99992</p>
+          </div>
+          <div className="d_mail">
+            <h1>WRITE YOUR QUERIES</h1>
+            <p>We are happy to hear your reviews and requests</p>
+            <div className="h_r_input">
+            <input className="h_review"></input>
+            <button>SUBMIT</button>
+            </div>
+        
+          </div>
+        </div>
+        
       </div>
-    </footer> */}
+    </footer>
     </div>
  
     </div>

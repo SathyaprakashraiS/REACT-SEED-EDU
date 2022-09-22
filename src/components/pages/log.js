@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import './css/log.css';
 import { Link } from 'react-router-dom';
 import {GoogleLogin , GoogleLogout} from 'react-google-login';
 import googleLogin from "../../services/googleLogin"
@@ -116,10 +116,10 @@ class GLogin extends Component
               
             
         
-        return (
+        return ( 
           <>
           <Navbar />
-          <div className="App">
+          <div className="g_log">
             <h1>LOGIN WITH GOOGLE</h1>
             <GoogleLogin
               clientId="576119017330-jpt7fm9m1k2476fd8aadl6lrr4smstd0.apps.googleusercontent.com"

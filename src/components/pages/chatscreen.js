@@ -4,6 +4,7 @@ import axios from 'axios';
 import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import { FaTelegram } from 'react-icons/fa';
 
 function Achat(){
   let history = useHistory();
@@ -80,8 +81,8 @@ function Achat(){
           }
         })
         .then(res => {
-          alert('message sent!');
-          history.push("/student/");
+          // alert('message sent!');
+          // history.push("/student/");
         })
         .catch(err => {
           alert('RE-CHECK THE message, FAILED TO send message')
@@ -91,6 +92,9 @@ function Achat(){
     //setInterval(fetchmessages, 600);
     useEffect(() => {
         fetchmessages();
+        const interval=setInterval(()=>{
+          fetchmessages()
+         },100)
     }, []);
 
       
@@ -103,46 +107,57 @@ return(
     <div className="main">
     <SNavbar/>
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
     
     <h1><b>CHATs</b></h1>
     {messages.length>0 ? 
-    <div className="cmain">
-    {
+    <div className="chat_main">
+        <div className='chat_out'>
+        {
     messages.map(item => (
     <a key={item.id}>
-        {
-            item.madebymail==userdata.email?
-            <>
+      
+            {item.madebymail==userdata.email?
+           
             <div className="mychat">
-            <b>{item.madeby}</b><br/>
-            <p>{item.comment}</p><br/>
+              <div className='chat_inside'>
+                <b>{item.madeby}</b>
+                <p>{item.comment}</p><br/>
+              </div>
+         
             </div>
-            </>:
-            <>
+            :
+            
             <div className="elsechat">
-            <b>{item.madeby}</b><br/>
+              <div className='chat_inside'>
+              <b>{item.madeby}</b>
             <p>{item.comment}</p><br/>
+              </div>
+            
             </div>
-            </>
+            
         }
-        {/* <button onClick={() => attemptquiz(item.cname)}>attempt quiz</button> */}
+          
     </a>
     ))
     }
+        </div>
+
     </div>
     :
     <p>No messages yet</p>
     }
-    <h1>message section</h1>
-    <label><b>message:</b>
-        <input
+    {/* <h1>message section</h1> */}
+    <div className='chat_input'>
+      <div className='c_inp_div'>
+    <input
           type="text" 
           value={tosendmessages}
           onChange={(e) => settosendmessages(e.target.value)}
-        />
-        </label><br/>
-        <button onClick={() => sendmessage()}>send message</button>
+        /></div>
+        <button onClick={() => sendmessage()}><FaTelegram/>send</button>
+    </div>
+  
+    
     </div>
 
     

@@ -12,12 +12,12 @@
 }
 
 .libmain{
-    width:60vw;
+    width:40vw;
     height:auto;
     background: #222A21;
     padding: 2%;
     display: grid;
-    grid-template-columns:20vw 20vw 20vw ;
+    grid-template-columns:20vw 20vw;
     grid-template-rows: auto;
     row-gap: 20px;
     column-gap: 10px;
@@ -48,7 +48,7 @@
 
 
 .libhead{
-    width:60vw;
+    width:40vw;
     background: #222A21;
     color: white;
 }

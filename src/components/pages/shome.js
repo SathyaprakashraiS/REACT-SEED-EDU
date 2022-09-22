@@ -385,6 +385,26 @@ return(
       :
       <p>No Mock exams attended to view</p>
       }
+
+      <h1><b>COMPETITIVE EXAMS</b></h1>
+      {attmock.length>0 ? 
+      <div className="qmain">
+      {
+      attmock.map(item => (
+        <a key={item.id}>
+          <div className="qcard">
+          <b>{item.testname}</b><br/>
+          <b>MARK OBTAINED: {item.markobtained}</b><br/>
+          <b>TOTAL MARKS: {item.totalmarks}</b><br/>
+          <button onClick={() => viewmockans(item.id)}>VIEW ANSWERS</button>
+          </div>
+        </a>
+        ))
+      }
+      </div>
+      :
+      <p>No Mock exams attended to view</p>
+      }
       
       <h1><b>CHAT COMMNITIES</b></h1>
       {(chatcomm.length)>0 ? 

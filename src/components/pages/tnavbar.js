@@ -90,6 +90,9 @@ return(
             <a class="nav-link"  href="/teacher/qpaper/"><b>QUESTION BANK</b></a>
         </li>
         <li className='thome_nav_item'>
+            <a class="nav-link"  href="/teacher/compexam/"><b>COMPETETIVE EXAMS</b></a>
+        </li>
+        <li className='thome_nav_item'>
             <a class="nav-link"  href="/"><b>HOME</b></a>
         </li>
         <li className='thome_nav_item'>

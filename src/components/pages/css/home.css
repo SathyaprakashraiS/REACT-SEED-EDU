@@ -10,11 +10,15 @@
     font-family: 'Poppins', sans-serif;
     font-size: 40px;
    
+    background: -webkit-linear-gradient(40deg, rgba(29,253,123,1) 5%, rgba(240,213,0,1) 47%, rgba(252,69,226,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   
+ 
 }
 
 .buildup_text > p{
     font-family: 'Poppins', sans-serif;
-    font-style: italic;
     font-size: 20px;
     color:#1a1616;
 }
@@ -23,6 +27,7 @@
     height:auto;
     display: flex;
     flex-direction: column;
+    overflow:hidden;
 
 }
 
@@ -30,7 +35,7 @@
     position: relative;
     width: 100vw;
     height:auto;
-   
+  
     height:100vh;
     /* z-index: -1; */
     color:white;
@@ -39,7 +44,7 @@
     background-image: url('../images/BGROCKET.gif');
     background-position-x: 90%, right;
     background-position-y: 0%, center;
-    background-image: linear-gradient(rgba(60, 60, 219, 0.8), rgba(90, 90, 255, 0.8)), url("../images/BGROCKET.gif");
+    background-image: linear-gradient(40deg, rgba(106, 39, 161, 0.849) 0%, rgba(91,70,252,0.7399159492898721) 100%) , url("../images/BGROCKET.gif");
     background-size: cover;
   
 
@@ -62,6 +67,7 @@
 
 .buildup_text > p{
     font-size: 20px;
+    color: white;
 }
 
 .gs{
@@ -79,6 +85,7 @@
 .home_image>img{
     width:80%;
     height: 80%;
+    background-position: center 10px;
     
     clip-path: polygon(16% 0, 0% 100%, 100% 50%);
 }
@@ -163,7 +170,7 @@
 .lbt > *{
     width: 100%;
     height: 100%;
-    color:rgb(12, 106, 150);
+    color:rgb(68, 66, 207);
     background:black;
     transition:color 1s cubic-bezier(0.39, 0.575, 0.565, 1);
    
@@ -342,22 +349,118 @@
 
 footer{
     width:100vw;
-    height:60vh;
+    height:auto;
 
 }
 
 .foot_main{
     width:100%;
-    height:90%;
+    height:auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background: #1a1616;
+    align-items: center;
+    text-align: center;
+ 
+}
+.foot_main > *{
+    width:100%;
+    border-bottom: 2px solid white;
+    align-self: center;
+}
+.foot_main > h1{
+    font-size: 25px;
+    color: white;
 }
 
-.footer_info{
-    width:30%;
-    background:#150A41;
-    color:white;
+.social_h{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
+
+.h_insta,.h_fb,.h_twit,.h_dis{
+    font-size: 40px;
+    margin:10px;
+    padding:3%;
+}
+.social_h > *:hover{
+    transform: scale(1.5);
+}
+
+.h_insta{
+    background: rgb(171,0,255);
+    background: linear-gradient(40deg, rgba(171,0,255,1) 0%, rgba(15,50,186,1) 100%); 
+    border-radius: 20px;
+    color: white;
+}
+.h_fb{
+   
+    background: linear-gradient(40deg, rgb(4, 0, 255) 0%, rgba(15,50,186,1) 100%); 
+    border-radius: 20px;
+    color: white;
+
+}
+.h_twit{
+    background: linear-gradient(40deg, rgb(0, 173, 253) 0%, rgba(15,50,186,1) 100%); 
+    border-radius: 20px; 
+    color: white;
+}
+.h_dis{
+    background: linear-gradient(40deg, rgb(2, 23, 66) 0%, rgba(15,50,186,1) 100%); 
+    border-radius: 20px;
+    color: white;
+
+}
+
+.d_info{
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+.d_location{
+    width:30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid whitesmoke;
+}
+
+.d_mail{
+    width:70%;
+    display: flex;
+    flex-direction: column;
+   
+
+}
+.h_r_input > input{
+    width:300px;
+    padding:1%;
+    margin-right: 5px;
+
+}
+.h_r_input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.h_r_input > button{
+    border:0;
+    width:100px;
+    height:40px;
+    background: rgb(180, 4, 48);
+    color:white;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+
 
 
 

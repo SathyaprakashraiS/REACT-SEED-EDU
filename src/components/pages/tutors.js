@@ -117,18 +117,28 @@ function Tutors(){
                             </>
                             }
                             <p><a href={item.resume}><b>CLICK TO VIEW RESUME</b></a></p>
-                            <br></br></>:<>
-                            <img className="bimg" src={item.img} />
-                            <p><b>USERNAME:{item.username}</b></p>
-                            <p><b>ABOUT:{item.status}</b></p>
-                            <p><b>TUTOR FOR GRADE:{item.standard}</b></p>
-                            <br></br>
-                        </>
+                            <br></br></>:<></>
                     }
                     </a>
                     ))
                 
         }
+        <p>TUTORS FOR YOUR GRADE</p>
+        {
+            tutors.map(item => (
+            <a key={item.id}>
+                 {!item.advertise?<>
+                    <img className="bimg" src={item.img} />
+                    <p><b>USERNAME:{item.username}</b></p>
+                    <p><b>ABOUT:{item.status}</b></p>
+                    <p><b>TUTOR FOR GRADE:{item.standard}</b></p>
+                    <br></br>
+            </>:<></>
+                 }
+            </a>
+            ))
+        }
+
         <p>ALL ARCHITECTS OF YOUR FUTURE</p>
         {
         alltutors.map(item => (

@@ -1,19 +1,108 @@
+.chat_main{
+    width:70vw;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    /* overflow-y: scroll; */
+    row-gap: 0;
+}
+.chat_out{
+    width:100%;
+    height:80vh;
+    overflow-y: scroll;
+    background:url("https://img.freepik.com/free-vector/social-media-network_74855-4575.jpg?w=826&t=st=1663855509~exp=1663856109~hmac=b81497c57417d7ee67f7cb25589ddbb616be96dffc56f179391ed336588d3261");
+    background-size: cover;
+}
+
+.chat_input{
+    width:70vw;
+    height:5vh;
+    transform: translateY(-120px);
+    display: flex;
+    flex-direction: row;
+    /* background: red; */
+    /* position: absolute; */
+}
+.chat_input > .c_inp_div {
+    width:80%
+}
+.chat_input > .c_inp_div  > input{
+    width:60%;
+    padding:5px;
+    border-radius: 25px;
+}
+
+.chat_input >button{
+    border:0;
+    transform: translateX(-280px);
+    width:200px;
+    height:30px;
+    color:green;
+    background-color: black;
+    border-radius: 25px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px;
+}
+.chat_input > button >*{
+    font-size: 16px;
+    
+}
+
+
 .mychat{
-    background-color: #00FF00;
-    width: 100px;
-    height: 100px;
-    position: relative;
-    left:100%-100px;
+    width:100%;
+    /* background-color: #00FF00; */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start; */
+    justify-content: flex-end;
+    text-align: left;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+   
+   
+}
+
+.chat_inside{
+    max-width: 500px;
+    min-width: 200px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 75% 75%, 81% 78%, 50% 75%, 0% 75%);
+    background: rgb(40, 233, 56);
+    padding:1%;
+}
+.mychat > .chat_inside >b{
+    /* background:green; */
+    text-align: left;
+    color:rgb(0, 0, 0);
+    margin:0;
+    padding:0;
+}
+.chat_inside >p{
+    color:white !important;
+    margin:0;
+    padding:0;
 }
 .elsechat{
-    background-color: #FF0000;
-    width: 100px;
-    height: 100px;
-    position: relative;
-    left:0%;
+    width:100%;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-end; */
+    justify-content: flex-start;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    /* background-color: #FF0000; */
+    margin-bottom: 10px;
+ 
 }
-.cmain{
-    background-color: #0000FF;
-    height:100%;
-    margin:5%;
+
+.elsechat > .chat_inside > b{
+color:red;
+}
+.chat_inside >p{
+    color:white !important;
 }

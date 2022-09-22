@@ -1,0 +1,17 @@
+.g_log{
+    width:100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(240deg, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 50%);
+
+
+}
+.g_log > h1{
+    font-size: 40px;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

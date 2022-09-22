@@ -1,3 +1,68 @@
+
+.t_tasks{
+  width:80vw;
+  height:auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  overflow: scroll; 
+}
+.t_tasks > *{
+  width:30%;
+  height:50vh;
+  background: url("https://img.freepik.com/free-vector/mobile-testing-concept-illustration_114360-1564.jpg?w=740&t=st=1663848729~exp=1663849329~hmac=107b27d7fbc0289a5b18b687234d15eeed79951d5b012dcaea3e124500f06cd8");
+  background-size:cover;
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+ 
+
+
+}
+
+.t_in{
+  width:80%;
+  height:80%;
+  text-transform: uppercase;
+  
+  background-color: rgba(173, 181, 187, 0.514);
+  display: flex;
+  flex-direction: column;
+  min-height: 10vh;
+
+  align-items: center;
+  align-self: center;
+}
+.t_in > *{
+text-align: center;
+}
+
+.t_in > button{
+  width:100px;
+  height:40px;
+  border:0;
+  background: green;
+  font-size: 16px;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .profile{
     margin-top:7%;
     width:75%;
@@ -46,7 +111,7 @@
     }
     .inmain{
         margin-left: 0%;
-    }
+    } 
     .sbook{
         width:80vw;
         margin:0 0 10px 10px;

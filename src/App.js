@@ -57,7 +57,10 @@ import Contacts from './components/pages/contacts';
 import CompetitiveElilst from './components/pages/competitiveexam';
 import Compexamwarn from './components/pages/compwarn';
 import Compexamination from './components/pages/attcompex';
-import Tutors from './components/pages/tutors'
+import Tutors from './components/pages/tutors';
+import Tviewcompexam from './components/pages/Tviewcompexams';
+import Tcompexans from './components/pages/compexans';
+import Scompexans from './components/pages/scompexans';
 
 function App() {
   return (
@@ -122,6 +125,9 @@ function App() {
         <Route path='/student/compwarn' exact component={Compexamwarn} />
         <Route path='/student/attcompex' exact component={Compexamination} />
         <Route path='/student/tutors' exact component={Tutors} />
+        <Route path='/teacher/compexam/' exact component={Tviewcompexam} />
+        <Route path='/teacher/compexans/' exact component={Tcompexans} />
+        <Route path='/student/compexans/' exact component={Tcompexans} />
       </Switch>
     </Router>
   </>

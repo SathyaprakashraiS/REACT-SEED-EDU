@@ -21,6 +21,8 @@ const Compexamination = () => {
       }
       const userdata = JSON.parse(localStorage.getItem('theuser'));
       const comepxid=JSON.parse(localStorage.getItem('compexamid'));
+      const comepxname=JSON.parse(localStorage.getItem('compexamname'));
+
       console.log(comepxid)
       var teacher=false
       var student=false
@@ -102,7 +104,7 @@ const Compexamination = () => {
                 form_data.append('sgrade',userdata.standard);
                 form_data.append('stest',comepxid);
                 form_data.append('spoint',"tempo");
-                let resurl=`http://127.0.0.1:8000/Scompexattresulttempo/`+userdata.username+'/'+comepxid+'/'+userdata.email+'/'+userdata.standard;
+                let resurl=`http://127.0.0.1:8000/Scompexattresulttempo/`+userdata.username+'/'+comepxid+'/'+userdata.email+'/'+userdata.standard+'/'+comepxname;
                 axios.post(resurl, form_data, {
                   headers: {
                     'content-type': 'multipart/form-data'
@@ -161,7 +163,7 @@ const Compexamination = () => {
         form_data.append('sgrade',userdata.standard);
         form_data.append('stest',comepxid);
         form_data.append('spoint',points);
-        let resurl=`http://127.0.0.1:8000/Scompexattresult/`+userdata.username+'/'+comepxid+'/'+userdata.email+'/'+userdata.standard+'/'+points+'/'+crt+'/'+wrong;
+        let resurl=`http://127.0.0.1:8000/Scompexattresult/`+userdata.username+'/'+comepxid+'/'+userdata.email+'/'+userdata.standard+'/'+points+'/'+crt+'/'+wrong+'/'+comepxname;
         axios.post(resurl, form_data, {
           headers: {
             'content-type': 'multipart/form-data'
