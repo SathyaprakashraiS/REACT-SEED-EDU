@@ -100,6 +100,7 @@ if(api)
     <div className="centertext">
     <a href="/colleges/" >Go back</a>
     <h1>STATEWISE COLLEGES IN INDIA</h1>
+    <div className="coverpage">
     </div>
     {apiavail ? (
         <><p>{api}</p>
@@ -122,6 +123,7 @@ if(api)
       ) : (
         <p>no api to fetch from :(</p>
       )}
+      </div>
     </>
     
   );

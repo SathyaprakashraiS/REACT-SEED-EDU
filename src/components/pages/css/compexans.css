@@ -1,0 +1,12 @@
+ .cans_inside{
+    margin-bottom: 10px;
+    background:rgb(13, 173, 157);
+ }
+ .cans_quiz{
+    width:60vw;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    /* background-color: rgb(0, 255, 238); */
+    margin-bottom: 10px;;
+ }

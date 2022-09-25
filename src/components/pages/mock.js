@@ -1,5 +1,5 @@
 import React,{useState,useEffect, Component } from 'react';
-import './shome.css';
+// import './shome.css';
 import { GoogleLogout } from 'react-google-login';
 import axios from 'axios';
 import SNavbar from './snavbar';
@@ -175,7 +175,6 @@ return(
     <div className="main">
     <SNavbar/>
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
 
     {/* <div>
     <h2>Enter Employee Details...</h2>
@@ -235,7 +234,7 @@ return(
     {
       qp.map(item =>(
         <a key={item.id}>
-          <iframe src={item.mockpaper} width="100" height="100"></iframe>
+          <iframe src={item.mockpaper} width="800" height="500"></iframe>
         </a>
       ))
     }

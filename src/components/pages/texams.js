@@ -5,6 +5,7 @@ import { GoogleLogout } from 'react-google-login';
 import TNavbar from './tnavbar';
 import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import { FaPlusCircle } from 'react-icons/fa';
 
 function Texams(){
   let history = useHistory();
@@ -293,33 +294,38 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={centerlol}><b>|_o_|</b></h1>
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
-        <br/><br/><br/>
-
         <h1>ADD EXAM</h1>
-        <label>exam for grade:
+        <div className='texam_inner'>
+          <div className='texam_input'>
+          <label>exam for grade:
           <select onChange={(e) => setBgrade(e.target.value)}>
             <option value="2">Grade 10</option>
             <option value="3">Grade 11</option>
             <option value="4">Grade 12</option>
           </select>
-        </label><br/>
-        <label>Enter exam name:
+        </label>
+          </div>
+          <div className='texam_input'>
+          <label>Enter exam name:
         <input
           type="text" 
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        </label><br/>
-        <label>Enter paper description:
+        </label>
+          </div>
+          <div className='texam_input'>
+          <label>Enter paper description:
         <input
           type="text" 
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
-        </label><br/>
-        <label>Enter max marks:
+        </label>
+          </div>
+          <div className='texam_input'>
+          <label>Enter max marks:
         <input
           type='number'
           step="1"
@@ -328,8 +334,10 @@ return(
           value={rating}
           onChange= {(e) => setRating(e.target.value)}
         />
-        </label><br/>
-        <label>attach question paper:
+        </label>
+          </div>
+          <div className='texam_input'>
+          <label>attach question paper:
         <input type="file" name="file" onChange={fileHandler} />
 			{isFilePicked ? (
 				<div>
@@ -345,8 +353,13 @@ return(
 			) : (
 				<p>Select a file to show details</p>
 			)}
-        </label><br/>
-        <button onClick={() => createbook()}>ADD EXAM</button>
+        </label>
+          </div>
+          <div className='texam_input'>
+          <button onClick={() => createbook()}>ADD EXAM <FaPlusCircle/></button>
+          </div>
+   
+      
 
         {(updexam.length>0) && (!updloading)?<>
           <h1>UPDATE EXAM DETAILS</h1>
@@ -408,47 +421,54 @@ return(
               </a>
               ))
             }
-        </>:<></>}
+        </>:<></>}</div>
+       
 
         <h1>UPDATE EXAM</h1>
         {(!loading) && (book.length>0) ?
-          <>
+          <div className='tupdate_main'>
           {
             book.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
-                  <p>name: {item.mockpapername}</p>
-                  <p>paperdescription: {item.paperdescription}</p>
-                  <p>marks: {item.totalmarks}</p>
+                <div className='texam_remove'>
+                  <p><b>name: </b>{item.mockpapername}</p>
+                  <p><b>paperdescription: </b>{item.paperdescription}</p>
+                  <p><b>marks: </b>{item.totalmarks}</p>
                   <form action={item.mockpaper}>
                     <input type="submit" value="View paper"/>
                   </form>
-                  <button onClick={() => updateexam(item.id)}>UPDATE EXAM</button>
+                  <button onClick={() => updateexam(item.id)} style={{
+                    background:"#1dd7e1"
+                  }}>UPDATE EXAM</button>
+                </div>
                 </div>
               </a>
               ))
             }
-          </>:<>{loading?<p>Opening the Vault</p>:<><p>no exams created by you were found,</p><p>add exams to update them</p></>}</>}
+          </div>:<>{loading?<p>Opening the Vault</p>:<><p>no exams created by you were found,</p><p>add exams to update them</p></>}</>}
 
         <h1>REMOVE EXAM</h1>
           {(!loading) && (book.length>0) ?
-          <>
+          <div className='tupdate_main'>
           {
             book.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
-                  <p>name: {item.mockpapername}</p>
-                  <p>paperdescription: {item.paperdescription}</p>
-                  <p>marks: {item.totalmarks}</p>
+                  <div className='texam_remove'>
+                  <p><b>name: </b>{item.mockpapername}</p>
+                  <p><b>paperdescription:</b> {item.paperdescription}</p>
+                  <p><b>marks:</b> {item.totalmarks}</p>
                   <form action={item.mockpaper}>
-                    <input type="submit" value="View paper"/>
+                    <input type="submit" value="View paper"/> 
                   </form>
                   <button onClick={() => deletebook(item.id)}>DELETE EXAM</button>
+                </div>
                 </div>
               </a>
               ))
             }
-          </>:<>{loading?<p>Opening the Vault</p>:<><p>no exams created by you were found,</p><p>add exams to delete them</p></>}</>}
+          </div>:<>{loading?<p>Opening the Vault</p>:<><p>no exams created by you were found,</p><p>add exams to delete them</p></>}</>}
 
         <h1>REMOVED EXAMS</h1>
         {(!resloading) && (resexam.length>0) ?

@@ -1,5 +1,133 @@
+
+.t_asses_out{
+  width:70vw;
+  height:auto;
+  display: flex;
+  flex-direction: row;
+  /* background-color: green; */
+  padding: 1%;
+}
+
+.t_asses_main{
+  width:30vw;
+  height:auto;
+  display: flex;
+  min-height: 10vh;
+  flex-direction: column;
+  background: black;
+  color: white;
+  padding:5%;
+  text-transform: uppercase;
+  column-gap: 10px;;
+  justify-content: center;
+  
+}
+.t_as_items {
+  border:1px solid rgb(3, 197, 197);
+  padding:3%;
+}
+.t_as_items > button{
+  border:0;
+  height:30px;
+  background-color: rgb(9, 166, 227);
+  border-radius: 25px;
+}
+.t_as_items > label > input{
+  width:100px;
+  padding: 10px;
+  margin:10px 0;
+  border:0;
+  border-radius:10px;
+}
+
+.t_view_asses{
+  width:40vw;
+  height:auto;
+  background-color: black;
+ 
+ 
+}
+.t_view_asses >iframe{
+  width:100%;
+  height:100%;
+}
+
+.tpaper_asses{
+  width:70vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.to_asses{
+  width:20vw;
+  height: auto;
+  display: flex;
+  min-height: 10vh;
+  margin-bottom:10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  color: white;
+  text-transform: uppercase;
+}
+.to_asses > *{
+  width:90%;
+  border:1px solid rgb(4, 0, 255);
+  padding:3%;
+}
+.to_asses > p > b{
+  text-align: left;
+  color:red;
+}
+.to_asses > button{
+  background: rgb(2, 190, 253);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .profile{
-    margin-top:7%;
+
+  margin-top:7%;
     width:75%;
   }
   
@@ -54,7 +182,7 @@
 .dispbook
 {
   background-color: rgb(3, 238, 23);
-  height:450px;
+  height:auto;
   padding-top:20px;
   display: flex;
   flex-direction: column;

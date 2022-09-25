@@ -243,7 +243,7 @@ useEffect(()=>{
      tsc++
      setts(ts+1)
      if(ts===3){
-      alert("You exceed the limit of tab switching..veliya poda ")
+      // alert("You exceed the limit of tab switching..veliya poda ")
       history.push("/student");
      }
      console.log(tsc)

@@ -1,5 +1,5 @@
 import React,{useState,useEffect, Component } from 'react';
-import './css/arts.css';
+import './srevnotes.css';
 import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
 import { Link, Redirect, useHistory } from 'react-router-dom';
@@ -76,34 +76,38 @@ function Snotes(){
           let center={
               marginLeft:'35%',
           };
-          let thecont={
-            marginLeft:'15%',
-          }
+          // let thecont={
+          //   marginLeft:'15%',
+          // }
 
 return(
     
     <div className="main">
     <SNavbar/>
 
-    <div className="inmain">
+    <div className="srev_main">
     <h1 style={center}><b>REVISION NOTES</b></h1>
     <h1><b>CLASS {userdata.standard}</b></h1>
     
 
   </div>
-  <div style={thecont}>
-  <div class="container">
+  <div >
+  <div class="scontainer">
     {
     book.map(item => (
-        <div class="card-box">
+        <div class="scard-box">
       <a key={item.id}>
-      <div class="card-img">
+        <div className='scard_outer'>
+        <div class="scard-img">
       <img src={item.thumbnail} alt=""/>
           </div>
-      
-    <p><b>{item.title}</b></p>
+     <div className='scard-info'>
+     <p><b>{item.title}</b></p>
     <p><b>{item.sub}</b></p>
-    <a href={"http://127.0.0.1:8000"+item.file}><b>READ NOTES</b></a>
+    <a href={item.file}>Read</a></div> 
+        </div>
+      
+    
     
       </a>
       </div>

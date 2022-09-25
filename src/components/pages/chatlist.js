@@ -121,25 +121,29 @@ return(
     <div className="main">
     <TNavbar/>
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
     
     <h1>CREATE A CHAT COMMUNITY</h1>
-    <label><b>Enter comunity name:</b>
+    <div className='chat_create_main'>
+      <div className='chat_create_in'>
+      <label><b>Enter comunity name:</b>
         <input
           type="text" 
           value={comname}
           onChange={(e) => setcomname(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter grade description:</b>
+        </label>
+      </div>
+      <div className='chat_create_in'>
+      <label><b>Enter grade description:</b>
         <input
           type="text" 
           value={comgrade}
           onChange={(e) => setcomgrade(e.target.value)}
         />
-        </label><br/>
-        
-        <label>Add group icon:
+        </label>
+      </div>
+      <div className='chat_create_in'>
+      <label>Add group icon:
         <input type="file" name="image" accept="image/png, image/jpeg" onChange={imageHandler} />
 			{isimgPicked ? (
 				<div>
@@ -148,23 +152,42 @@ return(
 			) : (
 				<p>Select a image to show details</p>
 			)}
-        </label><br/>
-        <button onClick={() => createcommunity()}>CREATE COMMUNITY</button>
+        </label>
+      </div>
+      <div className='chat_create_in'>
+      <button onClick={() => createcommunity()}>CREATE COMMUNITY</button>
+      </div>
+    </div>
+   
+        
 
-    <h1>UPDATE COMMUNITY DETAILS</h1>
+    {/* <h1>UPDATE COMMUNITY DETAILS</h1> */}
     
     <h1><b>DELETE CHAT</b></h1>
     {chatcomms.length>0 ? 
-    <div className="cmain">
+    <div className="deletec_main">
     {
     chatcomms.map(item => (
     <a key={item.id}>
-        <b>group name:{item.commname}</b><br/>
+      <div className='delete_chat'>
+        <div className='delete_chat_in'>
+           <b>group name:{item.commname}</b>
+           </div>
+        <div className='delete_chat_in'>
         <p>group for:{item.comgrade}</p>
+        </div>
+        <div className='delete_chat_in'>
         <p>group was created by:{item.commcreatedby}</p>
-        <button onClick={() => gotochat(item.id)}>view group</button>
-        <button onClick={() => deletechat(item.id)}>delete group</button>
-        <br></br>
+        </div>
+        <div className='delete_chat_in'>
+          <div className='delete_button'>
+          <button onClick={() => gotochat(item.id)}>view group</button>
+          <button onClick={() => deletechat(item.id)}>delete group</button>
+          </div>
+        </div>
+   
+      </div>
+       
     </a>
     ))
     }

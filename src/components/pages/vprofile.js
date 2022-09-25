@@ -51,76 +51,117 @@ function Vprofile() {
     
     <>
     {userdata?
-        <>
-            <div className="outer"> 
+      
+            <div className="vp_outer"> 
                 <Navbar/>
-                <div className="hmain">
+                {/* <div className="vp_main">
                 <p>view profile</p>
-                </div>
+                </div> */}
                 
                 {
                 userdata.teacher=false?<>
                 <div className="sbox">
                   <p>STUDENT PROFILE</p>
+                  
                   {
                     profdetails.map(item => (
+                      <div className='vp_main'>
                     <a key={item.id}>
+                      <div className='vp_items'>
                         <img className="bimg" src={item.img} />
+                      </div>
+                      <div className='vp_items'>
                         <p><b>USERNAME:{item.username}</b></p>
+                      </div>
+                      <div className='vp_items'>  
                         <p><b>EMAIL:{item.email}</b></p>
-                        <p><b>ABOUT:{item.status}</b></p>
-                        {
+                      </div>
+                      <div className='vp_items'>
+                      <p><b>ABOUT:{item.status}</b></p>
+                      </div>
+                      <div className='vp_items'>
+                      {
                           item.hide?<>
                             <b><p>HIDE STATUS:ENABLED</p></b>
                           </>:<>
                             <b><p>HIDE STATUS:DISABLED</p></b>
                           </>
                         }
-                        <p><b>GRADE:{item.standard}</b></p>
-                        {
-                          item.needassist?<>
+                      </div>
+                      <div className='vp_items'>
+                      <p><b>GRADE:{item.standard}</b></p>
+                      </div>
+                      <div className='vp_items'>
+                      {
+                          item.needassist?<> 
                             <p><b>REQUEST TUTORING:ENABLED</b></p>
                           </>:
                           <>
                             <p><b>REQUEST TUTORING:DISABLED</b></p>
                           </>
                         }
-                        {
+                      </div>
+                      <div className='vp_items'>
+                      {
                           item.contactnumber=="9876543210"?<>
                             <p><b>CONTACT NOT YET ADDED</b></p>
                           </>:<>
                             <p><b>CONTACT NUMBER:{item.contactnumber}</b></p>
                           </>
                         }
-                        <button onClick={()=>goback()}>Go back</button>
-                        <button onClick={()=>editprofile()}>edit profile</button>
-                        <br></br>
+                      </div>
+                      <div className='vp_items'>
+                      <button onClick={()=>goback()}>Go back</button>
+                      </div>
+                      <div className='vp_items'>
+                      <button onClick={()=>editprofile()}>edit profile</button>
+                      </div>
+                
                     </a>
+                    </div>
                     ))
                 
                 }
+                  
+           
                 </div>
                   </>
-                  :<>
-                  <br/>
+                  :
                   <div className="tbox">
-                  <p>TEACHER PROFILE</p>
+                  {/* <p>TEACHER PROFILE</p> */}
+                 
                   {
                     profdetails.map(item => (
+                      
                     <a key={item.id}>
-                        <img className="bimg" src={item.img} />
-                        <p><b>NAME:{item.username}</b></p>
-                        <p><b>MAIL:{item.email}</b></p>
-                        <p><b>ABOUT:{item.status}</b></p>
-                        {
+                      <div className='vp_main'>
+                      <div className='vp_image'>
+                      <img className="bimg" src={item.img} />
+                      </div>
+                      <div className='vp_item_main'>
+                      <div className='vp_items'>
+                      <p><b>NAME:{item.username}</b></p>
+                      </div>
+                      <div className='vp_items'>
+                      <p><b>MAIL:{item.email}</b></p>
+                      </div>
+                      <div className='vp_items'>
+                      <p><b>ABOUT:{item.status}</b></p>
+                      </div>
+                      <div className='vp_items'>
+                      {
                           item.hide?<>
                             <b><p>HIDE STATUS:ENABLED</p></b>
                           </>:<>
                             <b><p>HIDE STATUS:DISABLED</p></b>
                           </>
                         }
-                        <p><b>GRADE:{item.standard}</b></p>
-                        {
+                      </div>
+                      <div className='vp_items'>
+                      <p><b>GRADE:{item.standard}</b></p>
+                      </div>
+                      <div className='vp_items'>
+                      {
                           item.advertise?<>
                             <p><b>ADVERTISE:ENABLED</b></p>
                           </>:
@@ -128,27 +169,51 @@ function Vprofile() {
                             <p><b>ADVERTISE:DISABLED</b></p>
                           </>
                         }
-                        {
+                      </div>
+                      <div className='vp_items'>
+                      {
                           item.contactnumber=="9876543210"?<>
                             <p><b>CONTACT NOT YET ADDED</b></p>
                           </>:<>
                             <p><b>CONTACT NUMBER:{item.contactnumber}</b></p>
                           </>
                         }
-                        <p><a href={item.resume}><b>CLICK TO VIEW RESUME</b></a></p>
-                        <button onClick={()=>goback()}>Go back</button>
-                        <button onClick={()=>editprofile()}>edit profile</button>
-                        <br></br>
+                      </div>
+                      <div className='vp_items'>
+                      <p><a href={item.resume}><b>CLICK TO VIEW RESUME</b></a></p>
+                      </div>
+                      <div className='vp_items'> 
+                      <button onClick={()=>goback()}>Go back</button>
+                      </div>
+                      <div className='vp_items'>
+                      <button onClick={()=>editprofile()}>edit profile</button>
+                      </div>
+                      </div>
+                    
+                        
+                        
+                       
+                       
+                       
+                       
+                       
+                       
+                      
+                      </div>  
+                
                     </a>
+                  
                     ))
                 
                 }
+                
+                 
                 </div>
-                  </>
+                
                 }
                 
             </div>
-        </>:
+       :
         <>
             {pushout()}
         </>

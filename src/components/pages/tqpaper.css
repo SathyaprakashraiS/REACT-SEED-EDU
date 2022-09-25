@@ -1,3 +1,91 @@
+
+.t_qp_out{
+  width:30vw;
+  height:auto;
+  background: #000000;
+  display: flex;
+  min-height: 10vh;
+  flex-direction: column;
+  row-gap: 20px;
+  text-transform: uppercase;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+
+  padding:5%;
+}
+.t_bank_paper{
+  display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ row-gap: 20px;
+ column-gap:10px;
+}
+.tb_paper{
+  width:20vw;
+  height:auto;
+  background: #0086d4;
+}
+
+.t_qp_in{
+  width:100%;
+  align-self: center;
+}
+.t_qp_in > label {
+  color:rgb(196, 179, 30);
+}
+
+.t_qp_in > label >input{
+  width:150px;
+  padding: 6px;
+  margin:10px 10px;
+  border:0;
+  border-radius:10px;
+
+}
+.t_qp_in > button{
+  border:0;
+  background: rgb(0, 255, 0);
+  width:200px;
+  height:40px;
+  border-radius: 25px;
+}
+
+select{
+  width:150px;
+  padding: 6px;
+  border:0;
+  border-radius:10px;
+  background: #6e6969;
+  
+
+}
+select > option{
+ background: #2a0052;
+ color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .profile{
     margin-top:7%;
     width:75%;
@@ -15,7 +103,7 @@
     height: 100%;
     overflow: auto;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: uppercase; 
     scrollbar-width:thin;;
   }
   

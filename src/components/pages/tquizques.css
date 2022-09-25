@@ -1,3 +1,80 @@
+.quiz_qadd{
+  width:40vw;
+  height: auto;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding:5%;
+  text-transform: uppercase;
+}
+.quiz_question > label > input{
+  width:500px;
+  padding: 20px;
+  border:0;
+  border-radius:10px;
+
+}
+.quiz_optans > label > input{
+  width:100px;
+  padding: 10px;
+  border:0;
+  border-radius:10px;
+
+}
+.quiz_options > label > input{
+  width:300px;
+  padding: 10px;
+  border:0;
+  border-radius:10px;
+
+}
+
+.quiz_qadd > button{
+  border:0;
+  height:20px;
+  border-radius: 25px;
+   font-family: 'Times New Roman', Times, serif;
+  background: rgb(8, 218, 8);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .profile{
     margin-top:7%;
     width:75%;

@@ -1,42 +1,73 @@
 .revmain{
     background:#150A41;
 }
-.rview{
-    width:90vw;
-    height:90vh;
-    /* padding:5%; */
+.rev_header{
+    width:100vw;
+    height:10vh;
     display: flex;
-    align-self: center;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: uppercase;
+    color:white;
+}
+.rev_hinner{
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    background:rgba(55, 216, 127, 0.322);
-    position: absolute;
-    display: none;
+}
+.rev_hinner > input{
+    width:100px;
+    height:20px
+}
 
+.rev_main_out{
+    width:100vw;
+    height:auto;
+    display: flex;
+    flex-direction: row;
 }
- .rview_show{
-  display: block;
+
+.rev_search{
+    width:30vw;
 }
+.rev_disp{
+    width:65vw;
+    /* background: red; */
+}
+.rev_viewer{
+    width:100%;
+    height:100%;
+    margin-left: 20px;
+    background: url("https://img.freepik.com/free-vector/open-book-with-mystic-bright-light_1284-12772.jpg?w=740&t=st=1663797743~exp=1663798343~hmac=5b3e8be076f42a2598f495e1fa9f4faa066d40b6d07eb95c3129b45638635086");
+}
+
 .revmain > h1{
     color:white;
     text-align: center;
 }
-.srev > h4,h3{
-    color:white;
-}
+
+
+
 
 .revcard{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: 5%;
+    row-gap: 5px;
+    column-gap: 5px;
+    background: rgb(255, 255, 255);
+   
+    /* margin-left: 5%; */
 }
 .inrev{
-    width:300px;
-    height:400px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    background:rgb(4, 17, 75);
+    width:200px;
+    height:250px;
+   
+    background:rgb(0, 0, 0);
+    color:white;
+    text-transform: uppercase;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,11 +80,12 @@
     color:white;
     background:black;
 }
-.inrev > *{
-   /* text-transform: uppercase; */
-}
+
 
 .inrev > img{
-    width:300px;
-    height:200px;
+    width:100%;
+    height:100px;
 }
+
+
+

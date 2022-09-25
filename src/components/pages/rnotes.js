@@ -7,28 +7,12 @@ import GLogin from './log';
 import Navbar from '../navbar';
 import { Link, Redirect,useHistory } from 'react-router-dom';
 import { PdfView } from '../structures/PdfView';
+import { FaWindowClose } from 'react-icons/fa';
 
 
 function hello(s){
-console.log("hello")
-let val  = s;
- const rview = document.querySelectorAll(".rview")
- const close = document.querySelectorAll(".close_view")
- const butt = document.querySelectorAll(".view_but")
- const len = rview.length
- for(let i = 0;i<len;i++){
-
-butt[i].onclick = ()=>{
-  rview[i].classList.add("rview_show")
-}
-
- 
-
-
-  close[i].onclick = ()=>{
-    rview[i].classList.remove("rview_show")
-  }
- }
+let vie = document.querySelector(".rev_viewer")
+vie.src = s
  
 
 
@@ -84,13 +68,7 @@ function Rnotes()
   const { state } = ([])
   var authenticated=false;
 
-  // try{
-  //   state = this.props.location
-  //   authenticated=true
-  // }
-  // catch{
 
-  // }
 
   if(locdata!=null)
   {
@@ -164,19 +142,25 @@ if(api)
   return(
     <div className="revmain">
     <Navbar />
+    <div className='rev_header'>
+    
+    <div className='rev_hinner'><h4>SEARCH NOTES BY SUBJECT:</h4>
+    <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
+    </div>
     <h1>REVISION NOTES</h1>
+    
+    <h3>Books for {sname}</h3>
+    </div>
+   
 
    
     {apiavail ? (
-        <><p>{api}</p>
-             <div className="srev">
-                  <h4>SEARCH NOTES BY SUBJECT:</h4>
-                    <input type="input " id="colle" onChange={ (event) => SortCity(event.target.value) }></input>
-                    <h3>Books for {sname}</h3>
-                    {/* <button onClick={SortCity}>Search</button> */}
-                
-                    <div className="revcard">
-                      {/* PART TO DISPLAY SEARCHED RESULT */}
+        <div className='rev_main_out'>
+          <div className='rev_search'>
+          <div className="srev">
+               
+                  <div className="revcard">
+            
       {
       
       sub.map(item => (
@@ -186,9 +170,8 @@ if(api)
         <b>{item.title}</b>
         <b>{item.sub}</b>
         <b>{item.grade}</b>
-        <a href={"http://127.0.0.1:8000"+item.file}>REA</a>
+        {/* <a href={"http://127.0.0.1:8000"+item.file}>READ</a> */}
     
-        <br></br><br></br>
         </div>
       </a>
       ))
@@ -198,8 +181,6 @@ if(api)
       </div> 
                     
                 </div>
-
-        {/* DISPLAY ALL PART */}
        <div className="revcard">
       {
       notes.map(item => (
@@ -211,12 +192,8 @@ if(api)
         <b>{item.grade}</b>
         {/* {item.file} */}
         {/* <a  href={"http://127.0.0.1:8000"+item.file}>READ</a> */}
-        <button className="view_but" onClick={(e)=>hello(item.file)}>HELLO</button>
-        <div className="rview">
-<button className="close_view">close</button>
-<a>{item.file}</a>
-<PdfView pdf={item.file}/>
-</div>
+        <button className="view_but" onClick={(e)=>hello(item.file)}>READ</button>
+      
         </div>
    
       </a>
@@ -225,8 +202,14 @@ if(api)
       }
  
       </div> 
+      
+          </div>
+          <div className='rev_disp'>
+        <iframe src="" className='rev_viewer'></iframe>
+      </div>
+             
     
-        </>
+        </div>
       ) : (
         <p>no api to fetch from :(</p>
       )}

@@ -1,0 +1,14 @@
+.tview_inside{
+    width:40vw;
+    background:#333333;
+    color:white;
+}
+.tview_inside > button{
+    background: rgb(0, 213, 255);
+    width:200px;
+    height:30px;
+    border:0;
+    border-radius:5px;
+    text-align: center;
+
+}

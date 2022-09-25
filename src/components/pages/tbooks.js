@@ -5,6 +5,7 @@ import axios from 'axios';
 import TNavbar from './tnavbar';
 // import BookStruct from '../structures/BookStruct';
 import { Redirect, useHistory } from 'react-router-dom';
+import { FaFolderPlus } from 'react-icons/fa';
 
 function Tbooks(){
   let history = useHistory();
@@ -274,7 +275,7 @@ function Tbooks(){
       }
 
     async function restorebook(theid){
-      let resurl=`http://127.0.0.1:8000/tdelbook-list/`+userdata.email+'/'+theid+`/`;
+      let resurl=`http://127.0.0.1:8000/tresbook-list/`+userdata.email+'/'+theid+`/`;
       const request = await fetch(resurl)
         .then(response => {
           if(response.ok)
@@ -316,47 +317,57 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={centerlol}><b>|_o_|</b></h1>
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
-        <br/><br/><br/>
 
         <h1>ADD BOOK</h1>
-        <label>book for grade:
+        <div className='tbook_addmain'>
+          <div className='tbook_igrid'>
+          <label>book for grade:
           <select onChange={(e) => setBgrade(e.target.value)}>
             <option value="2">Grade 10</option>
             <option value="3">Grade 11</option>
             <option value="4">Grade 12</option>
           </select>
-        </label><br/>
-        <label>Enter book name:
+        </label>
+          </div>
+          <div className='tbook_igrid'>
+          <label>Enter book name:
         <input
           type="text" 
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        </label><br/>
-        <label>Enter subject name:
+        </label>
+          </div>
+          <div className='tbook_igrid'>
+          <label>Enter subject name:
         <input
           type="text" 
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
-        </label><br/>
-        <label>Enter book details:
+        </label>
+          </div>
+          <div className='tbook_igrid'>
+          <label>Enter book details:
         <input
           type="text" 
           value={details}
           onChange={(e) => setDetails(e.target.value)}
         />
-        </label><br/>
-        <label>Enter book review:
+        </label>
+          </div>
+          <div className='tbook_igrid'>
+          <label>Enter book review:
         <input
           type="text" 
           value={review}
           onChange={(e) => setReview(e.target.value)}
         />
-        </label><br/>
-        <label>Enter book rating:
+        </label>
+          </div>
+          <div className='tbook_igrid'>
+          <label>Enter book rating:
         <input
           type='number'
           step="0.1"
@@ -365,8 +376,10 @@ return(
           value={rating}
           onChange= {(e) => setRating(e.target.value)}
         />
-        </label><br/>
-        <label>Add book image:
+        </label>
+          </div>
+          <div className='tbook_igrid'>
+          <label>Add book image:
         <input type="file" name="image" accept="image/png, image/jpeg" onChange={imageHandler} />
 			{isimgPicked ? (
 				<div>
@@ -382,15 +395,18 @@ return(
 			) : (
 				<p>Select a image to show details</p>
 			)}
-        </label><br/>
-        <label>Enter book author:
+        </label>
+          </div>
+          <div className='tbook_igrid'> <label>Enter book author:
         <input
           type="text" 
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
-        </label><br/>
-        <label>Enter book pdf:
+        </label>
+        </div>
+          <div className='tbook_igrid'>
+          <label>Enter book pdf:
         <input type="file" name="file" onChange={fileHandler} />
 			{isFilePicked ? (
 				<div>
@@ -406,9 +422,12 @@ return(
 			) : (
 				<p>Select a file to show details</p>
 			)}
-        </label><br/>
-        <button onClick={() => createbook()}>ADD BOOK</button>
-
+        </label>
+          </div>
+          <div className='tbook_igrid'>   <button onClick={() => createbook()}>ADD BOOK<FaFolderPlus className='btfolder'/></button></div>
+     
+     
+        </div>
         {updbdata.length>0 ? <>
           <h1>UPDATE DETAILS</h1>
           {
@@ -416,6 +435,8 @@ return(
               <a key={item.id}>
                 <div classname="dispbook">
                 {/* <img classname="bimg" src={item.image} /> */}
+                <div className='tbook_addmain'>
+                <div className='tbook_igrid'>
                 <label>book for grade:
                   <select onChange={(e) => setupdBgrade(e.target.value)}>
                     <option value="2">select pls</option>
@@ -423,43 +444,55 @@ return(
                     <option value="3">Grade 11</option>
                     <option value="4">Grade 12</option>
                   </select>
-                </label><br/>
-                  <label>Enter book name:
+                </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Enter book name:
                   <input
                     type="text" 
                     value={updname}
                     onChange={(e) => setupdName(e.target.value)}
                   />
-                  </label><br/>
-                  <label>Enter book author:
+                  </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Enter book author:
                   <input
                     type="text" 
                     value={updauthor}
                     onChange={(e) => setupdAuthor(e.target.value)}
                   />
-                  </label><br/>
-                  <label>Enter book subject:
+                  </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Enter book subject:
                   <input
                     type="text" 
                     value={updsubject}
                     onChange={(e) => setupdSubject(e.target.value)}
                   />
-                  </label><br/>
-                  <label>Enter book details:
+                  </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Enter book details:
         <input
           type="text" 
           value={upddetails}
           onChange={(e) => setupdDetails(e.target.value)}
         />
-        </label><br/>
-        <label>Enter book review:
+        </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Enter book review:
         <input
           type="text" 
           value={updreview}
           onChange={(e) => setupdReview(e.target.value)}
         />
-        </label><br/>
-        <label>Enter book rating:
+        </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Enter book rating:
         <input
           type='number'
           step="0.1"
@@ -468,8 +501,10 @@ return(
           value={updrating}
           onChange= {(e) => setupdRating(e.target.value)}
         />
-        </label><br/>
-        <label>Add book image to update :<br/>
+        </label>
+                </div>
+                <div className='tbook_igrid'>
+                <label>Add book image to update :<br/>
         <input type="file" name="image" accept="image/png, image/jpeg" onChange={updimageHandler} />
 			{updisimgPicked ? (
 				<div>
@@ -485,10 +520,14 @@ return(
 			) : (
 				<p>Select a image to show details</p>
 			)}</label>
-                  <form action={item.file}>
+                </div>
+                <div className='tbook_igrid'>
+                <form action={item.file}>
                     <input type="submit" value="Read Book" />
                   </form>
-                  <label>attach new book to attach update pdf:<br/>
+                </div>
+                <div className='tbook_igrid'>
+                <label>attach new book to attach update pdf:<br/>
                   <input type="file" name="file" onChange={updfileHandler} />
                 {updisFilePicked ? (
                   <div>
@@ -504,8 +543,12 @@ return(
                 ) : (
                   <p>Select a file to show details</p>
                 )}
-                  </label><br/>
-                  <button onClick={() => postupdate(item.id)}>POST UPDATED DETAILS</button>
+                  </label>
+                </div>
+                <div className='tbook_igrid'><button onClick={() => postupdate(item.id)}>POST UPDATED DETAILS</button></div>
+        
+                  
+                </div>
                 </div>
               </a>
               ))
@@ -514,57 +557,62 @@ return(
 
         <h1>UPDATE BOOK</h1>
         {(!loading) && (book.length>0) ?
-          <>
+          <div className='tupdate_main'>
           {
             book.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
                 {/* <img classname="bimg" src={item.image} /> */}
-                  <p>name: {item.name}</p>
-                  <p>author: {item.author}</p>
-                  <p>subject: {item.subject}</p>
+                <div className='updatebook_t'>
+                  <p><b>name: </b>{item.name}</p>
+                  <p><b>author: </b>{item.author}</p>
+                  <p><b>subject:</b> {item.subject}</p>
                   {item.bgrade==2?<p>grade: 10</p>:<></>}
                   {item.bgrade==3?<p>grade: 11</p>:<></>}
                   {item.bgrade==4?<p>grade: 12</p>:<></>}
                   <form action={item.file}>
                     <input type="submit" value="Read Book" />
                   </form>
-                  <button onClick={() => updatebook(item.id)}>UPDATE BOOK DETAILS</button>
+                  <button onClick={() => updatebook(item.id)}><b>UPDATE BOOK DETAILS</b></button>
                 </div>
-              </a>
+                </div>
+              </a> 
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to update them</p>}</>}
+          </div>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to update them</p>}</>}
 
         <h1>REMOVE BOOK</h1>
           {(!loading) && (book.length>0) ?
-          <>
+          <div className='tupdate_main'>
           {
             book.map(item => (
               <a key={item.id}>
+                 <div className='updatebook_t'>
                 <div classname="dispbook">
-                <img classname="bimg" src={item.image} />
-                  <p>name: {item.name}</p>
-                  <p>author: {item.author}</p>
-                  <p>subject: {item.subject}</p>
+                <img classname="tbook_remove" src={item.image} />
+                  <p><b>name:</b> {item.name}</p>
+                  <p><b>author: </b>{item.author}</p>
+                  <p><b>subject:</b> {item.subject}</p>
                   {item.bgrade==2?<p>grade: 10</p>:<></>}
-                  {item.bgrade==3?<p>grade: 11</p>:<></>}
+                  {item.bgrade==3?<p>grade: 11</p>:<></>} 
                   {item.bgrade==4?<p>grade: 12</p>:<></>}
                   <a href={item.file}>Read Book</a>
                   <br/>
                   <button onClick={() => deletebook(item.id)}>DELETE BOOK</button>
                 </div>
+                </div>
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
+          </div>:<>{loading?<p>Cruising the shelves</p>:<p>no book available add books to delete</p>}</>}
 
           <h1>RESTORE DELETED BOOKS</h1>
           {(!delloading) && (delbook.length>0) ?
-          <>
+          <div className='updatebook_t'>
           {
             delbook.map(item => (
               <a key={item.id}>
+                 <div className='updatebook_t'>
                 <div classname="dispbook">
                 <img classname="bimg" src={item.image} />
                   <p>name: {item.name}</p>
@@ -577,10 +625,11 @@ return(
                   <br/>
                   <button onClick={() => restorebook(item.id)}>RESTORE BOOK</button>
                 </div>
+                </div>
               </a>
               ))
             }
-          </>:<>{delloading?<p>Minning the Bin</p>:<><p>no books have been deleted previously,</p><p>delete books to restore them</p></>}</>}
+          </div>:<>{delloading?<p>Minning the Bin</p>:<><p>no books have been deleted previously,</p><p>delete books to restore them</p></>}</>}
     </div>
 </div>
     );

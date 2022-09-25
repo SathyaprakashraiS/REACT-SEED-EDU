@@ -11,12 +11,12 @@
  
   
     
-}
+} 
 
 .info *{
   color:white;
-  border:2px solid rgb(38, 226, 116);
-  background: linear-gradient(190deg, rgba(76,131,207,1) 26%, rgba(53,89,240,1) 61%);
+  /* border:2px solid rgb(38, 226, 116);
+  background: linear-gradient(190deg, rgba(76,131,207,1) 26%, rgba(53,89,240,1) 61%); */
 }
 
 
@@ -35,13 +35,13 @@
   top:0;
   left:0;
   transform-style: preserve-3d;
-  transition: 1.5s ease-in-out;
+  transition: 1s ease-in-out;
   backface-visibility: hidden;
   transform: perspective(500px) rotateY(0deg);
 }
 
 .books .face.front{
-  background: linear-gradient(190deg, rgb(196, 88, 16) 26%, rgb(99, 12, 197) 61%);
+  background:#191919;
 }
 .books:hover .face.front{
   transform: perspective(500px) rotateY(180deg);
@@ -58,10 +58,4 @@
   transform: perspective(500px) rotateY(360deg);
 }
 
-.books:hover .face .img{
-  transform: perspective(500px) translateZ(50px);
-}
-.books:hover .face .info{
-  transform: perspective(500px) translateZ(50px);
-}
 

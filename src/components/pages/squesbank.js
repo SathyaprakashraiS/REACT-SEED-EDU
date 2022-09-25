@@ -142,7 +142,7 @@ else{
 
 
   let center={
-    marginLeft:'30%',
+    marginLeft:'50%',
 };
     
       
@@ -153,11 +153,11 @@ return(
     <SNavbar/>
     {/* <div style={page}> */}
     {/* {userdata.standard} */}
-    <div className="inmain">
+    <div className="qbhome">
     <h1 style={center}><b>QUESTION BANK</b></h1>
-    <div className="thecard">
+    <div className="qbouter">
     {apiavail ? (
-        <>
+        <div className='qptype'>
       {
       qtype.map(item => (
       <a key={item.id}>
@@ -172,7 +172,7 @@ return(
   
       }
     
-        </>
+        </div>
       ) : (
         <><p>{api}</p>
         <p>no api to fetch from :(</p> </>
@@ -193,7 +193,7 @@ return(
         <b>{item.papertype}</b>
         <b>{item.key}</b>
         <b>{item.year}</b>
-        <a href={"http://127.0.0.1:8000"+item.paper}>VIEW PAPER</a>
+        <a href={item.paper}>VIEW</a>
         </div>
       </a>
       ))

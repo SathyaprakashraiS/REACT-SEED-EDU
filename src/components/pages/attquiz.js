@@ -276,23 +276,21 @@ var tsc = 0
 useEffect(()=>{
   let check = document.querySelector(".aqmain")
   let warn_check = document.querySelector(".warn_model")
-  // const ok= ()=>{
-  //   let warn_check = document.querySelector(".warn_model")
-  //   warn_check.classList.remove("show_warn")
-  
-  // }
+ 
   console.log(check)
   document.addEventListener("visibilitychange", function() {
     if (document.visibilityState === 'visible') {
       console.log("hello")
       // warn_check.classList.add("show_warn")
     } else {
-     console.log("poda veliya")
+    //  console.log("poda veliya")
      tsc++
      setts(ts+1)
      if(ts===3){
-      alert("You exceed the limit of tab switching..veliya poda ")
-      history.push("/student");
+      // alert("You exceed the limit of tab switching..veliya poda ")
+      // setts(0)
+      history.push("/home");
+      
      }
      console.log(tsc)
      warn_check.classList.add("show_warn")
@@ -318,7 +316,7 @@ useEffect(()=>{
       
 
   
-      
+       
 
 return(
   <div className="aqmain">
@@ -336,7 +334,7 @@ return(
   quiz.map(item => (
     <div className="qus_item">
     <a key={item.id}>
-      <div className='ques_potti'><p>{item.cquestion}</p><img src="https://c.ndtvimg.com/2019-11/ask3nj1g_cbse-sample-question-paper_625x300_07_November_19.jpg"/></div><br/>
+      <div className='ques_potti'><p>{item.cquestion}</p></div><br/>
       <div className='quiz_potti_outer'>
       <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
       <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,2)}  />{item.coption2}</label><br /></div>
@@ -347,7 +345,7 @@ return(
       <p>B.<button className="optionq" onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>
       <p>C.<button className="optionq" onClick={() => answer(item.id,3)}><p>{item.coption3}</p></button></p>
       <p>D.<button className="optionq" onClick={() => answer(item.id,4)}><p>{item.coption4}</p></button></p> */}
-      {/* <b>CORRECT ANSWER: OPTION {item.canswer}</b> */}
+      <b>CORRECT ANSWER: OPTION {item.canswer}</b>
     </a>
     </div>
     ))

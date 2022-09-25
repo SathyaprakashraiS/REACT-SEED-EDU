@@ -1,5 +1,5 @@
 import React,{useState,useEffect, Component } from 'react';
-import './shome.css';
+
 import { GoogleLogout } from 'react-google-login';
 import axios from 'axios';
 import SNavbar from './snavbar';
@@ -64,11 +64,11 @@ return(
     <div className="main">
     <SNavbar/>
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
-    <h1><b>MOCK WARNING</b></h1>
+    {/* <h1 style={center}><b>|_o_|</b></h1> */}
+    <h1><b>MOCK WARNING</b></h1> 
     <div class="warntext">
       {
-        <>
+        <div className='warn_main'>
   <p><b style={cap}>M</b>ake sure you have a good internet connection to attend the exam</p>
   <p><b style={cap}>A</b>ttending the quiz from PC is advisable</p>
   <p><b style={cap}>O</b>nce the exam is started you can't navigate back or away from the browser</p>
@@ -79,7 +79,7 @@ return(
   <p><b style={cap}>P</b>ress start button to start the exam </p>
   <button onClick={() => goback()}>GO BACK</button>
   <button onClick={() => accept()}>ACCEPT</button>
-  </>
+  </div>
       }
 </div>
     <br/><br/><br/>

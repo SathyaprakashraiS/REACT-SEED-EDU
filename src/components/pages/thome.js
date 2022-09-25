@@ -71,7 +71,7 @@ function Teacher(){
     console.log(userdata)
     
     let center={
-        marginLeft:'50%',
+        marginLeft:'30%',
     };
     let centerlol={
         marginLeft:'45%',
@@ -83,7 +83,9 @@ return(
     <TNavbar/>
     <div className="inmain">
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
+        {/* <h1>MANAGE BOOKS</h1> */}
         <div className='t_tasks'>
+        
             <div className='t_books'>
                 <div className='t_in'>
                 <h1>BOOKS</h1>

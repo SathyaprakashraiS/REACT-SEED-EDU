@@ -1,3 +1,81 @@
+.t_cs_out{
+  width:70vw;
+  height:auto;
+  background: #000000;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto;
+  row-gap: 10px;
+  padding:5%;
+  text-transform: uppercase;
+}
+.t_cs_in{
+  width:20vw;
+  height:auto;
+}
+.t_cs_in > label >b{
+  color: red;
+}
+
+.t_cs_in > label > input{
+  
+  padding: 5px;
+  margin:10px 0;
+  border:0;
+  border-radius:10px;
+
+}
+.t_cs_in > button{
+  width:100px;
+  height:40px;
+  border-radius: 25px;
+  background: rgb(0, 255, 0);
+  border:0;
+  
+}
+.tcourse_main{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap:10px;
+  column-gap:10px;
+
+}
+.tcourse_main > *{
+width:30vw;
+background:rgb(0, 156, 254);
+}
+
+
+.t_cs_det{
+  color:white;
+}
+
+
+.tc_inside{
+  width:30vw;
+  background:black;
+  color:white;
+}
+
+.tc_img{
+  width:100%;
+  height:20%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .profile{
     margin-top:7%;
     width:75%;
@@ -14,7 +92,7 @@
     position: fixed;
     height: 100%;
     overflow: auto;
-    text-align: center;
+    text-align: center; 
     text-transform: uppercase;
     scrollbar-width:thin;;
   }

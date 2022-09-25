@@ -103,7 +103,8 @@ function Tutors(){
       {
                     tutors.map(item => (
                     <a key={item.id}>
-                        {item.advertise?<>
+                        {item.advertise?<div className='tutor_main'>
+                      
                             <img className="bimg" src={item.img} />
                             <p><b>USERNAME:{item.username}</b></p>
                             <p><b>EMAIL:{item.email}</b></p>
@@ -117,7 +118,7 @@ function Tutors(){
                             </>
                             }
                             <p><a href={item.resume}><b>CLICK TO VIEW RESUME</b></a></p>
-                            <br></br></>:<></>
+                            <br></br></div>:<></>
                     }
                     </a>
                     ))
@@ -127,13 +128,16 @@ function Tutors(){
         {
             tutors.map(item => (
             <a key={item.id}>
-                 {!item.advertise?<>
+                 {!item.advertise?
+                 <div className='tutor_main' style={{
+                  background:"red",
+                 }}>
                     <img className="bimg" src={item.img} />
                     <p><b>USERNAME:{item.username}</b></p>
                     <p><b>ABOUT:{item.status}</b></p>
                     <p><b>TUTOR FOR GRADE:{item.standard}</b></p>
                     <br></br>
-            </>:<></>
+                  </div>:<></>
                  }
             </a>
             ))

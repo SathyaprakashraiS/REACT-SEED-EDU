@@ -70,18 +70,19 @@ function Scompexans(){
     {
         marginLeft:'45%',
     };
-    
+     
   return(
       
       <div className="main">
       <TNavbar/>
       
       <div className="inmain">
-      <h1 style={center}><b>|_o_|</b></h1>
       <p><b>COMPETITIVE EXAMS AVAILABLE FOR GRADE 10</b></p>
+      <div className='comp_main'>
       {
       compexamlist.map(item => (
-      <a key={item.id}>
+        <div className='comp_inner'>
+          <a key={item.id}>
         {item.cgrade=="10"?<>
         <p><b>NAME:{item.cname}</b></p>
         <p><b>TOTAL MARKS:{item.totalmarks}</b></p>
@@ -96,19 +97,24 @@ function Scompexans(){
         <br></br></>:<></>
         }
         </a>
+        </div>
+      
         ))    
         }
+      </div>
+    
         <br/>
       <p><b>COMPETITIVE EXAMS AVAILABLE FOR GRADE 11</b></p>
       {
       compexamlist.map(item => (
-      <a key={item.id}>
+        <div className='comp_inner'>
+          <a key={item.id}>
         {item.cgrade=="11"?<>
         <p><b>NAME:{item.cname}</b></p>
         <p><b>TOTAL MARKS:{item.totalmarks}</b></p>
         {
         item.negativemarkings?<>
-        <p><b>WRONG ANSWERS ARE AWARDED -1 POINTS</b></p>
+        <p><b>WRONGS ANSWERS ARE AWARDED WITH -1 POINTS</b></p>
         </>:<>
         <p><b>NO NEGATIVE MARKING</b></p>
         </>
@@ -117,13 +123,16 @@ function Scompexans(){
         <br></br></>:<></>
         }
         </a>
-        ))    
+        </div>
+      
+        ))     
         }
         <br/>
       <p><b>COMPETITIVE EXAMS AVAILABLE FOR GRADE 12</b></p>
       {
       compexamlist.map(item => (
-      <a key={item.id}>
+        <div className='comp_inner'>
+          <a key={item.id}>
         {item.cgrade=="12"?<>
         <p><b>NAME:{item.cname}</b></p>
         <p><b>TOTAL MARKS:{item.totalmarks}</b></p>
@@ -135,9 +144,11 @@ function Scompexans(){
         </>
         }
         <button onClick={() => gotocompex(item.id)}>VIEW EXAM</button>
-        </>:<></>
+        <br></br></>:<></>
         }
         </a>
+        </div>
+      
         ))    
         }
         <br/>

@@ -6,6 +6,11 @@
 } */
 
 
+.main{
+    min-width: 80vw;
+    min-height: 100vh;
+}
+
 .home_h{
     font-family: 'Poppins', sans-serif;
     font-size: 40px;

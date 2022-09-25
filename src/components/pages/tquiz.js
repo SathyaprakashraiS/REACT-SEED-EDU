@@ -342,25 +342,32 @@ return(
         <br/><br/><br/>
 
         <h1>ADD QUIZ</h1>
-        <label><b>Enter quiz name:</b>
-        <input
+        <div className='qh_main'>
+          <div className='qh_inner'>
+          <label><b>Enter quiz name:</b>
+        <input 
           type="text" 
           value={Qname}
           onChange={(e) => setQname(e.target.value)}
         />
-        </label><br/>
-        <label>quiz for grade:
+        </label>
+        <label><b>quiz for grade:</b>
           <select onChange={(e) => setgrade(e.target.value)}>
             <option value="10">Grade 10</option>
             <option value="11">Grade 11</option>
             <option value="12">Grade 12</option>
           </select>
-        </label><br/>
+        </label>
+          </div>
+   
+          <button onClick={() => createquiz()}>ADD QUIZ</button>
+        </div>
+      
         {/* <label><b>Author:</b>{userdata.username}
         </label><br/>
         <label><b>Standard:</b>{userdata.standard}
         </label><br/> */}
-        <button onClick={() => createquiz()}>ADD QUIZ</button>
+       
 
         {(updloading) && (updquiz.length>0)?
         <>
@@ -369,21 +376,26 @@ return(
             updquiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
+                <div className='qh_main'>
+              <div className='qh_inner'>  
                 <label><b>change quiz name:</b>
                 <input
                   type="text" 
                   value={updname}
                   onChange={(e) => setupdname(e.target.value)}
                 />
-                </label><br/>
-                <label>quiz for grade:
+                </label>
+                <label><b>quiz for grade:</b>
                 <select onChange={(e) => setupdgrade(e.target.value)}>
                   <option value="10">Grade 10</option>
                   <option value="11">Grade 11</option>
                   <option value="12">Grade 12</option>
                 </select>
-                </label><br/>
+                </label>
+                </div>
                   <button onClick={() => postupdate(item.id)}>UPDATE QUIZ DETAILS</button>
+                  
+                  </div>
                 </div>
               </a>
               ))
@@ -397,11 +409,14 @@ return(
             quiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
+                  <div className='update_quiz_data'>
                   <p>name: {item.cname}</p>
                   <p>grade: {item.cgrade}</p>
                   <a href={item.file}>View Quiz</a>
                   <br/>
                   <button onClick={() => updatequiz(item.id)}>UPDATE QUIZ</button>
+                  </div>
+                 
                 </div>
               </a>
               ))
@@ -415,11 +430,13 @@ return(
             quiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
+                <div className='remove_quiz_data'>
                   <p>name: {item.cname}</p>
                   <p>grade: {item.cgrade}</p>
-                  <a href={item.file}>View Quiz</a>
+                  <b><a href={item.file}>View Quiz</a></b>
                   <br/>
-                  <button onClick={() => deletequiz(item.id)}>DELETE QUIZ</button>
+                  <button onClick={() => deletequiz(item.id)}>REMOVE QUIZ</button>
+                  </div>
                 </div>
               </a>
               ))
@@ -433,11 +450,13 @@ return(
             delquiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
+                <div className='update_quiz_data'>
                   <p>name: {item.cname}</p>
                   <p>grade: {item.cgrade}</p>
                   <a href={item.file}>View Quiz</a>
                   <br/>
-                  <button onClick={() => restorequiz(item.id)}>RESTORE QUIZ</button>
+                  <button onClick={() => restorequiz(item.id)}>UPDATE QUIZ</button>
+                  </div>
                 </div>
               </a>
               ))
@@ -451,11 +470,13 @@ return(
             quiz.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
+                <div className='update_quiz_data'>
                   <p>name: {item.cname}</p>
                   <p>grade: {item.cgrade}</p>
                   <a href={item.file}>View Quiz</a>
                   <br/>
-                  <button onClick={() => selectquiz(item.id)}>VIEW QUIZ QUESTIONS</button>
+                  <button onClick={() => selectquiz(item.id)}>UPDATE QUES</button>
+                  </div>
                 </div>
               </a>
               ))

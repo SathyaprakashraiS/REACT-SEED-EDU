@@ -15,7 +15,7 @@ function TAsses(){
         <Redirect to="/"/>
         )
     }
-
+ 
     const [paper,setpaper] = useState([]);
     const [epaper,setepaper] = useState([]);
     const [asspaper,setasspaper] = useState([]);
@@ -331,6 +331,11 @@ function TAsses(){
     //     }
     // }
 
+    const ViewAns = (file) =>{
+      let viewer = document.querySelector(".asses_viewer")
+      viewer.src = file
+    }
+
     useEffect(() => {
         fetchEpaper();
         fetchPaper();
@@ -351,9 +356,8 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={centerlol}><b>|_o_|</b></h1>
+  
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
-        <br/><br/><br/>
 
         {(asspaperloading) && (asspaper.length>0)?
         <>
@@ -363,41 +367,57 @@ return(
             asspaper.map(item => (
               <a key={item.id}>
                 <div classname="dispbook">
-                  <p>name: {item.studentname}</p>
-                  <p>testname: {item.testname}</p>
-                  <p>grade: {item.sgrade}</p>
-                  <p>total marks: {item.totalmarks}</p>
-                  <a href={item.answersheet}>View answersheet</a><br/>
-                  <br/>
-                  <label>Enter mark obtained:
-                    <input
-                    type='number'
-                    step="0.1"
-                    min='0'
-                    max={item.totalmarks}
-                    value={tmarks}
-                    onChange={(e) => settmarks(e.target.value)}
-                    />
-                    </label><br/>
-                  <label>attach corrected answersheet:
-                <input type="file" name="file" onChange={fileHandler} />
-                    {isFilePicked ? (
-                        <div>
-                            <p>Filename: {selectedFile.name}</p>
-                            <p>Filetype: {selectedFile.type}</p>
-                            <p>Size in bytes: {selectedFile.size}</p>
-                            <p>
-                                lastModifiedDate:{' '}
-                                {selectedFile.lastModifiedDate.toLocaleDateString()}
-                            </p>
-                <p><a href={selectedFile}>READ FILE</a></p>
+                  <div className='t_asses_out'>
+                            <div className='t_asses_main'>
+                              <div className='t_as_items'><p>name: {item.studentname}</p></div>
+                              <div className='t_as_items'><p>testname: {item.testname}</p></div>
+                              <div className='t_as_items'><p>grade: {item.sgrade}</p></div>
+                              <div className='t_as_items'><p>total marks: {item.totalmarks}</p></div>
+                              <div className='t_as_items'>
+                                {/* <a href={item.answersheet}>View answersheet</a> */}
+                                <button className='view_asses' onClick={(e=>ViewAns(item.answersheet))} style={{
+                                  background : "orange",
+                                }}>VIEW ANSWER SHEET</button>
+                              </div>
+                              <div className='t_as_items'>
+                              <label>Enter mark obtained:
+                              <input
+                              type='number'
+                              step="0.1"
+                              min='0'
+                              max={item.totalmarks}
+                              value={tmarks}
+                              onChange={(e) => settmarks(e.target.value)}
+                              />
+                              </label>
+                              </div>
+                              <div className='t_as_items'> <label>attach corrected answersheet:
+                          <input type="file" name="file" onChange={fileHandler} />
+                              {isFilePicked ? (
+                                  <div>
+                                      <p>Filename: {selectedFile.name}</p>
+                                      <p>Filetype: {selectedFile.type}</p>
+                                      <p>Size in bytes: {selectedFile.size}</p>
+                                      <p>
+                                          lastModifiedDate:{' '}
+                                          {selectedFile.lastModifiedDate.toLocaleDateString()}
+                                      </p>
+                          <p><a href={selectedFile}>READ FILE</a></p>
+                                  </div>
+                              ) : (
+                                  <p>Select a file to show details</p>
+                              )}
+                          </label></div>
+                              <div className='t_as_items'> 
+                              <button onClick={() => submitpaper(item.id)}>POST EVALUATION</button></div>
+                            </div> 
+                            <div className='t_view_asses'>
+                          <iframe src="" className='asses_viewer'></iframe>
                         </div>
-                    ) : (
-                        <p>Select a file to show details</p>
-                    )}
-                </label><br/>
-                  <button onClick={() => submitpaper(item.id)}>POST EVALUATION</button>
-                </div>
+                          </div>
+                       
+                  </div>
+                 
               </a>
               ))
             }
@@ -407,25 +427,28 @@ return(
 
         <h1>PAPERS TO BE ASSESED</h1>
         {(!loading) && (paper.length>0) ?
-          <>
+          <div className='tpaper_asses'>
           {
             paper.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
-                  <p>name: {item.studentname}</p>
-                  <p>testname: {item.testname}</p>
-                  <p>grade: {item.sgrade}</p>
-                  <p>total marks:{item.totalmarks}</p>
-                  <a href={item.answersheet}>View answersheet</a><br/>
-                  <br/>
+                
+                  <div className='to_asses'>
+                  <p><b>name:</b> {item.studentname}</p>
+                  <p><b>testname:</b> {item.testname}</p>
+                  <p><b>grade:</b> {item.sgrade}</p>
+                  <p><b>total marks:</b>{item.totalmarks}</p>
+                  {/* <button className='view_asses' onClick={(e=>ViewAns(item.answersheet))} style={{
+                                  background : "orange",
+                                }}>VIEW ANSWER SHEET</button> */}
                   <button onClick={() => assespaper(item.id)}>ASSES PAPER</button>
-                </div>
+                  </div>
+            
               </a>
               ))
             }
-          </>:<>{loading?<p>Checking the Papers in Bundles</p>:<p>No unevaluated papers found!</p>}</>}
+          </div>:<>{loading?<p>Checking the Papers in Bundles</p>:<p>No unevaluated papers found!</p>}</>}
     
-        <h1>ASSESED PAPERS</h1>
+        {/* <h1>ASSESED PAPERS</h1>
         {(!eloading) && (epaper.length>0) ?
           <>
           {
@@ -438,10 +461,7 @@ return(
                   <p>mark obtained: {item.markobtained}</p>
                   <p>total marks: {item.totalmarks}</p>
                   <p>total: {item.markobtained}/{item.totalmarks}</p>
-                  {/* <a href={item.answersheet}>View answersheet</a><br/>
-                  <a href={item.correctedanswersheet}>View corrected-answersheet</a> */}
                   <br/>
-                  {/* <button onClick={() => viewepaper(item.id)}>VIEW PAPER</button> */}
                   <form action={item.answersheet}>
                     <input type="submit" value="View answersheet" />
                   </form>
@@ -452,7 +472,7 @@ return(
               </a>
               ))
             }
-          </>:<>{eloading?<p>Checking the Paper Bundles</p>:<p>Papers left for evaluation!</p>}</>}
+          </>:<>{eloading?<p>Checking the Paper Bundles</p>:<p>Papers left for evaluation!</p>}</>} */}
 
     
     </div>

@@ -38,13 +38,17 @@ function Tcourse(){
     const [loading,setloading] = useState([true]);
     const [delcourses,setdelcourses] = useState([]);
     const [delloading,setdelloading] = useState([true]);
-    const [selectedimg, setSelectedimg] = useState();
+    const [selectedimg, setSelectedimg] = useState(null);
     const [isimgPicked, setIsimgPicked] = useState(false);
     const imageHandler = (event) => {
-      setSelectedimg(event.target.files[0]);
-      setIsimgPicked(true);        
+      if(event.target.files && event.target.files[0]){
+        setSelectedimg(URL.createObjectURL(event.target.files[0]))
+        setIsimgPicked(true);      
+      }
+      
     };
 
+   
     // const [delbook,setdelbook] = useState([]);
     // const [Qname,setQname] = useState([]);
     // const [book,setbook] = useState([]);
@@ -271,7 +275,7 @@ function Tcourse(){
     }, []);
     console.log(userdata)
     
-    let center={
+    let center={ 
         marginLeft:'38%',
     };
     let centerlol={
@@ -283,26 +287,29 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={centerlol}><b>|_o_|</b></h1>
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
-        <br/><br/><br/>
-
         <h1>ADD COURSE</h1>
-        <label><b>Enter course name:</b>
+        <div className='t_cs_out'>
+          <div className='t_cs_in'>
+          <label><b>Enter course name:</b>
         <input
           type="text" 
           value={cname}
           onChange={(e) => setcname(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter course description:</b>
+        </label>
+          </div>
+          <div className='t_cs_in'>
+          <label><b>Enter course description:</b>
         <input
           type="text" 
           value={cdes}
           onChange={(e) => setcdes(e.target.value)}
         />
-        </label><br/>
-        <label>Enter course rating:
+        </label>
+          </div>
+          <div className='t_cs_in'>
+          <label><b>Enter course rating:</b>
         <input
           type='number'
           step="0.1"
@@ -311,39 +318,55 @@ return(
           value={crating}
           onChange= {(e) => setcrating(e.target.value)}
         />
-        </label><br/>
-        <label>Enter course price[in rs or "Free"]:
+        </label>
+          </div>
+          <div className='t_cs_in'>
+          <label><b>Enter course price[in rs or "Free"]:</b>
         <input
           type="text" 
           value={cprice}
           onChange={(e) => setcprice(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter course link:</b>
+        </label>
+          </div>
+          <div className='t_cs_in'>
+          <label><b>Enter course link:</b>
         <input
           type="text" 
           value={clink}
           onChange={(e) => setclink(e.target.value)}
         />
-        </label><br/>
-        <label>Add course image:
+        </label>
+          </div>
+          <div className='t_cs_in'>
+          <label><b>Add course image:</b>
         <input type="file" name="image" accept="image/png, image/jpeg" onChange={imageHandler} />
 			{isimgPicked ? (
-				<div>
-					{/* <p>Image name: {selectedimg.name}</p>
+				<div className='t_cs_det'>
+					<p>Image name: {selectedimg.name}</p>
 					<p>Image type: {selectedimg.type}</p>
 					<p>Size in bytes: {selectedimg.size}</p>
-					<p>
+					{/* <p>
 						lastModifiedDate:{' '}
 						{selectedimg.lastModifiedDate.toLocaleDateString()}
 					</p> */}
-          <p><a href={selectedimg}>VIEW IMAGE</a></p>
+          <img src={selectedimg} style={{
+            width:"50px",
+            height:"50px"
+          }}></img>
 				</div>
 			) : (
 				<p>Select a image to show details</p>
 			)}
-        </label><br/>
-        <button onClick={() => createcourse()}>ADD COURSE</button>
+        </label>
+          </div>
+          <div className='t_cs_in'> <button onClick={() => createcourse()}>ADD COURSE</button></div>
+         
+        </div>
+
+        
+      
+       
 
         {(updloading) && (updcourses.length>0) ? <>
           
@@ -394,14 +417,14 @@ return(
                 <input type="file" name="image" accept="image/png, image/jpeg" onChange={updimageHandler} />
               {updisimgPicked ? (
                 <div>
-                  {/* <p>Image name: {selectedimg.name}</p>
+                  <p>Image name: {selectedimg.name}</p>
                   <p>Image type: {selectedimg.type}</p>
                   <p>Size in bytes: {selectedimg.size}</p>
-                  <p>
+                  {/* <p>
                     lastModifiedDate:{' '}
                     {selectedimg.lastModifiedDate.toLocaleDateString()}
                   </p> */}
-                  <p><a href={updselectedimg}>VIEW IMAGE</a></p>
+                  <img src={updselectedimg}></img>
                 </div>
               ) : (
                 <p>Select a image to show details</p>
@@ -433,12 +456,12 @@ return(
 
         <h1>SELECT COURSE TO UPDATE</h1>
         {(!loading) && (courses.length>0) ?
-          <>
+          <div className='tcourse_main'>
           {
             courses.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
-                <img classname="bimg" src={item.image} />
+                <div classname="tc_inside">
+                <img className='tc_img' src={item.image} />
                   <p>name: {item.name}</p>
                   <p>description: {item.description}</p>
                   <p>rating: {item.rating}</p>
@@ -451,16 +474,16 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course created by you were found, add course to delete</p>}</>}
+          </div>:<>{loading?<p>Cruising the shelves</p>:<p>no course created by you were found, add course to delete</p>}</>}
 
         <h1>REMOVE COURSE</h1>
           {(!loading) && (courses.length>0) ?
-          <>
+          <div className='tcourse_main'>
           {
             courses.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
-                <img classname="bimg" src={item.image} />
+                <div classname="tc_inside">
+                <img classname="tc_img" src={item.image} />
                   <p>name: {item.name}</p>
                   <p>description: {item.description}</p>
                   <p>rating: {item.rating}</p>
@@ -473,16 +496,16 @@ return(
               </a>
               ))
             }
-          </>:<>{loading?<p>Cruising the shelves</p>:<p>no course created by you were found, add course to delete</p>}</>}
+          </div>:<>{loading?<p>Cruising the shelves</p>:<p>no course created by you were found, add course to delete</p>}</>}
 
           <h1>RESTORE DELETED COURSE</h1>
           {(!delloading) && (delcourses.length>0) ?
-          <>
+          <div className='tcourse_main'>
           {
             delcourses.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
-                <img classname="bimg" src={item.image} />
+                <div classname="tc_inside">
+                <img classname="tc_img" src={item.image} />
                   <p>name: {item.name}</p>
                   <p>description: {item.description}</p>
                   <p>rating: {item.rating}</p>
@@ -495,7 +518,7 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Minning the Bin</p>:<><p>no courses deleted previously,</p><p>delete course to restore!</p></>}</>}
+          </div>:<>{delloading?<p>Minning the Bin</p>:<><p>no courses deleted previously,</p><p>delete course to restore!</p></>}</>}
     </div>
 </div>
     );

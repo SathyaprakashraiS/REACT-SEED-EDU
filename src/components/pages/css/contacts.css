@@ -1,11 +1,24 @@
 .contactcard{
-    background-color: #00FF00;
-    margin:50px;
+    background-color: #cce781;
+    width:50vw;
+    height:30vh;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    
+
 }
 .contacts{
-    background-color: #FFFF00;
+   
 }
-.bimg{
-    width:150px;
-    height:150px;
+
+.con_img {
+    width:50%
 }
+.con_det{
+    width:50%;
+}
+.con_img > img{
+    width:100%;
+    height:100%;
+} 

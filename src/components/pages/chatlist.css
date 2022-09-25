@@ -1,0 +1,68 @@
+.chat_create_main{
+    width:40vw;
+    display: flex;
+    flex-direction: column;
+    background: rgb(0, 0, 0);
+    padding:5%;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+}
+.deletec_main{
+   
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+   
+}
+
+
+.chat_create_in >label >input{
+    width:300px;
+    padding: 10px;
+    margin:10px 0;
+    border:0;
+    border-radius:10px;
+}
+.chat_create_in  > button{
+    width:300px;
+    height:20px;
+    border:0;
+    background: green;
+    color:white;
+    border-radius: 25px;
+    
+}
+
+.delete_chat{
+    width:40vw;
+    display: flex;
+    flex-direction: column;
+    background: black;
+    color: white;
+    row-gap: 10px;;
+    padding:3%;
+    text-transform: uppercase;
+}
+
+.delete_button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+.delete_button > button:nth-child(1){
+    border:0;
+    width:200px;
+    background:rgb(238, 255, 0);
+    color:black;
+    text-transform: uppercase;
+}
+.delete_button > button:nth-child(2){
+    border:0;
+    width:200px;
+    background:red;
+    color:black;
+    text-transform: uppercase;
+     
+}

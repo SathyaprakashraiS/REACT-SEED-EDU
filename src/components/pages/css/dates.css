@@ -1,6 +1,7 @@
 
 *{
-  scrollbar-color: black rgba(5, 38, 187, 0.5)
+  scrollbar-color: rgb(0, 0, 0) rgba(255, 255, 255, 1);
+  scrollbar-width: thin;
 }
 .timeline{
   overflow-x: hidden;

@@ -1,0 +1,12 @@
+.comp_main{
+    width:70vw;
+    height:auto;
+    /* background: black; */
+    color:white;
+}
+
+.comp_inner{
+    width:50vw;
+    height:auto;
+    background: black;
+}

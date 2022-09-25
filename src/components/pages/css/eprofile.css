@@ -1,3 +1,48 @@
 .pagemain{
     background:#150A41;
+} 
+
+.ed_sbox{
+    width:80vw;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    background-size: cover;
+    color:white;
+    margin-left:5%;
+    padding:5%;
+    text-transform: uppercase;
+
 }
+.ed_box_items{
+    width:60vw;
+    height: 20vw;
+    background: #150A41;
+    border:2px solid rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ed_box_items > label > input{
+    width:200px;
+    padding:5px;
+    border-radius: 25px;
+    text-transform: uppercase;
+}
+.ed_box_items > button{
+
+    border:0;
+    width:200px;
+    height:30px;
+    background:rgb(103, 212, 0);
+    color:white;
+    font-size: 20px;
+    text-transform: uppercase;
+
+}
+
+
+

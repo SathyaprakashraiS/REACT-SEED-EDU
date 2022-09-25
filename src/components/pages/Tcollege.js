@@ -3,6 +3,7 @@ import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
 // import Dispcards from './display';
 import './css/Acollege.css';
+import AllCollege from '../structures/AllCollege';
 import GLogin from './log';
 import Navbar from '../navbar';
 
@@ -93,32 +94,38 @@ if(api)
 
         </>
       ) : (
-        <p>Login panra dei</p>
+        <p></p>
       )}
     </div>
     <div className="centertext">
-    <a href="/colleges/" >Go back</a>
+    <a href="/colleges/" ><b>Go back</b></a>
     <h1>TOP COLLEGES IN INDIA</h1>
-    </div>
+    
     {apiavail ? (
         <><p>{api}</p>
-      {
-      college.map(item => (
-      <a key={item.id}>
-      {item.name}
-      {item.city}
-      {item.state}
-      {item.rating}
-      </a>
-      ))
-}
+        <div className='table_out'>
+            <div className="header">
+           <p>Name</p>
+           <p>City</p>
+           <p>State</p>
+           <p>Rating</p> 
+           </div>
+          {
+          college.map(item => (
+          <a key={item.id}>
+              
+              <AllCollege data={item} name={item.name} city={item.city} state={item.state} rating={item.rating}/>
+          
+          </a>
+          ))
+    }
+    </div>
 
         </>
       ) : (
         <p>no api to fetch from :(</p>
-      )}
+      )}</div>
     </>
-    
   );
 }
 

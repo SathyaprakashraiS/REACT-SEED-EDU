@@ -1,7 +1,8 @@
 import React,{useState,useEffect, Component } from 'react';
 import axios from 'axios';
-import TNavbar from './tnavbar';
 import './css/Tviewcompexams.css';
+import TNavbar from './tnavbar';
+
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 function Tviewcompexam(){
@@ -83,6 +84,7 @@ function Tviewcompexam(){
       {
       compexamlist.map(item => (
       <a key={item.id}>
+        <div className='tview_inside'>
         {item.cgrade=="10"?<>
         <p><b>NAME:{item.cname}</b></p>
         <p><b>TOTAL MARKS:{item.totalmarks}</b></p>
@@ -96,7 +98,9 @@ function Tviewcompexam(){
         <button onClick={() => gotocompex(item.id)}>VIEW EXAM</button>
         <br></br></>:<></>
         }
+        </div>
         </a>
+        
         ))    
         }
         <br/>
@@ -104,7 +108,9 @@ function Tviewcompexam(){
       {
       compexamlist.map(item => (
       <a key={item.id}>
+        <div className='tview_inside'>
         {item.cgrade=="11"?<>
+        
         <p><b>NAME:{item.cname}</b></p>
         <p><b>TOTAL MARKS:{item.totalmarks}</b></p>
         {
@@ -117,7 +123,9 @@ function Tviewcompexam(){
         <button onClick={() => gotocompex(item.id)}>VIEW EXAM</button>
         <br></br></>:<></>
         }
+        </div>
         </a>
+
         ))    
         }
         <br/>
@@ -125,6 +133,7 @@ function Tviewcompexam(){
       {
       compexamlist.map(item => (
       <a key={item.id}>
+         <div className='tview_inside'>
         {item.cgrade=="12"?<>
         <p><b>NAME:{item.cname}</b></p>
         <p><b>TOTAL MARKS:{item.totalmarks}</b></p>
@@ -138,6 +147,7 @@ function Tviewcompexam(){
         <button onClick={() => gotocompex(item.id)}>VIEW EXAM</button>
         </>:<></>
         }
+        </div>
         </a>
         ))    
         }

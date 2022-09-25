@@ -1,3 +1,102 @@
+
+.qh_main{
+  width:30vw;
+  height:150px;
+  background: black;
+  display: flex ;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6%;
+  text-transform: uppercase;
+
+}
+.qh_main > button{
+  border:0;
+  background: rgb(0, 250, 0);
+  border-radius: 25px;
+}
+
+.qh_inner{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  justify-self: center;
+}
+.qh_inner > label > input{
+  width:200px;
+  padding: 10px;
+  border:0;
+  margin:10px 10px;
+  border-radius:10px;
+}
+
+.update_quiz_data{
+  width:30vh;
+  height:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+  padding:5%;
+  text-transform: uppercase;
+}
+.update_quiz_data > button{
+  border:0;
+  background: orange;
+  border-radius: 25px;;
+}
+
+.remove_quiz_data{
+  width:30vh;
+  height:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+  padding:5%;
+  text-transform: uppercase;
+}
+
+.remove_quiz_data > button{
+  border:0;
+  background: rgb(255, 0, 0);
+  border-radius: 25px;;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .profile{
     margin-top:7%;
     width:75%;
@@ -18,7 +117,7 @@
     text-transform: uppercase;
     scrollbar-width:thin;;
   }
-  
+   
   lisn a {
     display: block;
     color: rgb(255, 255, 255);

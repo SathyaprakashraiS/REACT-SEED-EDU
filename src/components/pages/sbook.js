@@ -86,7 +86,9 @@ return(
     <h1 style={center}><b>|_o_|</b></h1>
     <h1><b>GRADED BOOKS</b></h1>
     {apiavail ? (
-        <>
+        <div  style={{
+          marginLeft:"100px"
+        }} >
         <div className="sbook">
         {
         book.map(item => (
@@ -99,7 +101,7 @@ return(
         }
         </div>
         <br/><br/><br/>
-        </>
+        </div>
     ):(
         <>
         <h1>RACKS ARE EMPTY, LIBRARY MAY BE CLOSED VISIT US LATER...</h1>

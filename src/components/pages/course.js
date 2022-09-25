@@ -45,7 +45,7 @@ function Course()
     <div class="container">
   <div class="card-box">
     <div class="card-img">
-      <a href="/courses/arts/"><img src="https://www.pursueit.ae/public/uploads/activity-feature-image/thumb/509991583590777.jpg" alt=""/></a>
+      <a href="/courses/arts/"><img src="https://images.aubcdn.com/aub/images/_1200x630_crop_center-center_82_none/COURSE-IMAGE-painting-and-expressionism.jpg?mtime=1591643210" alt=""/></a>
     </div>
     <div class="card-content">
       <span><a href="/courses/arts/">ARTS</a></span>

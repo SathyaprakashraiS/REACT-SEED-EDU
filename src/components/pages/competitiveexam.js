@@ -45,7 +45,7 @@ function CompetitiveElilst(){
       localStorage.setItem('compexansid',JSON.stringify(theid));
         history.push("/student/compexans/");
     }
-
+ 
     async function fetchexamname(){
         var apiavail=false;
         const request = await fetch(`http://127.0.0.1:8000/Scompexamlist/`+userdata.standard+'/'+userdata.email)
@@ -116,14 +116,15 @@ function CompetitiveElilst(){
       <SNavbar/>
       
       <div className="inmain">
-      <h1 style={center}><b>|_o_|</b></h1>
       <b>EXAMS TO ATTEND</b>
       {exams.length>0 ? 
-    <div className="cmain">
+    <div className="comp_home_main">
     {
     exams.map(item => (
-    <a key={item.id}>
-        <b>exam name:{item.cname}</b><br/>
+      <div className='comp_home_outer'>
+          <a key={item.id}>
+            <div className='comp_home_inner'>
+            <b>exam name:{item.cname}</b><br/>
         <p>totalmarks:{item.totalmarks}</p>
         {item.negativemarkings?<>
         <p>marks are deducted for wrong answer</p>
@@ -133,10 +134,11 @@ function CompetitiveElilst(){
         }
         <p>total examination time:{item.time}</p>
         <button onClick={() => attendexam(item.id,item.cname)}>take test</button>
-        {/* <button onClick={() => gotochat(item.id)}>view group</button>
-        <button onClick={() => deletechat(item.id)}>delete group</button> */}
-        <br></br>
+            </div>
+      
     </a>
+      </div>
+    
     ))
     }
     </div>
@@ -145,17 +147,18 @@ function CompetitiveElilst(){
     }
       <b>ATTENDED COMPETITEV EXAMS</b>
       {attexams.length>0 ? 
-    <div className="cmain">
+    <div className="comp_att_main">
     {
     attexams.map(item => (
-    <a key={item.id}>
+      <div className='comp_att_out'>
+        <a key={item.id}>
         <b>exam name:{item.stestname}</b><br/>
         <p>scoredmarks:{item.spoint}</p>
         <button onClick={() => viewans(item.stest)}>VIEW ANS</button>
-        {/* <button onClick={() => gotochat(item.id)}>view group</button>
-        <button onClick={() => deletechat(item.id)}>delete group</button> */}
         <br></br>
     </a>
+      </div>
+    
     ))
     }
     </div>

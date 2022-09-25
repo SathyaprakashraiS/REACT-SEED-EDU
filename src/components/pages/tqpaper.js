@@ -50,7 +50,7 @@ function Texams(){
     const [details, setDetails] = useState("");
     const [review, setReview] = useState("");
     const [rating, setRating] = useState("");
-    const [author, setAuthor] = useState("");
+    const [author, setAuthor] = useState(""); 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [selectedimg, setSelectedimg] = useState();
@@ -344,26 +344,30 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={centerlol}><b>|_o_|</b></h1>
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
-        <br/><br/><br/>
-
+    
         <h1>ADD QUESTION PAPER</h1>
-        <label>paper name:
+        <div className='t_qp_out'>
+          <div className='t_qp_in'>
+          <label>paper name:
         <input
           type="text" 
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        </label><br/>
-        <label>paper for grade:
+        </label>
+          </div>
+          <div className='t_qp_in'>
+          <label>paper for grade:
           <select onChange={(e) => setpgrade(e.target.value)}>
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-        </label><br/>
-        <label>paper class:
+        </label>
+          </div>
+          <div className='t_qp_in'>
+          <label>paper class:
           <select onChange={(e) => setchild(e.target.value)}>
             <option value="2">CBSE 10</option>
             <option value="3">CBSE 11</option>
@@ -372,40 +376,53 @@ return(
             <option value="6">AIEED</option>
             <option value="7">AIIMS</option>
           </select>
-        </label><br/>
-        <label>paper type:
+        </label>
+          </div>
+          <div className='t_qp_in'>
+          <label>paper type:
           <select onChange={(e) => setptype(e.target.value)}>
             <option value="practise paper">practise paper</option>
             <option value="solution paper">solution paper</option>
             <option value="session paper">session paper</option>
             <option value="session paper key">session paper key</option>
           </select>
-        </label><br/>
-        <label>paper year:
+        </label>
+          </div>
+          <div className='t_qp_in'>
+          <label>paper year:
         <input
           type="text" 
           value={year}
           onChange={(e) => setYear(e.target.value)}
         />
-        </label><br/>
-        <label>attach question paper:
+        </label>
+          </div>
+          <div className='t_qp_in'>
+          <label>attach question paper:
         <input type="file" name="file" onChange={fileHandler} />
 			{isFilePicked ? (
 				<div>
 					<p>Filename: {selectedFile.name}</p>
 					<p>Filetype: {selectedFile.type}</p>
 					<p>Size in bytes: {selectedFile.size}</p>
-					<p>
+					{/* <p>
 						lastModifiedDate:{' '}
 						{selectedFile.lastModifiedDate.toLocaleDateString()}
-					</p>
-          <p><a href={selectedFile}>VIEW FILE</a></p>
+					</p> */}
+          {/* <iframe src={selectedFile}></iframe> */}
 				</div>
 			) : (
 				<p>Select a file to show details</p>
 			)}
-        </label><br/>
-        <button onClick={() => addquestionpaper()}>ADD QUESTION PAPER</button>
+        </label>
+          </div>
+          <div className='t_qp_in'>
+          <button onClick={() => addquestionpaper()}>ADD QUESTION PAPER</button>
+          </div>
+       
+        </div>
+       
+       
 
         {/* UPDATE A PARTICULAR PAPER */}
         {updpaper.length>0?<>
@@ -483,11 +500,11 @@ return(
 
         <h1>SELECT QUESTION PAPER TO UPDATE</h1>
         {(!delloading) && (delpaper.length>0) ?
-          <>
+          <div className='t_bank_paper'>
           {
             delpaper.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
+                <div className="tb_paper">
                   <p>name: {item.name}</p>
                   <p>type: {item.childpaperfile}</p>
                   <p>for grade: {item.forgrade}</p>
@@ -502,15 +519,15 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+          </div>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
 
         <h1>REMOVE QUESTION PAPER</h1>
         {(!delloading) && (delpaper.length>0) ?
-          <>
+          <div className='t_bank_paper'>
           {
             delpaper.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
+                <div className="tb_paper">
                   <p>name: {item.name}</p>
                   <p>type: {item.childpaperfile}</p>
                   <p>for grade: {item.forgrade}</p>
@@ -525,15 +542,15 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
+          </div>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available add papers to delete</p>}</>}
         
         <h1>DELETED QUESTION PAPER</h1>
         {(!resloading) && (respaper.length>0) ?
-          <>
+          <div className='t_bank_paper'>
           {
             respaper.map(item => (
               <a key={item.id}>
-                <div classname="dispbook">
+                <div className="tb_paper">
                   <p>name: {item.name}</p>
                   <p>type: {item.childpaperfile}</p>
                   <p>for grade: {item.forgrade}</p>
@@ -548,7 +565,7 @@ return(
               </a>
               ))
             }
-          </>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available delete papers to restore</p>}</>}
+          </div>:<>{delloading?<p>Opening the Vault</p>:<p>no papers available delete papers to restore</p>}</>}
 
         {/* <h1>AVAILABLE QUESTION PAPER TYPES</h1>
           {(!loading) && (papertypes.length>0) ?

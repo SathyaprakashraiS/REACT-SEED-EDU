@@ -1,5 +1,5 @@
 import React,{useState,useEffect, Component } from 'react';
-import './tquiz.css';
+import './tquizques.css';
 import axios from 'axios';
 import { GoogleLogout } from 'react-google-login';
 import TNavbar from './tnavbar';
@@ -218,47 +218,55 @@ return(
 <div className="main">
     <TNavbar/>
     <div className="inmain">
-        <h1 style={centerlol}><b>|_o_|</b></h1>
         <h1 style={center}><b>TEACHER PORTAL</b></h1>
-        <br/><br/><br/>
 
         <h1>ADD QUESTION TO QUIZ</h1>
-        <label><b>Enter question:</b>
+        <div className='quiz_qadd'>
+          <div className='quiz_question'>
+          <label><b>Enter question:</b>
         <input
-          type="text" 
+          type="text"  
           value={question}
           onChange={(e) => setquestion(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter option1:</b>
+        </label>
+          </div>
+          <div className='quiz_options'><label><b>Enter option1:</b>
         <input
           type="text" 
           value={option1}
           onChange={(e) => setoption1(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter option2:</b>
+        </label></div>
+          <div className='quiz_options'>
+          <label><b>Enter option2:</b>
         <input
           type="text" 
           value={option2}
           onChange={(e) => setoption2(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter option3:</b>
+        </label>
+          </div>
+          <div className='quiz_options'>
+          <label><b>Enter option3:</b>
         <input
           type="text" 
           value={option3}
           onChange={(e) => setoption3(e.target.value)}
         />
-        </label><br/>
-        <label><b>Enter option4:</b>
+        </label>
+          </div>
+          <div className='quiz_options'>
+          <label><b>Enter option4:</b>
         <input
           type="text" 
           value={option4}
           onChange={(e) => setoption4(e.target.value)}
         />
-        </label><br/>
-        <label>Enter answer option:
+        </label>
+          </div>
+       
+        <div className='quiz_optans'> <label>Enter answer option:
         <input
           type='number'
           step="1"
@@ -267,9 +275,10 @@ return(
           value={answer}
           onChange= {(e) => setanswer(e.target.value)}
         />
-        </label><br/>
+        </label></div>
+       <br/>
         <button onClick={() => addquestion()}>ADD QUESTION</button>
-
+        </div>
         {(updloading) && (updquizques.length>0) ? <>
         <h1>DETAILS TO UPDATE QUESTION</h1>
         {

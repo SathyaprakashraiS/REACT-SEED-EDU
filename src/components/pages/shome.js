@@ -4,6 +4,7 @@ import { GoogleLogout } from 'react-google-login';
 import SNavbar from './snavbar';
 import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
 
 function Student(){
   let history = useHistory();
@@ -268,26 +269,20 @@ return(
     {/* <div style={page}> */}
     {/* {userdata.standard} */}
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
     <h1><b>BOOKS</b></h1>
-    <div className="sbook">
+    <div className="sbook" >
     {
     book.map(item => (
       <a key={item.id}>
         <div >
         <BookStruct name={item.name} img={item.image} author={item.author} subject={item.subject} file={item.file}/>
         </div>
-          {/* <div style={bookcard}>
-        <img style={bookimg} src={item.image}/><br/>
-        <b>{item.name}</b><br/>
-        <b>{item.author}</b><br/>
-        <b>{item.subject}</b>
-        </div> */}
+      
       </a>
       ))
     }
     </div>
-    <button onClick={(e)=>togbooks()}>NEXT</button>
+    <button onClick={(e)=>togbooks()} className="book_scroll"><FaArrowRight/></button>
     <br/><br/><br/>
     <h1><b>QUIZ</b></h1>
     {quiz.length>0 ? 
@@ -297,7 +292,9 @@ return(
     <a key={item.id}>
       <div className="qcard">
         <b>{item.cname}</b><br/>
-        <b>{item.author}</b><br/>
+        <b style={{
+          fontSize:"12px"
+        }}>{item.author}</b><br/>
         <b>{item.cgrade}</b><br/>
         <button onClick={() => attemptquiz(item.cname)}>attempt quiz</button>
       </div>
@@ -377,26 +374,6 @@ return(
           <b>MARK OBTAINED: {item.markobtained}</b><br/>
           <b>TOTAL MARKS: {item.totalmarks}</b><br/>
           <button onClick={() => viewmockans(item.id)}>VIEW ANSWER SHEET</button>
-          </div>
-        </a>
-        ))
-      }
-      </div>
-      :
-      <p>No Mock exams attended to view</p>
-      }
-
-      <h1><b>COMPETITIVE EXAMS</b></h1>
-      {attmock.length>0 ? 
-      <div className="qmain">
-      {
-      attmock.map(item => (
-        <a key={item.id}>
-          <div className="qcard">
-          <b>{item.testname}</b><br/>
-          <b>MARK OBTAINED: {item.markobtained}</b><br/>
-          <b>TOTAL MARKS: {item.totalmarks}</b><br/>
-          <button onClick={() => viewmockans(item.id)}>VIEW ANSWERS</button>
           </div>
         </a>
         ))

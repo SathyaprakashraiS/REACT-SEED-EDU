@@ -1,10 +1,14 @@
+
+
 .warntext
 {
-  font-size: 75%;
-  padding-left: 30%;
+  width:70vw;
+  height:80vh;
+  font-size: 20px;
+  
   padding-top: 3%;
-  margin:auto;
-  background-color: white;
-  color:black;
+
+  background-color: rgb(0, 0, 0);
+  color:rgb(255, 255, 255);
 
 }

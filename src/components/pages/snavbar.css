@@ -50,7 +50,7 @@
   display: none;
 }
 .shome_nav_tog{
-  margin-top:1%;
+  /* margin-top:1%; */
 }
 
 @media only screen and (max-width: 600px){

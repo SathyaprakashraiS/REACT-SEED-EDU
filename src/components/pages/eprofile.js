@@ -154,42 +154,52 @@ function Eprofile() {
         <>
             {/* <div className="outer">  */}
                 <Navbar/>
-                <div className="hmain">
+                <div className="ed_main">
                     <div className="pagemain">
                     {userdata.teacher?<>
                       <>
                       <p>TEACHER</p>
-                      <div className="sbox">
-                      <label>standard:
+                      <div className="ed_sbox">
+                        <div className='ed_box_items'>
+                          <label>standard:
                   <select onChange={(e) => setnewstandard(e.target.value)}>
                     <option value="10">select pls</option>
                     <option value="10">Grade 10</option>
                     <option value="11">Grade 11</option>
                     <option value="12">Grade 12</option>
                   </select>
-                </label><br/>
-                <label>user name:(username must contain only letters number and special charecters not spaces)
+                </label>
+                </div>
+                        <div className='ed_box_items'>
+                        <label>user name:(username must contain only letters number and special charecters not spaces)
                   <input
                     type="text" 
                     value={newname}
                     onChange={(e) => setnewname(e.target.value)}
                   />
-                  </label><br/>
-                  <label>status:
+                  </label>
+                        </div>
+                        <div className='ed_box_items'>
+                        <label>status:
                   <input
                     type="text" 
                     value={newstatus}
                     onChange={(e) => setnewstatus(e.target.value)}
                   />
-                  </label><br/>
+                  </label>
+                        </div>
+                        <div className='ed_box_items'>
+                        <br/>
                   <label>contact number:
                   <input
                     type="text" 
                     value={newcontactnumber}
                     onChange={(e) => setnewcontactnumber(e.target.value)}
                   />
-                  </label><br/>
-                  <label>Add image to update DP:<br/>
+                  </label>
+                        </div>
+                        <div className='ed_box_items'>
+                        <label>Add image to update DP:<br/>
         <input type="file" name="image" accept="image/png, image/jpeg" onChange={imageHandler} />
 			{isimgPicked ? (
 				<div>
@@ -205,6 +215,9 @@ function Eprofile() {
 			) : (
 				<p>Select a image to show details</p>
 			)}</label>
+                        </div>
+                        <div className='ed_box_items'>
+                           
                   <label>attach new resume to attach update old-resume details:<br/>
                   <input type="file" name="file" onChange={fileHandler} />
                 {isFilePicked ? (
@@ -221,15 +234,23 @@ function Eprofile() {
                 ) : (
                   <p>Select a file to show details</p>
                 )}
-                  </label><br/>
-                  <label><b>teacher:</b><input type="checkbox" name="staffstatus" onChange={staffstatusHandler} /></label><br/>
-                  <label><b>student:</b><input type="checkbox" name="studentstatus" onChange={studentstatusHandler} /></label><br/>
-                  <label><b>hide status:</b><input type="checkbox" name="hidestatus" onChange={hidestatusHandler} /></label><br/>
-                  <label><b>ADVERTISE:</b><input type="checkbox" name="advertstatus" onChange={advertisestatusHandler} /></label><br/>
+                  </label>
+                        </div>
+                        <div className='ed_box_items'>
+                        <label><b>teacher:</b><input type="checkbox" name="staffstatus" onChange={staffstatusHandler} /></label>
+                        <label><b>student:</b><input type="checkbox" name="studentstatus" onChange={studentstatusHandler} /></label><br/>
+                        <label><b>hide status:</b><input type="checkbox" name="hidestatus" onChange={hidestatusHandler} /></label>
+                        <label><b>ADVERTISE:</b><input type="checkbox" name="advertstatus" onChange={advertisestatusHandler} /></label><br/>
+                        </div>
+                        <div className='ed_box_items'><button onClick={()=>postupdate()}>update details</button></div>
+                        <div className='ed_box_items'> <button onClick={()=>goback()}>Go back</button></div>
+                      
+              
+                 
                   
-                        <button onClick={()=>postupdate()}>update details</button>
+                        
                     </div>
-                    <button onClick={()=>goback()}>Go back</button>
+                   
                       
                       </>
                       </>:

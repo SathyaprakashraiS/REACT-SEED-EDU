@@ -62,7 +62,6 @@ return(
     <div className="main">
     <Navbar/>
     <div className="inmain">
-    <h1 style={center}><b>|_o_|</b></h1>
     <b>CONTACTS</b>
     {contacts.length>0 ? 
     <div className="contacts">
@@ -70,13 +69,18 @@ return(
     contacts.map(item => (
     <a key={item.id}>
       <div className="contactcard">
-        <img className="bimg" src={item.img} /><br/>
+        <div className='con_img'>
+        <img src={item.img} />
+        </div>
+        <div className='con_det'>
         <b>NAME: {item.contactname}</b><br/>
         <b>CONTACT NUMBER: {item.contactnumber}</b><br/>
         {
             item.mail=="" || item.mail=="-"?<></>:<><b>E-MAIL: {item.mail}</b><br/></>
         }
         <p>{item.brief}</p>
+        </div>
+        
       </div>
     </a>
     ))
