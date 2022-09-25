@@ -113,6 +113,16 @@ return(
         <li className='shome_nav_item'>
             <a class="nav-link"  href="/student/questionbank/"><b>QUESTION BANK</b></a>
         </li>
+        <li className='shome_nav_item'>
+            <a class="nav-link"  href="/student/svideos/"><b>VIDEOS</b></a>
+        </li>
+        {twelvegrade?<>
+        <li className='shome_nav_item'>
+            <a class="nav-link"  href="#"><b>COURSES</b></a>
+        </li>
+        </>:
+        <></>
+        }
         {userdata.needassist?<>
         <li className='shome_nav_item'>
             <a class="nav-link"  href="/student/tutors/"><b>TUTORS</b></a>

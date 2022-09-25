@@ -1,0 +1,45 @@
+.books
+{
+    background-color:#FF0000;
+    margin-left:20%;
+    /* text-transform: uppercase; */
+    /* display: flex; */
+    /* justify-content: center; */
+    text-overflow:break-word;
+    /* margin-left: 10px;
+    margin-bottom: 10px;
+    align-items: center; */
+    /* flex-direction: column; */
+    /* background: rgb(246, 247, 246); */
+}
+.bookimg
+{
+    height: 200px;
+    width:200px;
+}
+.wholebook{
+    margin-left:"100px";
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-overflow:ellipsis;
+    background-color:#00FF00;
+}
+.bookmain{ 
+    margin-top:-8px;
+    background:#150A41;
+    height:100%;
+    overflow-x: hidden;
+    
+    
+    
+}
+.bookinmain{
+    /* width:47vw; */
+    background:#150A41;
+    color: white;
+    /* margin-left: 20%;
+    margin-top:-14px;
+    padding-left: 2%; */
+    /* cursor: e-resize; */
+}

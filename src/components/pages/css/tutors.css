@@ -1,5 +1,29 @@
  .tutor_main{
-    width:50vw;
-    height: auto;
-    background: rgb(250, 250, 250);
+    width:300px;
+    height: 300px;
+    /* height: auto; */
+    background:#0000FF;
+    margin-left:25px;
+    margin-bottom:25px;
+    /* background: rgb(250, 250, 250); */
+ }
+ .advertisetutor{
+   width:300px;
+    height: 350px;
+    background:#0000FF;
+    margin-left:25px;
+    margin-bottom:25px;
+    
+ }
+ .tutorimg{
+   width: 100px;
+   height:100px;
+ }
+ .alltutors{
+   margin-left:"100px";
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-overflow:ellipsis;
+    background-color:#00FF00;
  }

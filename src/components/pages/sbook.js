@@ -1,8 +1,6 @@
 import React,{useState,useEffect, Component } from 'react';
-import './shome.css';
-import { GoogleLogout } from 'react-google-login';
+import './css/sbook.css';
 import SNavbar from './snavbar';
-import BookStruct from '../structures/BookStruct';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 function Sbook(){
@@ -80,26 +78,29 @@ function Sbook(){
           };
 return(
     
-    <div className="main">
+    <div className="bookmain">
     <SNavbar/>
-    <div className="inmain">
+    <div className="bookinmain">
     <h1 style={center}><b>|_o_|</b></h1>
     <h1><b>GRADED BOOKS</b></h1>
     {apiavail ? (
-        <div  style={{
-          marginLeft:"100px"
-        }} >
-        <div className="sbook">
+        <div  className="wholebook">
         {
         book.map(item => (
           <a key={item.id}>
-            <div >
-            <BookStruct name={item.name} img={item.image} author={item.author} subject={item.subject} file={item.file}/>
+            <div className="books">
+              <div className="bookimg">
+              <img src={item.image} alt=""/>
+              </div>
+              <p><b>NAME:</b>{item.name}</p>
+              <p><b>SUBJECT:</b>{item.subject}</p>
+              <p><b>AUTHOR:</b>{item.author}</p>
+              <p><a href={item.file}><b>READ NOW</b></a></p>
             </div>
+            
           </a>
           ))
         }
-        </div>
         <br/><br/><br/>
         </div>
     ):(

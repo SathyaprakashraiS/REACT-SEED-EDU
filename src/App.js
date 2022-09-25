@@ -60,7 +60,8 @@ import Compexamination from './components/pages/attcompex';
 import Tutors from './components/pages/tutors';
 import Tviewcompexam from './components/pages/Tviewcompexams';
 import Tcompexans from './components/pages/compexans';
-import Scompexans from './components/pages/scompexans';
+//import Scompexans from './components/pages/scompexans';
+import Svideos from './components/pages/svideos';
 
 function App() {
   return (
@@ -128,6 +129,7 @@ function App() {
         <Route path='/teacher/compexam/' exact component={Tviewcompexam} />
         <Route path='/teacher/compexans/' exact component={Tcompexans} />
         <Route path='/student/compexans/' exact component={Tcompexans} />
+        <Route path='/student/svideos/' exact component={Svideos} />
       </Switch>
     </Router>
   </>

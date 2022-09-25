@@ -1,5 +1,4 @@
 import React,{useState,useEffect, Component } from 'react';
-import axios from 'axios';
 import './css/tutors.css';
 import SNavbar from './snavbar';
 import { Link, Redirect, useHistory } from 'react-router-dom';
@@ -99,13 +98,14 @@ function Tutors(){
       
       <div className="inmain">
       <h1 style={center}><b>|_o_|</b></h1>
-      <p>TUTORS INTRESTED IN GIVING PERSONEL LECTURE FOR YOUR GRADE</p>
+      <p><b>TUTORS INTRESTED IN GIVING PERSONEL LECTURE FOR YOUR GRADE</b></p>
+      <div className="alltutors">
       {
                     tutors.map(item => (
                     <a key={item.id}>
-                        {item.advertise?<div className='tutor_main'>
+                        {item.advertise && item.standard==userdata.standard?<div className='advertisetutor'>
                       
-                            <img className="bimg" src={item.img} />
+                            <img className="tutorimg" src={item.img} />
                             <p><b>USERNAME:{item.username}</b></p>
                             <p><b>EMAIL:{item.email}</b></p>
                             <p><b>ABOUT:{item.status}</b></p>
@@ -124,37 +124,42 @@ function Tutors(){
                     ))
                 
         }
-        <p>TUTORS FOR YOUR GRADE</p>
+        </div>
+        <p><b>TUTORS OF YOUR GRADE</b></p>
+        <div className="alltutors">
         {
-            tutors.map(item => (
+            alltutors.map(item => (
             <a key={item.id}>
-                 {!item.advertise?
-                 <div className='tutor_main' style={{
-                  background:"red",
-                 }}>
+                 {item.standard==userdata.standard?
+                 <div className='tutor_main'>
                     <img className="bimg" src={item.img} />
                     <p><b>USERNAME:{item.username}</b></p>
                     <p><b>ABOUT:{item.status}</b></p>
-                    <p><b>TUTOR FOR GRADE:{item.standard}</b></p>
                     <br></br>
                   </div>:<></>
                  }
             </a>
             ))
         }
+        </div>
 
-        <p>ALL ARCHITECTS OF YOUR FUTURE</p>
+        <p><b>ALL ARCHITECTS OF YOUR FUTURE</b></p>
+        <div className="alltutors">
         {
+          
         alltutors.map(item => (
         <a key={item.id}>
+          <div className='tutor_main'>
             <img className="bimg" src={item.img} />
             <p><b>USERNAME:{item.username}</b></p>
             <p><b>ABOUT:{item.status}</b></p>
             <p><b>TUTOR FOR GRADE:{item.standard}</b></p>
             <br></br>
+            </div>
             </a>
             ))
         }
+        </div>
       </div>
       </div>
       );
