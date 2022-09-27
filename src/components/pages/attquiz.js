@@ -163,6 +163,11 @@ const Quiz = () => {
       console.log("size of quesid",quesid.length)
         var q=0
         var points=0
+        if(quesid.length==0)
+        {
+          points=0;
+        }
+        else{
         for(var i=0;i<(quiz.length);i++)
         {
             console.log("OVER HERE 1")
@@ -187,6 +192,7 @@ const Quiz = () => {
                 }
             }
         }
+      }
         // addresult(points)
 
         form_data.append('sname',userdata.username);
@@ -336,16 +342,17 @@ return(
     <a key={item.id}>
       <div className='ques_potti'><p>{item.cquestion}</p></div><br/>
       <div className='quiz_potti_outer'>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,2)}  />{item.coption2}</label><br /></div>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,3)}  />{item.coption3}</label><br /></div>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,4)}  />{item.coption4}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,2)}  />{item.coption2}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,3)}  />{item.coption3}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,4)}  />{item.coption4}</label><br /></div>
+
       </div>
       {/* <p>A.<button className="optionq" onClick={() => answer(item.id,1)}><p>{item.coption1}</p></button></p>
       <p>B.<button className="optionq" onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>
       <p>C.<button className="optionq" onClick={() => answer(item.id,3)}><p>{item.coption3}</p></button></p>
       <p>D.<button className="optionq" onClick={() => answer(item.id,4)}><p>{item.coption4}</p></button></p> */}
-      <b>CORRECT ANSWER: OPTION {item.canswer}</b>
+      {/* <b>CORRECT ANSWER: OPTION {item.canswer}</b> */}
     </a>
     </div>
     ))

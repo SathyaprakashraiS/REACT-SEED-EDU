@@ -129,6 +129,14 @@ const Compexamination = () => {
         var points=0
         var crt=0
         var wrong=0
+        if(quesid.length==0)
+        {
+          points=0;
+          crt=0;
+          wrong=0;
+          q=0;
+        }
+        else{
         for(var i=0;i<(questions.length);i++)
         {
             console.log("OVER HERE 1")
@@ -156,6 +164,7 @@ const Compexamination = () => {
                 }
             }
         }
+      }
         // addresult(points)
 
         form_data.append('sname',userdata.username);
@@ -293,10 +302,10 @@ return(
       </>:<></>}
       {/* <div className='ques_potti'><p>{item.cquestion}</p><img src="https://c.ndtvimg.com/2019-11/ask3nj1g_cbse-sample-question-paper_625x300_07_November_19.jpg"/></div><br/> */}
       <div className='quiz_potti_outer'>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,2)}  />{item.coption2}</label><br /></div>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,3)}  />{item.coption3}</label><br /></div>
-      <div className='quiz_potti'><label className='optionq'><input type="radio" name="optionq" onClick={() => answer(item.id,4)}  />{item.coption4}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,1)}  />{item.coption1}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,2)}  />{item.coption2}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,3)}  />{item.coption3}</label><br /></div>
+      <div className='quiz_potti'><label className='optionq'><input type="radio" name={item.id} onClick={() => answer(item.id,4)}  />{item.coption4}</label><br /></div>
       </div>
       {/* <p>A.<button className="optionq" onClick={() => answer(item.id,1)}><p>{item.coption1}</p></button></p>
       <p>B.<button className="optionq" onClick={() => answer(item.id,2)}><p>{item.coption2}</p></button></p>

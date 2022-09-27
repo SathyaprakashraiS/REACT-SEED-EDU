@@ -146,7 +146,6 @@ function Tutors(){
         <p><b>ALL ARCHITECTS OF YOUR FUTURE</b></p>
         <div className="alltutors">
         {
-          
         alltutors.map(item => (
         <a key={item.id}>
           <div className='tutor_main'>
